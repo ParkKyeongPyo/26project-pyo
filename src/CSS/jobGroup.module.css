@@ -1,0 +1,39 @@
+.group {
+  background-color: #e5e7eb;
+  padding: 4px 20px 4px 20px;
+  border-radius: 20px;
+  margin-right: 15px;
+  border: 1px solid white;
+}
+
+.groupFlex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.groupTop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.mouseOver {
+  border: 1px solid #1890ff;
+  color: #1890ff;
+  background-color: #e5e7eb;
+  padding: 4px 20px 4px 20px;
+  border-radius: 20px;
+  margin-right: 15px;
+}
+
+.click {
+  border: 1px solid #1890ff;
+  color: white;
+  background-color: #1890ff;
+  padding: 4px 20px 4px 20px;
+  border-radius: 20px;
+  margin-right: 15px;
+}

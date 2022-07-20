@@ -1,0 +1,14 @@
+.flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  border-bottom: 1px solid gray;
+}
+
+.item1 {
+  margin-right: 30px;
+}
+
+.item2 {
+  margin-left: 80%;
+}

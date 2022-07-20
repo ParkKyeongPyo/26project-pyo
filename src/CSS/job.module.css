@@ -1,0 +1,13 @@
+.groupTop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .groupFlex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
