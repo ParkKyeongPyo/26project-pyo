@@ -1,13 +1,12 @@
-import styles from '../CSS/login.module.css';
-import InfoBar from '../communityNavCol/InfoBar';
+import styles from "../CSS/login.module.css";
+import DevInfo from "../dev/DevInfo";
 
-
-function Info(){
-    return(
-        <div className={styles.flexCommunity} style={{width: "inherit"}}>
-            <InfoBar/>
-        </div>
-    );
+function Info({ job }) {
+  return (
+    <div className={styles.flexCommunity2} style={{ width: "inherit" }}>
+      {job === "개발자" && <DevInfo />}
+    </div>
+  );
 }
 
 export default Info;

@@ -1,12 +1,12 @@
-import styles from '../CSS/login.module.css';
-import ClubBar from '../communityNavCol/ClubBar';
+import styles from "../CSS/login.module.css";
+import DevClub from "../dev/DevClub";
 
-function Club(){
-    return(
-        <div className={styles.flexCommunity} style={{width: "inherit"}}>
-            <ClubBar/>
-        </div>
-    );
+function Club({ job }) {
+  return (
+    <div className={styles.flexCommunity2} style={{ width: "inherit" }}>
+        {job === "개발자" && <DevClub/>}
+    </div>
+  );
 }
 
 export default Club;

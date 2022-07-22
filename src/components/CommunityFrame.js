@@ -40,14 +40,14 @@ function CommunityFrame({ job }) {
   };
 
   return (
-    <div className={styles.flex}>
+    <div className={styles.flexCom}>
       <div className={frame.wide}>
         <h1>{job} 프리랜서 커뮤니티</h1>
         <SmallBar onClick={onClick} />
-        {community && <Community />}
-        {study && <Study />}
-        {club && <Club />}
-        {info && <Info />}
+        {community && <Community job={job}/>}
+        {study && <Study job={job}/>}
+        {club && <Club job={job}/>}
+        {info && <Info job={job}/>}
       </div>
     </div>
   );

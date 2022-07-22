@@ -1,11 +1,11 @@
 import styles from '../CSS/login.module.css';
-import StudyBar from '../communityNavCol/StudyBar';
+import DevStudy from '../dev/DevStudy';
 
 
-function Study(){
+function Study({job}){
     return(
-        <div className={styles.flexCommunity} style={{width: "inherit"}}>
-            <StudyBar/>
+        <div className={styles.flexCommunity2}>
+             {job === "개발자" && <DevStudy />}
         </div>
     );
 }

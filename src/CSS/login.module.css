@@ -3,13 +3,37 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: auto;
 }
 
-.flexCommunity{
+.flexCom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  margin-top: 250px;
+}
+
+.flexCommunity {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
-  height: 100%;
+  align-items: flex-start;
+}
+
+.flexThinBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 7px;
+}
+
+.flexCommunity2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 70%;
+  margin: 7px 0px 7px 0px;
 }

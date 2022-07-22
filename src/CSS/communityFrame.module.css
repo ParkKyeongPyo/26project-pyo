@@ -1,3 +1,18 @@
 .wide{
-    width: 70%;
+    width: 77%;
 }
+
+.halfboard{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 50%;
+}
+
+.middleBtn{
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+

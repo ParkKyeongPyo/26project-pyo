@@ -1,13 +1,12 @@
-import styles from '../CSS/login.module.css';
-import Combar from '../communityNavCol/ComBar';
+import styles from "../CSS/login.module.css";
+import DevCom from "../dev/DevCom.js";
 
-
-function Community(){
-    return(
-        <div className={styles.flexCommunity} style={{width: "inherit"}}>
-            <Combar/>
-        </div>
-    );
+function Community({ job }) {
+  
+  return (
+  <div className={styles.flexCommunity2}>
+    {job === "개발자" && <DevCom />}
+    </div>);
 }
 
 export default Community;
