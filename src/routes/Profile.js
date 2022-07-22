@@ -107,7 +107,7 @@ function Profile({ loginState }) {
   return (
     <div style={{ height: "inherit" }}>
       <MenuBar loginState={loginState} />
-      <div className={styles.flex}>
+      <div className={styles.flexHome}>
         <Form
           {...layout}
           name="nest-messages"

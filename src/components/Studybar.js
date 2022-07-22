@@ -3,7 +3,7 @@ import { Button } from "antd";
 import "antd/dist/antd.min.css";
 import Frame from "../CSS/communityFrame.module.css";
 
-function Studybar() {
+function Studybar({onWrite}) {
   return (
     <div className={styles.flexThinBar}>
       <div>
@@ -15,7 +15,7 @@ function Studybar() {
         <span className={Frame.middleBtn}>자기계발</span>
       </div>
       <div>
-        <Button>글쓰기</Button>
+        <Button onClick={onWrite}>글쓰기</Button>
       </div>
     </div>
   );

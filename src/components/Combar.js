@@ -3,7 +3,7 @@ import { Button } from "antd";
 import "antd/dist/antd.min.css";
 import Frame from "../CSS/communityFrame.module.css";
 
-function Combar() {
+function Combar({ onWrite }) {
   return (
     <div className={styles.flexThinBar}>
       <div>
@@ -16,7 +16,7 @@ function Combar() {
         <span className={Frame.middleBtn}>경험공유</span>
       </div>
       <div>
-        <Button>글쓰기</Button>
+        <Button onClick={onWrite}>글쓰기</Button>
       </div>
     </div>
   );

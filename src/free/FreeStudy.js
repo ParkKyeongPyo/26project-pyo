@@ -1,10 +1,12 @@
 import Board from "../components/Board";
 
-function DevClub(){
+
+function FreeStudy(){
     return(
         <>
+            <Board />
         </>
     );
 }
 
-export default DevClub;
+export default FreeStudy;

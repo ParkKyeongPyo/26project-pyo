@@ -1,6 +1,6 @@
 import Board from "../components/Board.js";
 
-function DevCom() {
+function FreeCom() {
   return (
     <>
       <Board />
@@ -8,4 +8,4 @@ function DevCom() {
   );
 }
 
-export default DevCom;
+export default FreeCom;

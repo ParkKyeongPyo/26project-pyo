@@ -6,6 +6,14 @@
   height: auto;
 }
 
+.flexHome {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .flexCom {
   display: flex;
   flex-direction: column;
@@ -36,4 +44,11 @@
   justify-content: flex-start;
   width: 70%;
   margin: 7px 0px 7px 0px;
+}
+
+.flexWrite{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }

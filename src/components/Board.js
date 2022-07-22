@@ -18,6 +18,11 @@ const columns = [
 ];
 const data = [];
 
+/*
+1. 게시글 서버 컨셉
+파이어베이스에 추가하자마자 바로 가져와서 data에 push
+*/
+
 for (let i = 0; i < 100; i++) {
   data.push({
     key: i,
@@ -27,6 +32,7 @@ for (let i = 0; i < 100; i++) {
   });
 }
 
+//게시판 component
 const Board = () => (
   <Table
     columns={columns}

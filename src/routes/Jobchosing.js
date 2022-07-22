@@ -72,7 +72,7 @@ function Jobchosing({ selectedJob, setSelectedJob, loginState }) {
   return (
     <div style={{ height: "inherit" }}>
       <MenuBar loginState={loginState} />
-      <div className={styles.flex}>
+      <div className={styles.flexHome}>
         <div className={groupStyles.groupTop}>
           <h3 className={groupStyles.groupFlex}>직군</h3>
           <div className={groupStyles.groupFlex}>

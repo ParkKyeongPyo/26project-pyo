@@ -3,17 +3,15 @@ import frame from "../CSS/communityFrame.module.css";
 
 import { useState } from "react";
 
-import SmallBar from "./SmallBar";
-import Community from "../RealCommunity/Community";
-import Study from "../RealCommunity/Study";
-import Club from "../RealCommunity/Club";
-import Info from "../RealCommunity/Info";
+import CommunityFrameSub from "./CommunityFrameSub";
+import Write from "../components/Write.js";
 
 function CommunityFrame({ job }) {
-  const [community, setCommunity] = useState(false);
+  const [community, setCommunity] = useState(true);
   const [study, setStudy] = useState(false);
   const [club, setClub] = useState(false);
   const [info, setInfo] = useState(false);
+  const [write, setWrite] = useState(false);
 
   const onClick = (e) => {
     if (e.key === "community") {
@@ -39,15 +37,31 @@ function CommunityFrame({ job }) {
     }
   };
 
+  const onWrite = () => {
+    setWrite(true);
+  };
+
+  const onWriteFinish = () => {
+    setWrite(false);
+  }
+
   return (
     <div className={styles.flexCom}>
       <div className={frame.wide}>
         <h1>{job} 프리랜서 커뮤니티</h1>
-        <SmallBar onClick={onClick} />
-        {community && <Community job={job}/>}
-        {study && <Study job={job}/>}
-        {club && <Club job={job}/>}
-        {info && <Info job={job}/>}
+        {write ? (
+          <Write />
+        ) : (
+          <CommunityFrameSub
+            job={job}
+            community={community}
+            study={study}
+            club={club}
+            info={info}
+            onClick={onClick}
+            onWrite={onWrite}
+          />
+        )}
       </div>
     </div>
   );
