@@ -1,0 +1,43 @@
+.btnMargin {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 53%;
+}
+
+.btnMarginRight {
+  margin-right: 10px;
+}
+
+.btnClick{
+    background-color: #1890ff;
+    color:white;
+    padding: 2px 10px 2px 10px;
+    border-radius: 20px;
+}
+
+
+.category {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 25%;
+  font-weight: bold;
+  font-size: small;
+  border: 1px solid gainsboro;
+  padding: 7px;
+}
+
+
+.cateSub {
+  background-color: #e5e7eb;
+  padding: 2px 10px 2px 10px;
+  border-radius: 20px;
+  border: 1px solid white;
+}
+
+.watch {
+  font-size: smaller;
+}

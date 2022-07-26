@@ -9,12 +9,12 @@ const MenuBar = ({loginState}) => {
 
   const item1 = [
     {
-      label: <Link to="/">Home</Link>,
-      key: "Home",
+      label: <Link to="/">로고</Link>,
+      key: "로고",
     },
     {
-      label: <Link to="/Jobchosing">직업 선택</Link>,
-      key: "Jobchosing",
+      label: <Link to="/allfree">All 프리랜서</Link>,
+      key: "allFree",
     },
     {
       label:  <Link to="/login">로그인</Link>,
@@ -24,12 +24,12 @@ const MenuBar = ({loginState}) => {
   
   const item2 = [
     {
-      label: <Link to="/">Home</Link>,
-      key: "Home",
+      label: <Link to="/">로고</Link>,
+      key: "로고",
     },
     {
-      label: <Link to="/Jobchosing">직업 선택</Link>,
-      key: "Jobchosing",
+      label: <Link to="/allfree">All 프리랜서</Link>,
+      key: "allfree",
     },
     {
       label: <Link to="/profile">프로필</Link>,

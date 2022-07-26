@@ -1,10 +1,10 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../routes/Home";
 import Login from "../routes/Login";
-import Jobchosing from "../routes/Jobchosing";
 import Profile from "../routes/Profile";
 import Free from "../community/Free";
 import Dev from "../community/Dev";
+import Allfree from "../routes/Allfree";
 
 import { useState, useEffect } from "react";
 
@@ -35,7 +35,16 @@ function RouterCom() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home loginState={loginState} />}></Route>
+        <Route
+          path="/"
+          element={
+            <Home
+              loginState={loginState}
+              selectedJob={selectedJob}
+              setSelectedJob={setSelectedJob}
+            />
+          }
+        ></Route>
         <Route
           path="/login"
           element={<Login loginState={loginState} />}
@@ -44,20 +53,14 @@ function RouterCom() {
           path="/profile"
           element={<Profile loginState={loginState} />}
         ></Route>
-        <Route
-          path="/Jobchosing"
-          element={
-            <Jobchosing
-              selectedJob={selectedJob}
-              setSelectedJob={setSelectedJob}
-              loginState={loginState}
-            />
-          }
-        ></Route>
+        <Route path="/allfree" element={<Allfree />}></Route>
       </Routes>
       <Routes>
-        <Route path="/community/free" element={<Free selectedJob={selectedJob} />}></Route>
-        <Route path="/community/dev" element={<Dev />}></Route>
+        <Route
+          path="/community/free"
+          element={<Free selectedJob={selectedJob} />}
+        ></Route>
+        <Route path="/community/alldev" element={<Dev />}></Route>
       </Routes>
     </Router>
   );
