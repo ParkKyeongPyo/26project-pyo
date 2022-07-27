@@ -15,11 +15,7 @@ const CommunityMenuBar = ({job}) => {
     {
       label: <Link to="/community/free">All 프리랜서</Link>,
       key: "freelancer",
-    },
-    {
-      label:  <Link to="/community/dev">{job}</Link>,
-      key: {job},
-    },
+    }
   ];
 
   const onClick = (e) => {

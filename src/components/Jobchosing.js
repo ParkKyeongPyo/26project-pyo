@@ -9,7 +9,6 @@ import "antd/dist/antd.min.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import IT from "./IT";
 
 /* 
 해결해야 될 문제
@@ -72,31 +71,14 @@ function Jobchosing({ selectedJob, setSelectedJob, loginState }) {
             <h3 className={groupStyles.groupFlex}>IT/프로그래밍</h3>
             <div className={groupStyles.groupFlex}>
               <Link
-                
-                to="/community/alldev"
+                to="/community/dev"
                 className={groupStyles.group}
                 onMouseOut={onGroupMouseOut}
                 onMouseOver={onGroupMouseOver}
                 onClick={onGroupClick}
               >
-                All 개발자
+                개발자
               </Link>
-              <span
-                className={groupStyles.group}
-                onMouseOut={onGroupMouseOut}
-                onMouseOver={onGroupMouseOver}
-                onClick={onGroupClick}
-              >
-                웹 개발자
-              </span>
-              <span
-                className={groupStyles.group}
-                onMouseOut={onGroupMouseOut}
-                onMouseOver={onGroupMouseOver}
-                onClick={onGroupClick}
-              >
-                앱 개발자
-              </span>
               <span
                 className={groupStyles.group}
                 onMouseOut={onGroupMouseOut}

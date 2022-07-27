@@ -33,47 +33,12 @@ const validateMessages = {
   },
 };
 
-function Profile({ loginState }) {
-  const [nickname, setNickname] = useState("");
-  const [age, setAge] = useState("");
-  const [job, setJob] = useState("");
-  const [intro, setIntro] = useState("");
+function Profile({ loginState, userNickname, setUserNickname, job, setJob, age, setAge, intro, setIntro }) {
   const navigate = useNavigate();
-
-  const user = authService.currentUser;
-  let email = "";
-
-  if (user !== null) {
-    // The user object has basic properties such as display name, email, etc.
-    const displayName = user.displayName;
-    email = user.email;
-    const photoURL = user.photoURL;
-    const emailVerified = user.emailVerified;
-  }
-
-  const getUserInfo = async () => {
-    const docRef = doc(db, "Profile", email);
-    const docSnap = await getDoc(docRef);
-
-    console.log(docSnap);
-
-    if (docSnap.exists()) {
-      const preProfile = docSnap.data();
-      setNickname(preProfile.nickname);
-      setAge(preProfile.age);
-      setJob(preProfile.job);
-      setIntro(preProfile.intro);
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }
-  };
-
-  getUserInfo();
 
   const onChange = (e) => {
     if (e.target.name === "nickname") {
-      setNickname(e.target.value);
+      setUserNickname(e.target.value);
     } else if (e.target.name === "age") {
       setAge(e.target.value);
     } else if (e.target.name === "job") {
@@ -97,7 +62,7 @@ function Profile({ loginState }) {
 
   const onSave = async () => {
     await setDoc(doc(db, "Profile", email), {
-      nickname: nickname,
+      nickname: userNickname,
       age: age,
       job: job,
       intro: intro,
@@ -115,7 +80,7 @@ function Profile({ loginState }) {
           onFinish={onSave}
         >
           <Form.Item name={["user", "nickname"]} label="닉네임">
-            <Input name="nickname" onChange={onChange} placeholder={nickname} />
+            <Input name="nickname" onChange={onChange} placeholder={userNickname} />
           </Form.Item>
 
           <Form.Item name={["user", "age"]} label="나이">

@@ -4,30 +4,26 @@ import "antd/dist/antd.min.css";
 import { Input, Button } from "antd";
 import { Select } from "antd";
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import { db } from "../fbase.js";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { authService } from "../fbase.js";
 
 const { Option } = Select;
 
 /*
 문제
-1. devNum 새로고칭하면 초기화됨
-2. 서버로 보낼때 firebase 오류 생김
+1. devNum 새로고칭하면 초기화 됨
 */
 
-function Write() {
+function Write({ setWrite, job, userNickname, setUserNickname }) {
   const [category, setCategory] = useState("");
   const [header, setHeader] = useState("");
   const [content, setContent] = useState("");
-  const [devNum, setDevNum] = useState(1);
-
-  const navigate = useNavigate();
 
   const onChange = (e) => {
     setHeader(e.target.value);
@@ -38,16 +34,39 @@ function Write() {
   };
 
   const onSubmit = async () => {
-    await setDoc(doc(db, "개발자", category), {
-      DevNum: devNum,
+    const docRef = doc(db, "글번호", job);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Getting docSnap!");
+    } else {
+      console.log("No docSnap");
+    }
+
+    const user = authService.currentUser;
+    const uid = user.uid;
+    console.log(uid);
+
+    if(userNickname === "") setUserNickname(uid);
+
+    await setDoc(doc(db, job, category), {
+      num: docSnap.data().num,
+      user: userNickname,
       header: header,
+      category: category,
       content: content,
       reply: [],
     });
 
-    setDevNum((prev) => prev + 1);
-    navigate("/community/alldev");
+    await updateDoc(doc(db, "글번호", job), {
+      num: docSnap.data().num + 1,
+    });
+    setWrite(false);
   };
+
+  useEffect(() => {
+    setCategory("일반");
+  }, []);
 
   return (
     <form className={styles.flexWrite} onSubmit={onSubmit}>
@@ -64,7 +83,7 @@ function Write() {
           <Option value="Q&A">Q&A</Option>
           <Option value="정보">정보</Option>
           <Option value="현실고충">현실고충</Option>
-          <Option value="스터디/동아리 모집">스터디/동아리 모집</Option>
+          <Option value="스터디ㅣ동아리 모집">스터디ㅣ동아리 모집</Option>
           <Option value="경험">경험</Option>
           <Option value="수익">수익</Option>
         </Select>

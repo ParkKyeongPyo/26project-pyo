@@ -1,11 +1,11 @@
 import CommunityFrame from "../components/CommunityFrame";
 import CommunityMenuBar from "../components/CommunityMenuBar";
 
-function Free({ selectedJob }) {
+function Free({ userNickname , setUserNickname }) {
   return (
     <div style={{ height: "inherit" }}>
-      <CommunityMenuBar job={selectedJob} />
-      <CommunityFrame job="All" />
+      <CommunityMenuBar />
+      <CommunityFrame job="All" userNickname={userNickname} setUserNickname={setUserNickname}/>
     </div>
   );
 }

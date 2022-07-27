@@ -1,34 +1,20 @@
-import SmallBar from "./SmallBar";
-import Community from "../RealCommunity/Community";
-import Study from "../RealCommunity/Study";
-import Club from "../RealCommunity/Club";
-import Info from "../RealCommunity/Info";
+import styles from "../CSS/login.module.css";
+import Combar from "../components/Combar.js";
+import Board from "../components/Board.js";
 
-function CommunityFrameSub({
-  job,
-  community,
-  study,
-  club,
-  info,
-  onClick,
-  onWrite
-}) {
+import { useState } from "react";
+
+
+function CommunityFrameSub({ job, onWrite }) {
+
+  const [selectedCategory, setSelectedCategory] = useState("");
+
   return (
-    <>
-      <SmallBar onClick={onClick} />
-      {community && (
-        <Community job={job} onWrite={onWrite} />
-      )}
-      {study && (
-        <Study job={job} onWrite={onWrite} />
-      )}
-      {club && (
-        <Club job={job} onWrite={onWrite} />
-      )}
-      {info && (
-        <Info job={job} onWrite={onWrite} />
-      )}
-    </>
+    <div className={styles.flexCommunity2}>
+      <Combar onWrite={onWrite} setSelectedCategory={setSelectedCategory} />
+      {job === "All" && <Board selectedCategory={selectedCategory} job={job}/>}
+      {job === "개발자" && <Board selectedCategory={selectedCategory} job={job}/>}
+    </div>
   );
 }
 
