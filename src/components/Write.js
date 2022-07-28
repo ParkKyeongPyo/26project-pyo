@@ -20,7 +20,7 @@ const { Option } = Select;
 1. devNum 새로고칭하면 초기화 됨
 */
 
-function Write({ setWrite, job, userNickname, setUserNickname }) {
+function Write({ setWrite, job, userNickname, setUserNickname, onWriteFinish }) {
   const [category, setCategory] = useState("");
   const [header, setHeader] = useState("");
   const [content, setContent] = useState("");
@@ -134,6 +134,7 @@ function Write({ setWrite, job, userNickname, setUserNickname }) {
           type="primary"
           htmlType="button"
           className={write.btnMarginRight}
+          onClick={onWriteFinish}
         >
           취소
         </Button>
