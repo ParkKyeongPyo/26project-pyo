@@ -10,7 +10,14 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import { db } from "../fbase.js";
-import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  doc,
+  getDoc,
+  updateDoc,
+  setDoc,
+} from "firebase/firestore";
 import { authService } from "../fbase.js";
 
 const { Option } = Select;
@@ -20,7 +27,15 @@ const { Option } = Select;
 1. devNum 새로고칭하면 초기화 됨
 */
 
-function Write({ setWrite, job, userNickname, setUserNickname, onWriteFinish }) {
+function Write({
+  setWrite,
+  setCommunity,
+  setWriting,
+  job,
+  userNickname,
+  setUserNickname,
+  onWriteFinish,
+}) {
   const [category, setCategory] = useState("");
   const [header, setHeader] = useState("");
   const [content, setContent] = useState("");
@@ -43,18 +58,24 @@ function Write({ setWrite, job, userNickname, setUserNickname, onWriteFinish }) 
       console.log("No docSnap");
     }
 
+    /*
     const user = authService.currentUser;
-    const uid = user.uid;
-    console.log(uid);
+    const nickname = user.providerData[0].displayName;
+    console.log(nickname);
+    const uid = user.uid;*/
 
-    if(userNickname === "") setUserNickname(uid);
+    //date
+    const date = new Date();
 
-    await setDoc(doc(db, job, category), {
+    await setDoc(doc(db, job, `${docSnap.data().num}`), {
       num: docSnap.data().num,
       user: userNickname,
       header: header,
       category: category,
       content: content,
+      time: `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+      date: `${date.getMonth() + 1}-${date.getDate()}`,
+      year: `${date.getFullYear()}`,
       reply: [],
     });
 
@@ -62,6 +83,8 @@ function Write({ setWrite, job, userNickname, setUserNickname, onWriteFinish }) 
       num: docSnap.data().num + 1,
     });
     setWrite(false);
+    setCommunity(true);
+    setWriting(false);
   };
 
   useEffect(() => {

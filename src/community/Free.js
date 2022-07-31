@@ -1,7 +1,7 @@
 import CommunityFrame from "../components/CommunityFrame";
 import CommunityMenuBar from "../components/CommunityMenuBar";
 
-function Free({ userNickname , setUserNickname }) {
+function Free() {
   return (
     <div style={{ height: "inherit" }}>
       <CommunityMenuBar />

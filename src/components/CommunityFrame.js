@@ -12,6 +12,7 @@ function CommunityFrame({ job, userNickname, setUserNickname }) {
   const [writing, setWriting] = useState(false);
   const [community, setCommunity] = useState(true);
   const [writingNum, setWritingNum] = useState(0);
+  const [writingInfo, setWritingInfo] = useState({});
 
   const onWrite = () => {
     setWrite(true);
@@ -27,18 +28,20 @@ function CommunityFrame({ job, userNickname, setUserNickname }) {
 
   const onWriting = (e) => {
     console.log(e);
+    setWritingInfo(e);
     setWrite(false);
     setWriting(true);
     setCommunity(false);
   };
 
   return (
-    <div className={styles.flexCom}>
       <div className={frame.wide}>
-        <h1>{job} 프리랜서 커뮤니티</h1>
+        <h1 className={frame.h1}>{job} 프리랜서 커뮤니티</h1>
         {write && (
           <Write
             setWrite={setWrite}
+            setCommunity={setCommunity}
+            setWriting={setWriting}
             job={job}
             userNickname={userNickname}
             setUserNickname={setUserNickname}
@@ -53,9 +56,8 @@ function CommunityFrame({ job, userNickname, setUserNickname }) {
             setWritingNum={setWritingNum}
           />
         )}
-        {writing && <Writing />}
+        {writing && <Writing job={job} writingInfo={writingInfo}/>}
       </div>
-    </div>
   );
 }
 

@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { signOut } from "firebase/auth";
+import { signOut, updateProfile  } from "firebase/auth";
 import { authService } from "../fbase";
 import { db } from "../fbase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -33,7 +33,18 @@ const validateMessages = {
   },
 };
 
-function Profile({ loginState, userNickname, setUserNickname, job, setJob, age, setAge, intro, setIntro }) {
+function Profile({
+  loginState,
+  age,
+  setAge,
+  job,
+  setJob,
+  intro,
+  setIntro,
+  email, 
+  displayName,
+  setDisplayName
+}) {
   const navigate = useNavigate();
 
   const onChange = (e) => {
@@ -66,8 +77,24 @@ function Profile({ loginState, userNickname, setUserNickname, job, setJob, age, 
       age: age,
       job: job,
       intro: intro,
+    })
+
+    updateProfile(authService.currentUser, {
+      displayName: userNickname,
+    }).then(() => {
+      setDisplayName(userNickname);
+      // ...
+    }).catch((error) => {
+      // An error occurred
+      // ...
     });
+    
   };
+
+  const user = authService.currentUser;
+  let displayName = user.providerData[0].displayName;
+
+  if(displayName === "") displayName = user.uid;
 
   return (
     <div style={{ height: "inherit" }}>
@@ -80,11 +107,15 @@ function Profile({ loginState, userNickname, setUserNickname, job, setJob, age, 
           onFinish={onSave}
         >
           <Form.Item name={["user", "nickname"]} label="닉네임">
-            <Input name="nickname" onChange={onChange} placeholder={userNickname} />
+            <Input
+              name="nickname"
+              onChange={onChange}
+              placeholder={displayName}
+            />
           </Form.Item>
 
           <Form.Item name={["user", "age"]} label="나이">
-            <Input name="age" onChange={onChange} placeholder={age}/>
+            <Input name="age" onChange={onChange} placeholder={age} />
           </Form.Item>
 
           <Form.Item name={["user", "job"]} label="직업">
@@ -92,7 +123,11 @@ function Profile({ loginState, userNickname, setUserNickname, job, setJob, age, 
           </Form.Item>
 
           <Form.Item name={["user", "intro"]} label="소개">
-            <Input.TextArea name="intro" onChange={onChange} placeholder={intro}/>
+            <Input.TextArea
+              name="intro"
+              onChange={onChange}
+              placeholder={intro}
+            />
           </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

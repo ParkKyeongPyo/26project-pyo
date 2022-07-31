@@ -12,11 +12,10 @@ import { onAuthStateChanged } from "firebase/auth";
 import { authService, db } from "../fbase";
 import { doc, getDoc } from "firebase/firestore";
 
-
 function RouterCom() {
   const [loginState, setLoginState] = useState(false);
   const [selectedJob, setSelectedJob] = useState("");
-  const [userNickname, setUserNickname] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [age, setAge] = useState("");
   const [job, setJob] = useState("");
   const [intro, setIntro] = useState("");
@@ -37,7 +36,6 @@ function RouterCom() {
 
         if (docSnap.exists()) {
           const preProfile = docSnap.data();
-          setUserNickname(preProfile.nickname);
           setAge(preProfile.age);
           setJob(preProfile.job);
           setIntro(preProfile.intro);
@@ -46,7 +44,7 @@ function RouterCom() {
           console.log("No such document!");
         }
 
-        if(userNickname === "") setUserNickname(uid);
+        if (userNickname === "") setUserNickname(uid);
       } else {
         // User is signed out
         // ...
@@ -77,38 +75,23 @@ function RouterCom() {
           element={
             <Profile
               loginState={loginState}
-              userNickname={userNickname}
-              setUserNickname={setUserNickname}
               age={age}
               setAge={setAge}
               job={job}
               setJob={setJob}
               intro={intro}
               setIntro={setIntro}
+              email={email}
+              displayName={displayNasme}
+              setDisplayName={setDisplayName}
             />
           }
         ></Route>
         <Route path="/allfree" element={<Allfree />}></Route>
       </Routes>
       <Routes>
-        <Route
-          path="/community/free"
-          element={
-            <Free
-              userNickname={userNickname}
-              setUserNickname={setUserNickname}
-            />
-          }
-        ></Route>
-        <Route
-          path="/community/dev"
-          element={
-            <Dev
-              userNickname={userNickname}
-              setUserNickname={setUserNickname}
-            />
-          }
-        ></Route>
+        <Route path="/community/free" element={<Free />}></Route>
+        <Route path="/community/dev" element={<Dev />}></Route>
       </Routes>
     </Router>
   );

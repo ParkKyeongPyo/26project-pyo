@@ -1,7 +1,7 @@
 import CommunityMenuBar from "../components/CommunityMenuBar";
 import CommunityFrame from "../components/CommunityFrame";
 
-function Dev({userNickname , setUserNickname}) {
+function Dev() {
   return (
     <div style={{ height: "inherit" }}>
       <CommunityMenuBar job="개발자" />

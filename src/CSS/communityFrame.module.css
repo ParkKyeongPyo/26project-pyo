@@ -1,19 +1,22 @@
-.wide{
-    width: 77%;
-    height: inherit;
+.wide {
+  width: 77%;
+  height: inherit;
+  margin-left: 150px;
 }
 
-.halfboard{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    width: 50%;
+.halfboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  width: 50%;
 }
 
-.middleBtn{
-    font-size: 12px;
-    margin-right: 10px;
+.middleBtn {
+  font-size: 12px;
+  margin-right: 10px;
 }
 
-
+.h1 {
+  border-bottom: 1px solid gray;
+}

@@ -3,15 +3,16 @@ import { Button } from "antd";
 import "antd/dist/antd.min.css";
 import Frame from "../CSS/communityFrame.module.css";
 
-function Combar({ onWrite, setSelectedCategory }) {
+function Combar({ onWrite, setSelectedCategory, setCateChanged }) {
   const onClick = (e) => {
     setSelectedCategory(e.target.innerText);
+    setCateChanged(true);
   };
   return (
     <div className={styles.flexThinBar}>
       <div>
-        <Button>전체</Button>
-        <Button>인기</Button>
+        <Button onClick={onClick}>전체</Button>
+        <Button onClick={onClick}>인기</Button>
       </div>
       <div>
         <span className={Frame.middleBtn} onClick={onClick}>
