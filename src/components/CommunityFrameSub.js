@@ -5,7 +5,7 @@ import Board from "../components/Board.js";
 import { useState } from "react";
 import React from "react";
 
-function CommunityFrameSub({ job, onWrite, onWriting, setWritingNum }) {
+function CommunityFrameSub({ job, onWrite, onWriting, setWritingNum, jobEng }) {
   console.log("1");
 
   return (
@@ -15,6 +15,7 @@ function CommunityFrameSub({ job, onWrite, onWriting, setWritingNum }) {
         onWrite={onWrite}
         onWriting={onWriting}
         setWritingNum={setWritingNum}
+        jobEng={jobEng}
       />
     </div>
   );

@@ -11,14 +11,21 @@ import {
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
+import styles from "../CSS/login.module.css";
+
 import MenuBar from "../components/MenuBar";
 import LoginCom from "../components/LoginCom.js";
 import NewAccount from "../components/NewAccount.js";
+
+import { Steps } from "antd";
+const { Step } = Steps;
 
 const Login = ({ loginState }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(false);
+
+  let stepNum = 0;
 
   const navigate = useNavigate();
 
@@ -29,8 +36,7 @@ const Login = ({ loginState }) => {
   //Login Submit Event process
   const onSubmitAccount = async () => {
     //새 계정 만드는 처리
-    console.log(email);
-    console.log(password);
+    stepNum = 1;
     await createUserWithEmailAndPassword(authService, email, password)
       .then((userCredential) => {
         // Signed in
@@ -48,8 +54,7 @@ const Login = ({ loginState }) => {
   };
 
   const onSubmitLogin = async () => {
-    console.log(email);
-    console.log(password);
+    stepNum = 1;
     await signInWithEmailAndPassword(authService, email, password)
       .then((userCredential) => {
         // Signed in
@@ -90,6 +95,22 @@ const Login = ({ loginState }) => {
   return (
     <div style={{ height: "inherit" }}>
       <MenuBar loginState={loginState} />
+      <div className={styles.stepDiv}>
+        <Steps current={stepNum} className={styles.step}>
+          {newAccount ? (
+            <>
+              <Step title="계정 생성" description="This is a description." />
+              <Step title="닉네임 설정" description="This is a description." />
+              <Step title="회원가입" description="This is a description." />
+            </>
+          ) : (
+            <>
+              <Step title="ID/PW 입력" description="This is a description." />
+              <Step title="로그인" description="This is a description." />
+            </>
+          )}
+        </Steps>
+      </div>
       {newAccount ? (
         <NewAccount
           onSubmitAccount={onSubmitAccount}

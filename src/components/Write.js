@@ -32,9 +32,8 @@ function Write({
   setCommunity,
   setWriting,
   job,
-  userNickname,
-  setUserNickname,
   onWriteFinish,
+  jobEng,
 }) {
   const [category, setCategory] = useState("");
   const [header, setHeader] = useState("");
@@ -49,7 +48,7 @@ function Write({
   };
 
   const onSubmit = async () => {
-    const docRef = doc(db, "글번호", job);
+    const docRef = doc(db, "WritingNum", jobEng);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
@@ -58,37 +57,69 @@ function Write({
       console.log("No docSnap");
     }
 
-    /*
+    let jobCate = "";
+    if (category === "Q&A") jobCate = jobEng + "QA";
+    else if (category === "전체") jobCate = jobEng + "All";
+    else if (category === "정보공유") jobCate = jobEng + "Info";
+    else if (category === "경험공유") jobCate = jobEng + "Ex";
+    else if (category === "현실고충") jobCate = jobEng + "Re";
+    else if (category === "수익") jobCate = jobEng + "Rev";
+    else if (category === "스터디&동아리") jobCate = jobEng + "Stu";
+    else if (category === "세금&계약") jobCate = jobEng + "Tax";
+
+    console.log(category);
+
+    const cateRef = doc(db, "CateNum", jobCate);
+    const cateNumSnap = await getDoc(cateRef);
+
     const user = authService.currentUser;
     const nickname = user.providerData[0].displayName;
-    console.log(nickname);
-    const uid = user.uid;*/
+    const uid = user.uid;
+    let displayName = "";
+
+    if (nickname === "") displayName = uid;
+    else displayName = nickname;
 
     //date
     const date = new Date();
 
-    await setDoc(doc(db, job, `${docSnap.data().num}`), {
+    await setDoc(doc(db, jobEng, `${docSnap.data().num}`), {
       num: docSnap.data().num,
-      user: userNickname,
+      cateNum: cateNumSnap.data().num,
+      user: displayName,
       header: header,
       category: category,
       content: content,
-      time: `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
-      date: `${date.getMonth() + 1}-${date.getDate()}`,
+      count: 0,
+      time: `${("0" + date.getHours()).slice(-2)}:${(
+        "0" + date.getMinutes()
+      ).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`,
+      date: `${("0" + (date.getMonth() + 1)).slice(-2)}-${(
+        "0" + date.getDate()
+      ).slice(-2)}`,
       year: `${date.getFullYear()}`,
+      replyCount: 0,
+      favNum: 0,
       reply: [],
     });
 
-    await updateDoc(doc(db, "글번호", job), {
+    console.log(jobEng);
+    await updateDoc(doc(db, "WritingNum", jobEng), {
       num: docSnap.data().num + 1,
     });
+
+    console.log(jobCate);
+    await updateDoc(doc(db, "CateNum", jobCate), {
+      num: cateNumSnap.data().num + 1,
+    });
+
     setWrite(false);
     setCommunity(true);
     setWriting(false);
   };
 
   useEffect(() => {
-    setCategory("일반");
+    setCategory("전체");
   }, []);
 
   return (
@@ -96,19 +127,20 @@ function Write({
       <div className={write.category}>
         <span>카테고리</span>
         <Select
-          defaultValue="일반"
+          defaultValue="전체"
           style={{
             width: 200,
           }}
           onChange={handleChange}
         >
-          <Option value="일반">일반</Option>
+          <Option value="전체">전체</Option>
           <Option value="Q&A">Q&A</Option>
-          <Option value="정보">정보</Option>
+          <Option value="정보공유">정보공유</Option>
+          <Option value="경험공유">경험공유</Option>
           <Option value="현실고충">현실고충</Option>
-          <Option value="스터디ㅣ동아리 모집">스터디ㅣ동아리 모집</Option>
-          <Option value="경험">경험</Option>
           <Option value="수익">수익</Option>
+          <Option value="세금&계약">세금&계약</Option>
+          <Option value="스터디&동아리">스터디&동아리</Option>
         </Select>
       </div>
 

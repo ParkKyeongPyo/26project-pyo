@@ -15,10 +15,6 @@ import { doc, getDoc } from "firebase/firestore";
 function RouterCom() {
   const [loginState, setLoginState] = useState(false);
   const [selectedJob, setSelectedJob] = useState("");
-  const [displayName, setDisplayName] = useState("");
-  const [age, setAge] = useState("");
-  const [job, setJob] = useState("");
-  const [intro, setIntro] = useState("");
   const [email, setEmail] = useState("");
 
   useEffect(() => {
@@ -30,21 +26,6 @@ function RouterCom() {
         setEmail(user.email);
         // ...
         setLoginState(true);
-
-        const docRef = doc(db, "Profile", protoEmail);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          const preProfile = docSnap.data();
-          setAge(preProfile.age);
-          setJob(preProfile.job);
-          setIntro(preProfile.intro);
-        } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-        }
-
-        if (userNickname === "") setUserNickname(uid);
       } else {
         // User is signed out
         // ...
@@ -75,15 +56,7 @@ function RouterCom() {
           element={
             <Profile
               loginState={loginState}
-              age={age}
-              setAge={setAge}
-              job={job}
-              setJob={setJob}
-              intro={intro}
-              setIntro={setIntro}
               email={email}
-              displayName={displayNasme}
-              setDisplayName={setDisplayName}
             />
           }
         ></Route>

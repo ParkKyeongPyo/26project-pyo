@@ -18,7 +18,8 @@ import {
   limit,
   where,
 } from "firebase/firestore";
-import { setCurrentScreen } from "firebase/analytics";
+
+import Combar from "./Combar.js";
 
 const columns = [
   {
@@ -40,6 +41,16 @@ const columns = [
     dataIndex: "글쓴이",
     width: 80,
   },
+  {
+    title: "작성일",
+    dataIndex: "작성일",
+    width: 80,
+  },
+  {
+    title: "조회",
+    dataIndex: "조회",
+    width: 50,
+  },
 ];
 
 /*
@@ -52,104 +63,295 @@ ajax 사용시에는 비동기로 처리 됨.
 1. 글 0개 또는 1개시 글넘버 못불러 오는 문제 (비동기에 따른 순서 문제)
 */
 let data = [];
+let pageOrCate = false;
 
 //게시판 component
-function Board({ job, onWrite, onWriting, setWritingNum }) {
-  const [pageSize, setPageSize] = useState(2);
+function Board({ job, onWrite, onWriting, setWritingNum, jobEng }) {
+  const [pageSize, setPageSize] = useState(10);
   const [lastNum, setLastNum] = useState(1000000);
-  //const [pageChanged, setPageChanged] = useState(false);
-  const [change, setChange] = useState(false);
+  const [favNum, setFavNum] = useState(1000000);
+  const [cateNum, setCateNum] = useState(1000000);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [cateChanged, setCateChanged] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
-  console.log("2");
-
-  const getListAll = async (page) => {
+  const getListAllFirst = async (page) => {
     data = [];
+    let itemsProcessed = 0;
+
     const q = query(
-      collection(db, job),
+      collection(db, jobEng),
       where("num", "<=", lastNum - (page - 1) * pageSize),
       orderBy("num", "desc"),
       limit(pageSize)
     );
-      
-    console.log("lastNum : ", lastNum);
+
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot);
+    querySnapshot.forEach((doc, index, array) => {
+      data.push({
+        key: doc.data().num,
+        글번호: doc.data().num,
+        카테고리: doc.data().category,
+        제목: (
+          <>
+            <span
+              key={doc.data().header}
+              onClick={msg}
+              onMouseOver={mouseOver}
+              onMouseOut={mouseOut}
+            >
+              {doc.data().header}
+            </span>
+            <span className={board.replyCount}>[{doc.data().replyCount}]</span>
+          </>
+        ),
+        글쓴이: doc.data().user,
+        작성일: doc.data().time.substr(0, 5),
+        조회: doc.data().count,
+      });
+      itemsProcessed++;
+      if (itemsProcessed === querySnapshot.docs.length)
+        setLastNum(data[0].글번호);
+    });
+  };
+
+  const getListAll = async (page) => {
+    data = [];
+
+    const q = query(
+      collection(db, jobEng),
+      where("num", "<=", lastNum - (page - 1) * pageSize),
+      orderBy("num", "desc"),
+      limit(pageSize)
+    );
+
+    const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       data.push({
         key: doc.data().num,
         글번호: doc.data().num,
         카테고리: doc.data().category,
         제목: (
-          <span onClick={msg} onMouseOver={mouseOver} onMouseOut={mouseOut}>
-            {doc.data().header}
-          </span>
+          <>
+            <span
+              key={doc.data().header}
+              onClick={msg}
+              onMouseOver={mouseOver}
+              onMouseOut={mouseOut}
+            >
+              {doc.data().header}
+            </span>
+            <span className={board.replyCount}>[{doc.data().replyCount}]</span>
+          </>
         ),
         글쓴이: doc.data().user,
+        작성일: doc.data().time.substr(0, 5),
+        조회: doc.data().count,
       });
     });
-    //페이지 바뀌었을 때 번호로 다음페이지 가져오기 위해 글번호 가져오기
-
-    console.log("5a");
   };
 
   const getListCategory = async (page) => {
     data = [];
     const q = query(
-      collection(db, job),
+      collection(db, jobEng),
+      where("cateNum", "<=", cateNum - (page - 1) * pageSize),
       where("category", "==", selectedCategory),
-      where("num", "<=", lastNum - (page - 1) * pageSize),
-      orderBy("num", "desc"),
+      orderBy("cateNum", "desc"),
       limit(pageSize)
     );
 
-    console.log("lastNum : ", lastNum);
     const querySnapshot = await getDocs(q);
-    console.log("why")
+    const dataLength = querySnapshot.docs.length;
+    let itemsProcessed = 0;
+    {
+      dataLength != 0 &&
+        querySnapshot.forEach((doc) => {
+          data.push({
+            key: doc.data().num,
+            글번호: doc.data().num,
+            카테고리: doc.data().category,
+            제목: (
+              <>
+                <span
+                  key={doc.data().header}
+                  onClick={msg}
+                  onMouseOver={mouseOver}
+                  onMouseOut={mouseOut}
+                >
+                  {doc.data().header}
+                </span>
+                <span className={board.replyCount}>
+                  [{doc.data().replyCount}]
+                </span>
+              </>
+            ),
+            카테고리글번호: doc.data().cateNum,
+            글쓴이: doc.data().user,
+            작성일: doc.data().time.substr(0, 5),
+            조회: doc.data().count,
+          });
+          itemsProcessed++;
+          if (itemsProcessed === dataLength) setCateNum(data[0].카테고리글번호);
+        });
+    }
+  };
+
+  const getListFavorite = async (page) => {
+    data = [];
+    let itemsProcessed = 0;
+
+    const q = query(
+      collection(db, jobEng),
+      where("favNum", "!=", 0),
+      where("favNum", "<=", favNum - (page - 1) * pageSize),
+      orderBy("favNum", "desc"),
+      limit(pageSize)
+    );
+
+    const querySnapshot = await getDocs(q);
+
     querySnapshot.forEach((doc) => {
       data.push({
         key: doc.data().num,
         글번호: doc.data().num,
         카테고리: doc.data().category,
         제목: (
-          <span onClick={msg} onMouseOver={mouseOver} onMouseOut={mouseOut}>
-            {doc.data().header}
-          </span>
+          <>
+            <span
+              key={doc.data().header}
+              onClick={msg}
+              onMouseOver={mouseOver}
+              onMouseOut={mouseOut}
+            >
+              {doc.data().header}
+            </span>
+            <span className={board.replyCount}>[{doc.data().replyCount}]</span>
+          </>
         ),
         글쓴이: doc.data().user,
+        작성일: doc.data().time.substr(0, 5),
+        조회: doc.data().count,
+        댓글수: doc.data().replyCount,
+        FavNum: doc.data().favNum,
       });
+      itemsProcessed++;
+      if (itemsProcessed === querySnapshot.docs.length) {
+        setFavNum(data[0].FavNum);
+      }
     });
-    console.log("5b");
-    //페이지 바뀌었을 때 번호로 다음페이지 가져오기 위해 글번호 가져오기
   };
 
-  const getList = async (page) => {
+  const getListFavoritePageChanged = async (page) => {
+    data = [];
+
+    const q = query(
+      collection(db, jobEng),
+      where("favNum", "!=", 0),
+      where("favNum", "<=", favNum - (page - 1) * pageSize),
+      orderBy("favNum", "desc"),
+      limit(pageSize)
+    );
+
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+      data.push({
+        key: doc.data().num,
+        글번호: doc.data().num,
+        카테고리: doc.data().category,
+        제목: (
+          <>
+            <span
+              key={doc.data().header}
+              onClick={msg}
+              onMouseOver={mouseOver}
+              onMouseOut={mouseOut}
+            >
+              {doc.data().header}
+            </span>
+            <span className={board.replyCount}>[{doc.data().replyCount}]</span>
+          </>
+        ),
+        글쓴이: doc.data().user,
+        작성일: doc.data().time.substr(0, 5),
+        조회: doc.data().count,
+        댓글수: doc.data().replyCount,
+        FavNum: doc.data().favNum,
+      });
+    });
+  };
+
+  const getListPageChange = async (page) => {
+    data = [];
+
+    const q = query(
+      collection(db, jobEng),
+      where("category", "==", selectedCategory),
+      where("cateNum", "<=", cateNum - (page - 1) * pageSize),
+      orderBy("cateNum", "desc"),
+      limit(pageSize)
+    );
+
+    const querySnapshot = await getDocs(q);
+    const dataLength = querySnapshot.docs.length;
+    {
+      dataLength != 0 &&
+        querySnapshot.forEach((doc) => {
+          data.push({
+            key: doc.data().num,
+            글번호: doc.data().num,
+            카테고리: doc.data().category,
+            제목: (
+              <>
+                <span
+                  key={doc.data().header}
+                  onClick={msg}
+                  onMouseOver={mouseOver}
+                  onMouseOut={mouseOut}
+                >
+                  {doc.data().header}
+                </span>
+                <span className={board.replyCount}>
+                  [{doc.data().replyCount}]
+                </span>
+              </>
+            ),
+            글쓴이: doc.data().user,
+            작성일: doc.data().time.substr(0, 5),
+            조회: doc.data().count,
+          });
+        });
+    }
+  };
+
+  const getListPage = async (page) => {
     if (selectedCategory === "" || selectedCategory === "전체") {
-      console.log("4a");
       await getListAll(page);
+    } else if (selectedCategory === "인기") {
+      await getListFavoritePageChanged(page);
     } else {
-      console.log("4b");
+      await getListPageChange(page);
+    }
+  };
+
+  const getListCate = async (page) => {
+    if (selectedCategory === "전체") {
+      await getListAllFirst(page);
+    } else if (selectedCategory === "인기") {
+      await getListFavorite(page);
+    } else {
       await getListCategory(page);
     }
   };
 
-  const cateChange = async () => {
-    if (cateChanged) {
-      console.log("3");
-      
-      await getList(1);
-      setCateChanged(false);
-      setLastNum(data[0].글번호);
-    }
-  };
-
-  cateChange();
+  if (cateChanged) {
+    getListCate(1);
+    setCateChanged(false);
+  }
 
   const asyncFn = async () => {
-    await getList(1);
-    setLastNum(data[0].글번호);
+    await getListAllFirst(1);
   };
 
   useEffect(() => {
@@ -157,9 +359,8 @@ function Board({ job, onWrite, onWriting, setWritingNum }) {
   }, []);
 
   const onChange = async (event, page) => {
-    await getList(page);
+    await getListPage(page);
     setCurrentPage(page);
-    //setPageChanged((prev) => !prev);
   };
 
   const mouseOver = (e) => {
@@ -179,47 +380,16 @@ function Board({ job, onWrite, onWriting, setWritingNum }) {
     hideSelectAll: true,
   };
 
-  const onClick = (e) => {
-    setSelectedCategory(e.target.innerText);
-    setCateChanged(true);
-    setCurrentPage(1);
-    setLastNum(10000000);
-  };
-
-  console.log(10);
-  console.log(data);
-
   return (
     <>
-      <div className={styles.flexThinBar}>
-        <div>
-          <Button onClick={onClick}>전체</Button>
-          <Button onClick={onClick}>인기</Button>
-        </div>
-        <div>
-          <span className={Frame.middleBtn} onClick={onClick}>
-            Q&A
-          </span>
-          <span className={Frame.middleBtn} onClick={onClick}>
-            정보
-          </span>
-          <span className={Frame.middleBtn} onClick={onClick}>
-            현실고충
-          </span>
-          <span className={Frame.middleBtn} onClick={onClick}>
-            스터디l동아리 모집
-          </span>
-          <span className={Frame.middleBtn} onClick={onClick}>
-            경험
-          </span>
-          <span className={Frame.middleBtn} onClick={onClick}>
-            수익
-          </span>
-        </div>
-        <div>
-          <Button onClick={onWrite}>글쓰기</Button>
-        </div>
-      </div>
+      <Combar
+        onWrite={onWrite}
+        setSelectedCategory={setSelectedCategory}
+        setCateChanged={setCateChanged}
+        setCurrentPage={setCurrentPage}
+        setLastNum={setLastNum}
+        setCateNum={setCateNum}
+      />
       <Table
         columns={columns}
         dataSource={[...data]}
@@ -228,13 +398,14 @@ function Board({ job, onWrite, onWriting, setWritingNum }) {
         size="small"
         rowSelection={rowSelection}
       />
-      {console.log(data)}
       <Pagination
+        className={board.pagination}
         page={currentPage}
-        count={10}
+        variant="outlined"
+        color="primary"
+        count={100}
         onChange={onChange}
       />
-      {console.log("currentPage: ", currentPage)}
     </>
   );
 }

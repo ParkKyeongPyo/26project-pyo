@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { signOut, updateProfile  } from "firebase/auth";
+import { signOut, updateProfile } from "firebase/auth";
 import { authService } from "../fbase";
 import { db } from "../fbase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -33,29 +33,14 @@ const validateMessages = {
   },
 };
 
-function Profile({
-  loginState,
-  age,
-  setAge,
-  job,
-  setJob,
-  intro,
-  setIntro,
-  email, 
-  displayName,
-  setDisplayName
-}) {
+function Profile({ loginState, email }) {
+  const [userNickname, setUserNickname] = useState("");
+
   const navigate = useNavigate();
 
   const onChange = (e) => {
     if (e.target.name === "nickname") {
       setUserNickname(e.target.value);
-    } else if (e.target.name === "age") {
-      setAge(e.target.value);
-    } else if (e.target.name === "job") {
-      setJob(e.target.value);
-    } else if (e.target.name === "intro") {
-      setIntro(e.target.value);
     }
   };
 
@@ -72,29 +57,22 @@ function Profile({
   };
 
   const onSave = async () => {
-    await setDoc(doc(db, "Profile", email), {
-      nickname: userNickname,
-      age: age,
-      job: job,
-      intro: intro,
-    })
-
     updateProfile(authService.currentUser, {
       displayName: userNickname,
-    }).then(() => {
-      setDisplayName(userNickname);
-      // ...
-    }).catch((error) => {
-      // An error occurred
-      // ...
-    });
-    
+    })
+      .then(() => {
+        // ...
+      })
+      .catch((error) => {
+        // An error occurred
+        // ...
+      });
   };
 
   const user = authService.currentUser;
   let displayName = user.providerData[0].displayName;
 
-  if(displayName === "") displayName = user.uid;
+  if (displayName === "") displayName = user.uid;
 
   return (
     <div style={{ height: "inherit" }}>
@@ -111,22 +89,6 @@ function Profile({
               name="nickname"
               onChange={onChange}
               placeholder={displayName}
-            />
-          </Form.Item>
-
-          <Form.Item name={["user", "age"]} label="나이">
-            <Input name="age" onChange={onChange} placeholder={age} />
-          </Form.Item>
-
-          <Form.Item name={["user", "job"]} label="직업">
-            <Input name="job" onChange={onChange} placeholder={job} />
-          </Form.Item>
-
-          <Form.Item name={["user", "intro"]} label="소개">
-            <Input.TextArea
-              name="intro"
-              onChange={onChange}
-              placeholder={intro}
             />
           </Form.Item>
 

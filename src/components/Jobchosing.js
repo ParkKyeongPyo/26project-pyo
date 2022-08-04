@@ -9,7 +9,6 @@ import "antd/dist/antd.min.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-
 /* 
 해결해야 될 문제
 1. 여러 개 직군 클릭시 문제 => 하나만 클릭하게 해야 함.
@@ -23,11 +22,11 @@ function Jobchosing({ selectedJob, setSelectedJob, loginState }) {
   const navigate = useNavigate();
 
   const onGroupMouseOver = (e) => {
-    if (!groupClick) e.target.className = groupStyles.mouseOver;
+    e.target.className = groupStyles.mouseOver;
   };
 
   const onGroupMouseOut = (e) => {
-    if (!groupClick) e.target.className = groupStyles.group;
+    e.target.className = groupStyles.group;
   };
 
   const onJobMouseOver = (e) => {
@@ -68,7 +67,7 @@ function Jobchosing({ selectedJob, setSelectedJob, loginState }) {
       <div className={styles.flexHome}>
         <div className={groupStyles.groupFlex}>
           <div className={groupStyles.groupTop}>
-            <h3 className={groupStyles.groupFlex}>IT/프로그래밍</h3>
+            <h2 className={groupStyles.groupFlex}>IT</h2>
             <div className={groupStyles.groupFlex}>
               <Link
                 to="/community/dev"
@@ -95,7 +94,7 @@ function Jobchosing({ selectedJob, setSelectedJob, loginState }) {
                 onMouseOver={onGroupMouseOver}
                 onClick={onGroupClick}
               >
-                비지니스
+                웹/앱 운영자
               </span>
               <span
                 className={groupStyles.group}
@@ -103,20 +102,12 @@ function Jobchosing({ selectedJob, setSelectedJob, loginState }) {
                 onMouseOver={onGroupMouseOver}
                 onClick={onGroupClick}
               >
-                마케팅
-              </span>
-              <span
-                className={groupStyles.group}
-                onMouseOut={onGroupMouseOut}
-                onMouseOver={onGroupMouseOver}
-                onClick={onGroupClick}
-              >
-                Writer
+                쇼핑몰 운영자
               </span>
             </div>
           </div>
           <div className={groupStyles.groupTop}>
-            <h3 className={groupStyles.groupFlex}>디자인/창작</h3>
+            <h2 className={groupStyles.groupFlex}>디자인/창작</h2>
             <div className={groupStyles.groupFlex}>
               <span
                 className={groupStyles.group}
@@ -158,16 +149,227 @@ function Jobchosing({ selectedJob, setSelectedJob, loginState }) {
                 onMouseOver={onGroupMouseOver}
                 onClick={onGroupClick}
               >
-                소설가
+                작곡가
               </span>
-              <span
+            </div>
+          </div>
+        </div>
+
+        <div className={groupStyles.groupFlex}>
+          <div className={groupStyles.groupTop}>
+            <h2 className={groupStyles.groupFlex}>문서/글쓰기</h2>
+            <div className={groupStyles.groupFlex}>
+              <Link
+                to="/community/dev"
                 className={groupStyles.group}
                 onMouseOut={onGroupMouseOut}
                 onMouseOver={onGroupMouseOver}
-                onClick={onGroupClick}
               >
-                작곡가
-              </span>
+                작가
+              </Link>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                소설가
+              </Link>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                번역가
+              </Link>
+            </div>
+            <div className={groupStyles.groupFlex}>
+            <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                통역가
+              </Link>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                카피라이터
+              </Link>
+            </div>
+          </div>
+          <div className={groupStyles.groupTop}>
+            <h2 className={groupStyles.groupFlex}>크리에이터</h2>
+            <div className={groupStyles.groupFlex}>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                유튜버
+              </Link>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                인스타 인플루언서
+              </Link>
+            </div>
+            <div className={groupStyles.groupFlex}>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                블로거
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className={groupStyles.groupFlex}>
+          <div className={groupStyles.groupTop}>
+            <h2 className={groupStyles.groupFlex}>교육</h2>
+            <div className={groupStyles.groupFlex}>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                강사
+              </Link>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                심리상담가
+              </Link>
+            </div>
+            <div className={groupStyles.groupFlex}>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                온라인 강사
+              </Link>
+            </div>
+          </div>
+          <div className={groupStyles.groupTop}>
+            <h2 className={groupStyles.groupFlex}>영상/사진/음향</h2>
+            <div className={groupStyles.groupFlex}>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                영상편집가
+              </Link>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                사진가
+              </Link>
+            </div>
+            <div className={groupStyles.groupFlex}>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                성우
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        <div className={groupStyles.groupFlex}>
+          <div className={groupStyles.groupTop}>
+            <h2 className={groupStyles.groupFlex}>비지니스</h2>
+            <div className={groupStyles.groupFlex}>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                마케터
+              </Link>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                컨설턴트
+              </Link>
+            </div>
+            <div className={groupStyles.groupFlex}>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                온라인 강사
+              </Link>
+            </div>
+          </div>
+          <div className={groupStyles.groupTop}>
+            <h2 className={groupStyles.groupFlex}>방송계</h2>
+            <div className={groupStyles.groupFlex}>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                모델
+              </Link>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                메이크업 아티스트
+              </Link>
+            </div>
+            <div className={groupStyles.groupFlex}>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                헤어 디자이너
+              </Link>
+              <Link
+                to="/community/dev"
+                className={groupStyles.group}
+                onMouseOut={onGroupMouseOut}
+                onMouseOver={onGroupMouseOver}
+              >
+                헬스 트레이너
+              </Link>
             </div>
           </div>
         </div>

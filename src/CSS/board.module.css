@@ -5,3 +5,16 @@
 .mouseOut {
   text-decoration: none;
 }
+
+.replyCount{
+  color: #999999;
+  margin-left: 3px;
+}
+
+.pagination{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+}
+

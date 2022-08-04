@@ -5,7 +5,7 @@ function Free() {
   return (
     <div style={{ height: "inherit" }}>
       <CommunityMenuBar />
-      <CommunityFrame job="All" userNickname={userNickname} setUserNickname={setUserNickname}/>
+      <CommunityFrame job="All"/>
     </div>
   );
 }

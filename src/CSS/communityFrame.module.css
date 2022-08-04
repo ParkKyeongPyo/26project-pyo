@@ -13,10 +13,26 @@
 }
 
 .middleBtn {
-  font-size: 12px;
-  margin-right: 10px;
+  margin-right: 5px;
+  background-color: #e5e7eb;
+  padding: 5px 5px 3px 5px;
+  border-radius: 20px;
+  border: 1px solid white;
+  font-size:14px;
+  text-align: justify;
+}
+
+.mouseOver {
+  margin-right: 5px;
+  border: 1px solid #40a9ff;
+  color: #40a9ff;
+  background-color: #e5e7eb;
+  padding: 5px 5px 3px 5px;
+  border-radius: 20px;
+  font-size: 14px;
 }
 
 .h1 {
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #e5e7eb;
+  font-style:unset;
 }

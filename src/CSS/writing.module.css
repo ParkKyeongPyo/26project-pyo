@@ -2,11 +2,12 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 100%;
+  height: auto;
 }
 
-.content {
-  height: 50%;
+.content  {
+  max-height: auto;
+  min-height: 300px;
   margin-top: 30px;
   margin-left: 30px;
 }
