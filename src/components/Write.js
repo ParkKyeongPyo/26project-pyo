@@ -20,6 +20,8 @@ import {
 } from "firebase/firestore";
 import { authService } from "../fbase.js";
 
+import WriteCate from "./WriteCate";
+
 const { Option } = Select;
 
 /*
@@ -34,6 +36,7 @@ function Write({
   job,
   onWriteFinish,
   jobEng,
+  selectedGroup
 }) {
   const [category, setCategory] = useState("");
   const [header, setHeader] = useState("");
@@ -126,22 +129,7 @@ function Write({
     <form className={styles.flexWrite} onSubmit={onSubmit}>
       <div className={write.category}>
         <span>카테고리</span>
-        <Select
-          defaultValue="전체"
-          style={{
-            width: 200,
-          }}
-          onChange={handleChange}
-        >
-          <Option value="전체">전체</Option>
-          <Option value="Q&A">Q&A</Option>
-          <Option value="정보공유">정보공유</Option>
-          <Option value="경험공유">경험공유</Option>
-          <Option value="현실고충">현실고충</Option>
-          <Option value="수익">수익</Option>
-          <Option value="세금&계약">세금&계약</Option>
-          <Option value="스터디&동아리">스터디&동아리</Option>
-        </Select>
+        <WriteCate selectedGroup={selectedGroup} setCategory={setCategory}/>
       </div>
 
       <br />

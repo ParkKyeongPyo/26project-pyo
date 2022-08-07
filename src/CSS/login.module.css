@@ -47,21 +47,29 @@
   margin: 7px 0px 7px 0px;
 }
 
-.flexWrite{
+.flexWrite {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
 }
 
-.stepDiv{
+.stepDiv {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-bottom: 100px;
   margin-top: 20px;
+  background-color: inherit !important;
+  color: inherit !important;
 }
 
-.step{
+.step {
   width: 60%;
+}
+
+.loginPage{
+  background-color: white;
+  color: black;
+  height: inherit;
 }

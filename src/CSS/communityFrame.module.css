@@ -20,6 +20,7 @@
   border: 1px solid white;
   font-size:14px;
   text-align: justify;
+  color:black !important;
 }
 
 .mouseOver {
@@ -35,4 +36,6 @@
 .h1 {
   border-bottom: 1px solid #e5e7eb;
   font-style:unset;
+  color: inherit;
+  background-color: inherit;
 }

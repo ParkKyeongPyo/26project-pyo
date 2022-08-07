@@ -6,11 +6,12 @@ import { useState } from "react";
 import CommunityFrameSub from "./CommunityFrameSub";
 import Write from "../components/Write.js";
 import Writing from "./Writing";
+import FloatingBtn2 from "./FloatingBtn2.js";
 
-import {doc, updateDoc} from "firebase/firestore";
-import {db} from "../fbase.js";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../fbase.js";
 
-function CommunityFrame({ job, jobEng }) {
+function CommunityFrame({ job, jobEng, selectedGroup, night, setNight }) {
   const [write, setWrite] = useState(false);
   const [writing, setWriting] = useState(false);
   const [community, setCommunity] = useState(true);
@@ -30,7 +31,7 @@ function CommunityFrame({ job, jobEng }) {
   };
 
   const onWriting = async (e) => {
-    console.log(e)
+    console.log(e);
     setWritingInfo(e);
     setWrite(false);
     setWriting(true);
@@ -39,43 +40,68 @@ function CommunityFrame({ job, jobEng }) {
     const updateRef = doc(db, jobEng, `${e.글번호}`);
 
     await updateDoc(updateRef, {
-      count: e.조회 + 1
+      count: e.조회 + 1,
     });
   };
 
   return (
-    <div className={frame.wide}>
-      <h1 className={frame.h1}>프리랜서 {job} 커뮤니티</h1>
-      {write && (
-        <Write
-          setWrite={setWrite}
-          setCommunity={setCommunity}
-          setWriting={setWriting}
-          job={job}
-          onWriteFinish={onWriteFinish}
-          jobEng={jobEng}
-        />
-      )}
-      {community && (
-        <CommunityFrameSub
-          job={job}
-          onWrite={onWrite}
-          onWriting={onWriting}
-          setWritingNum={setWritingNum}
-          jobEng={jobEng}
-        />
-      )}
-      {writing && (
-        <Writing
-          job={job}
-          writingInfo={writingInfo}
-          setWrite={setWrite}
-          setCommunity={setCommunity}
-          setWriting={setWriting}
-          jobEng={jobEng}
-        />
-      )}
-    </div>
+    <>
+      <FloatingBtn2
+        night={night}
+        setNight={setNight}
+        setWrite={setWrite}
+        setWriting={setWriting}
+        setCommunity={setCommunity}
+      />
+      <div className={frame.wide}>
+        {selectedGroup === "프리랜서" && (
+          <h1 className={frame.h1}>
+            [{selectedGroup}] {job} 커뮤니티
+          </h1>
+        )}
+        {selectedGroup === "크리에이터" && (
+          <h1 className={frame.h1}>
+            [{selectedGroup}] {job} 커뮤니티
+          </h1>
+        )}
+        {selectedGroup === "자영업자" && (
+          <h1 className={frame.h1}>
+            [{selectedGroup}] {job} 사장님 커뮤니티
+          </h1>
+        )}
+        {write && (
+          <Write
+            setWrite={setWrite}
+            setCommunity={setCommunity}
+            setWriting={setWriting}
+            job={job}
+            onWriteFinish={onWriteFinish}
+            jobEng={jobEng}
+            selectedGroup={selectedGroup}
+          />
+        )}
+        {community && (
+          <CommunityFrameSub
+            job={job}
+            onWrite={onWrite}
+            onWriting={onWriting}
+            setWritingNum={setWritingNum}
+            jobEng={jobEng}
+            selectedGroup={selectedGroup}
+          />
+        )}
+        {writing && (
+          <Writing
+            job={job}
+            writingInfo={writingInfo}
+            setWrite={setWrite}
+            setCommunity={setCommunity}
+            setWriting={setWriting}
+            jobEng={jobEng}
+          />
+        )}
+      </div>
+    </>
   );
 }
 

@@ -66,7 +66,7 @@ let data = [];
 let pageOrCate = false;
 
 //게시판 component
-function Board({ job, onWrite, onWriting, setWritingNum, jobEng }) {
+function Board({ job, onWrite, onWriting, setWritingNum, jobEng, selectedGroup }) {
   const [pageSize, setPageSize] = useState(10);
   const [lastNum, setLastNum] = useState(1000000);
   const [favNum, setFavNum] = useState(1000000);
@@ -389,6 +389,7 @@ function Board({ job, onWrite, onWriting, setWritingNum, jobEng }) {
         setCurrentPage={setCurrentPage}
         setLastNum={setLastNum}
         setCateNum={setCateNum}
+        selectedGroup={selectedGroup}
       />
       <Table
         columns={columns}

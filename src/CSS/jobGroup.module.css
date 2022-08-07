@@ -14,11 +14,26 @@
   margin-bottom: 20px;
 }
 
+.groupFlexCreater {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: inherit;
+  background-color: inherit;
+}
+
 .groupTop {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-bottom: 50px;
+}
+
+.groupTopCreater {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 .mouseOver {

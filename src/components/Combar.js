@@ -10,6 +10,7 @@ function Combar({
   setCurrentPage,
   setLastNum,
   setCateNum,
+  selectedGroup
 }) {
   const onClick = (e) => {
     setSelectedCategory(e.target.innerText);
@@ -27,75 +28,212 @@ function Combar({
      e.target.className = Frame.middleBtn;
   };
 
-  return (
-    <div className={styles.flexThinBar}>
-      <div>
-        <Button onClick={onClick}>전체</Button>
-        <Button onClick={onClick}>인기</Button>
+  if(selectedGroup === "프리랜서"){
+    return (
+      <div className={styles.flexThinBar}>
+        <div>
+          <Button onClick={onClick}>전체</Button>
+          <Button onClick={onClick}>Q&A</Button>
+          <Button onClick={onClick}>인기</Button>
+        </div>
+        <div>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            정보공유
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            경험공유
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            현실고충
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            수익
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            세금&계약
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            스터디&동아리
+          </span>
+        </div>
+        <div>
+          <Button onClick={onWrite}>글쓰기</Button>
+        </div>
       </div>
-      <div>
-        <span
-          className={Frame.middleBtn}
-          onClick={onClick}
-          onMouseOut={onGroupMouseOut}
-          onMouseOver={onGroupMouseOver}
-        >
-          Q&A
-        </span>
-        <span
-          className={Frame.middleBtn}
-          onClick={onClick}
-          onMouseOut={onGroupMouseOut}
-          onMouseOver={onGroupMouseOver}
-        >
-          정보공유
-        </span>
-        <span
-          className={Frame.middleBtn}
-          onClick={onClick}
-          onMouseOut={onGroupMouseOut}
-          onMouseOver={onGroupMouseOver}
-        >
-          경험공유
-        </span>
-        <span
-          className={Frame.middleBtn}
-          onClick={onClick}
-          onMouseOut={onGroupMouseOut}
-          onMouseOver={onGroupMouseOver}
-        >
-          현실고충
-        </span>
-        <span
-          className={Frame.middleBtn}
-          onClick={onClick}
-          onMouseOut={onGroupMouseOut}
-          onMouseOver={onGroupMouseOver}
-        >
-          수익
-        </span>
-        <span
-          className={Frame.middleBtn}
-          onClick={onClick}
-          onMouseOut={onGroupMouseOut}
-          onMouseOver={onGroupMouseOver}
-        >
-          세금&계약
-        </span>
-        <span
-          className={Frame.middleBtn}
-          onClick={onClick}
-          onMouseOut={onGroupMouseOut}
-          onMouseOver={onGroupMouseOver}
-        >
-          스터디&동아리
-        </span>
+    );
+  } else if(selectedGroup === "크리에이터"){
+    return (
+      <div className={styles.flexThinBar}>
+        <div>
+          <Button onClick={onClick}>전체</Button>
+          <Button onClick={onClick}>Q&A</Button>
+          <Button onClick={onClick}>인기</Button>
+        </div>
+        <div>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            정보공유
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            경험공유
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            현실고충
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            수익
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            세금&계약
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            운영
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            협업
+          </span>
+        </div>
+        <div>
+          <Button onClick={onWrite}>글쓰기</Button>
+        </div>
       </div>
-      <div>
-        <Button onClick={onWrite}>글쓰기</Button>
+    );
+  } else if(selectedGroup === "자영업자"){
+    return (
+      <div className={styles.flexThinBar}>
+        <div>
+          <Button onClick={onClick}>전체</Button>
+          <Button onClick={onClick}>Q&A</Button>
+          <Button onClick={onClick}>인기</Button>
+        </div>
+        <div>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            정보공유
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            경험공유
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            현실고충
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            수익
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            세금&계약
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            운영
+          </span>
+          <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            직원/알바
+          </span>
+        </div>
+        <div>
+          <Button onClick={onWrite}>글쓰기</Button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Combar;

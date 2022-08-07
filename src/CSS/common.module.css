@@ -1,0 +1,28 @@
+.flexRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 30px 0 10px 0;
+    color: inherit;
+    background-color: inherit;
+}
+
+.flexRowMiddle{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 10px 0 10px 0;
+    color: inherit;
+    background-color: inherit;
+}
+
+.flexCol{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.nightMode{
+    color: inherit;
+    background-color: inherit;
+}

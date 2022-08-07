@@ -33,7 +33,7 @@ const validateMessages = {
   },
 };
 
-function Profile({ loginState, email }) {
+function Profile({ loginState}) {
   const [userNickname, setUserNickname] = useState("");
 
   const navigate = useNavigate();

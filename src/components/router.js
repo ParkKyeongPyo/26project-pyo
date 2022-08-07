@@ -2,9 +2,7 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../routes/Home";
 import Login from "../routes/Login";
 import Profile from "../routes/Profile";
-import Free from "../community/Free";
-import Dev from "../community/Dev";
-import Allfree from "../routes/Allfree";
+import Community from "./Community";
 
 import { useState, useEffect } from "react";
 
@@ -12,10 +10,14 @@ import { onAuthStateChanged } from "firebase/auth";
 import { authService, db } from "../fbase";
 import { doc, getDoc } from "firebase/firestore";
 
+let email = "";
+
 function RouterCom() {
   const [loginState, setLoginState] = useState(false);
+  const [selectedGroup, setSelectedGroup] = useState("프리랜서");
   const [selectedJob, setSelectedJob] = useState("");
-  const [email, setEmail] = useState("");
+  const [selectedJobEng, setSelectedJobEng] = useState("");
+  const [night, setNight] = useState(true);
 
   useEffect(() => {
     //Auth state observer
@@ -23,7 +25,7 @@ function RouterCom() {
       if (user) {
         const uid = user.uid;
         const protoEmail = user.email;
-        setEmail(user.email);
+        email = user.email;
         // ...
         setLoginState(true);
       } else {
@@ -44,6 +46,11 @@ function RouterCom() {
               loginState={loginState}
               selectedJob={selectedJob}
               setSelectedJob={setSelectedJob}
+              setSelectedJobEng={setSelectedJobEng}
+              setSelectedGroup={setSelectedGroup}
+              selectedGroup={selectedGroup}
+              night={night}
+              setNight={setNight}
             />
           }
         ></Route>
@@ -53,18 +60,20 @@ function RouterCom() {
         ></Route>
         <Route
           path="/profile"
+          element={<Profile loginState={loginState} />}
+        ></Route>
+        <Route
+          path="/community"
           element={
-            <Profile
-              loginState={loginState}
-              email={email}
+            <Community
+              selectedJob={selectedJob}
+              selectedGroup={selectedGroup}
+              selectedJobEng={selectedJobEng}
+              night={night}
+              setNight={setNight}
             />
           }
         ></Route>
-        <Route path="/allfree" element={<Allfree />}></Route>
-      </Routes>
-      <Routes>
-        <Route path="/community/free" element={<Free />}></Route>
-        <Route path="/community/dev" element={<Dev />}></Route>
       </Routes>
     </Router>
   );

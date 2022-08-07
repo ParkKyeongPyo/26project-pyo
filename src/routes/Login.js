@@ -93,7 +93,7 @@ const Login = ({ loginState }) => {
   };
 
   return (
-    <div style={{ height: "inherit" }}>
+    <div className={styles.loginPage}>
       <MenuBar loginState={loginState} />
       <div className={styles.stepDiv}>
         <Steps current={stepNum} className={styles.step}>
