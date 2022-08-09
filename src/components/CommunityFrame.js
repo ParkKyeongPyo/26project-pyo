@@ -11,7 +11,7 @@ import FloatingBtn2 from "./FloatingBtn2.js";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../fbase.js";
 
-function CommunityFrame({ job, jobEng, selectedGroup, night, setNight }) {
+function CommunityFrame({ job, jobEng, selectedGroup, night, setNight, userRN, loginState }) {
   const [write, setWrite] = useState(false);
   const [writing, setWriting] = useState(false);
   const [community, setCommunity] = useState(true);
@@ -31,7 +31,6 @@ function CommunityFrame({ job, jobEng, selectedGroup, night, setNight }) {
   };
 
   const onWriting = async (e) => {
-    console.log(e);
     setWritingInfo(e);
     setWrite(false);
     setWriting(true);
@@ -56,17 +55,17 @@ function CommunityFrame({ job, jobEng, selectedGroup, night, setNight }) {
       <div className={frame.wide}>
         {selectedGroup === "프리랜서" && (
           <h1 className={frame.h1}>
-            [{selectedGroup}] {job} 커뮤니티
+            {selectedGroup} {job} 커뮤니티
           </h1>
         )}
         {selectedGroup === "크리에이터" && (
           <h1 className={frame.h1}>
-            [{selectedGroup}] {job} 커뮤니티
+            {selectedGroup} {job} 커뮤니티
           </h1>
         )}
         {selectedGroup === "자영업자" && (
           <h1 className={frame.h1}>
-            [{selectedGroup}] {job} 사장님 커뮤니티
+            {selectedGroup} {job} 사장님 커뮤니티
           </h1>
         )}
         {write && (
@@ -78,6 +77,8 @@ function CommunityFrame({ job, jobEng, selectedGroup, night, setNight }) {
             onWriteFinish={onWriteFinish}
             jobEng={jobEng}
             selectedGroup={selectedGroup}
+            userRN={userRN}
+            loginState={loginState}
           />
         )}
         {community && (
@@ -88,16 +89,15 @@ function CommunityFrame({ job, jobEng, selectedGroup, night, setNight }) {
             setWritingNum={setWritingNum}
             jobEng={jobEng}
             selectedGroup={selectedGroup}
+            loginState={loginState}
           />
         )}
         {writing && (
           <Writing
-            job={job}
             writingInfo={writingInfo}
-            setWrite={setWrite}
-            setCommunity={setCommunity}
-            setWriting={setWriting}
             jobEng={jobEng}
+            userRN={userRN}
+            loginState={loginState}
           />
         )}
       </div>

@@ -4,7 +4,7 @@ import React from "react";
 
 import styles from "../CSS/login.module.css";
 
-function LoginCom({ onSubmitLogin, onChange, onSwitch, onFinishFailed}) {
+function LoginCom({ onSubmitLogin, onChange, onSwitch, onFinishFailed, onSubmitGoogle}) {
   return (
     <div className={styles.flex}>
       <Form
@@ -23,12 +23,12 @@ function LoginCom({ onSubmitLogin, onChange, onSwitch, onFinishFailed}) {
         autoComplete="off"
       >
         <Form.Item
-          label="Email"
+          label="이메일"
           name="Email"
           rules={[
             {
               required: true,
-              message: "Please input Email!",
+              message: "비밀번호를 입력해주세요!",
             },
           ]}
         >
@@ -36,18 +36,17 @@ function LoginCom({ onSubmitLogin, onChange, onSwitch, onFinishFailed}) {
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          label="비밀번호"
           name="Password"
           rules={[
             {
               required: true,
-              message: "Please input your password!",
+              message: "사용할 닉네임을 적어주세요!",
             },
           ]}
         >
           <Input.Password name="Password" onChange={onChange} />
         </Form.Item>
-
         <Form.Item
           name="remember"
           valuePropName="checked"
@@ -76,8 +75,14 @@ function LoginCom({ onSubmitLogin, onChange, onSwitch, onFinishFailed}) {
             span: 16,
           }}
         >
-          <Button htmlType="button">Continue with google</Button>
-          <Button htmlType="button">Continue with github</Button>
+          <Button htmlType="button" onClick={onSubmitGoogle}>
+            <img
+              width="17px"
+              alt="Google sign-in"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
+            />
+            <span style={{marginLeft: "10px", verticalAlign: "middle"}}>Coninue with google</span>
+          </Button>
         </Form.Item>
 
         <Form.Item

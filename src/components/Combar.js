@@ -1,5 +1,5 @@
 import styles from "../CSS/login.module.css";
-import { Button } from "antd";
+import { Button, message, Popover } from "antd";
 import "antd/dist/antd.min.css";
 import Frame from "../CSS/communityFrame.module.css";
 
@@ -10,7 +10,10 @@ function Combar({
   setCurrentPage,
   setLastNum,
   setCateNum,
-  selectedGroup
+  selectedGroup,
+  loginState,
+  setPageSize,
+  setMyWriting
 }) {
   const onClick = (e) => {
     setSelectedCategory(e.target.innerText);
@@ -18,23 +21,42 @@ function Combar({
     setCurrentPage(1);
     setLastNum(10000000);
     setCateNum(10000000);
+    setMyWriting(false);
+  };
+
+  const onMyWritingClick = (e) => {
+    if (loginState) {
+      setSelectedCategory(e.target.innerText);
+      setCateChanged(true);
+      setCurrentPage(1);
+      setLastNum(10000000);
+      setCateNum(10000000);
+      setPageSize(20);
+      setMyWriting(true);
+    } else {
+      message.warning("내 글보기 기능은 로그인 후 이용가능합니다");
+    }
   };
 
   const onGroupMouseOver = (e) => {
-     e.target.className = Frame.mouseOver;
+    e.target.className = Frame.mouseOver;
   };
 
   const onGroupMouseOut = (e) => {
-     e.target.className = Frame.middleBtn;
+    e.target.className = Frame.middleBtn;
   };
 
-  if(selectedGroup === "프리랜서"){
+  if (selectedGroup === "프리랜서") {
     return (
       <div className={styles.flexThinBar}>
         <div>
           <Button onClick={onClick}>전체</Button>
-          <Button onClick={onClick}>Q&A</Button>
           <Button onClick={onClick}>인기</Button>
+          <Button onClick={onClick}>Q&A</Button>
+          <Popover content="내 글은 가장 최근 글을 기준으로 최대 20개까지 볼 수 있습니다." title="주의사항" trigger="hover">
+            <Button onClick={onMyWritingClick}>내 글</Button>
+          </Popover>
+
         </div>
         <div>
           <span
@@ -91,13 +113,16 @@ function Combar({
         </div>
       </div>
     );
-  } else if(selectedGroup === "크리에이터"){
+  } else if (selectedGroup === "크리에이터") {
     return (
       <div className={styles.flexThinBar}>
         <div>
           <Button onClick={onClick}>전체</Button>
-          <Button onClick={onClick}>Q&A</Button>
           <Button onClick={onClick}>인기</Button>
+          <Button onClick={onClick}>Q&A</Button>
+          <Popover content="내 글은 최근 날짜를 기준으로 최대 20개까지 볼 수 있습니다." title="주의사항" trigger="hover">
+            <Button onClick={onMyWritingClick}>내 글</Button>
+          </Popover>
         </div>
         <div>
           <span
@@ -162,13 +187,16 @@ function Combar({
         </div>
       </div>
     );
-  } else if(selectedGroup === "자영업자"){
+  } else if (selectedGroup === "자영업자") {
     return (
       <div className={styles.flexThinBar}>
         <div>
           <Button onClick={onClick}>전체</Button>
-          <Button onClick={onClick}>Q&A</Button>
           <Button onClick={onClick}>인기</Button>
+          <Button onClick={onClick}>Q&A</Button>
+          <Popover content="내 글은 최근 날짜를 기준으로 최대 20개까지 볼 수 있습니다." title="주의사항" trigger="hover">
+            <Button onClick={onMyWritingClick}>내 글</Button>
+          </Popover>
         </div>
         <div>
           <span

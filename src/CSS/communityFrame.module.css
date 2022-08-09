@@ -1,7 +1,5 @@
 .wide {
-  width: 77%;
   height: inherit;
-  margin-left: 150px;
 }
 
 .halfboard {
@@ -38,4 +36,6 @@
   font-style:unset;
   color: inherit;
   background-color: inherit;
+  margin-left: 150px;
+  width: 77%;
 }

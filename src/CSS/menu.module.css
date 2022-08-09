@@ -4,3 +4,26 @@
     justify-content: flex-end;
     width: 100%;
 }
+
+.flexMenus{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    font-size: large;
+    background-color: #232F3E;
+    color: white;
+}
+
+.flexItem{
+    padding: 10px 20px 10px 20px;
+}
+
+.flexItemLast{
+    padding: 10px 20px 10px 20px;
+    margin-left: auto;
+}
+
+
+
+

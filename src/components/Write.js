@@ -21,6 +21,7 @@ import {
 import { authService } from "../fbase.js";
 
 import WriteCate from "./WriteCate";
+import Footer from "./Footer";
 
 const { Option } = Select;
 
@@ -36,7 +37,9 @@ function Write({
   job,
   onWriteFinish,
   jobEng,
-  selectedGroup
+  selectedGroup,
+  userRN,
+  loginState,
 }) {
   const [category, setCategory] = useState("");
   const [header, setHeader] = useState("");
@@ -50,6 +53,7 @@ function Write({
     setCategory(value);
   };
 
+  //글 제출.
   const onSubmit = async () => {
     const docRef = doc(db, "WritingNum", jobEng);
     const docSnap = await getDoc(docRef);
@@ -70,26 +74,27 @@ function Write({
     else if (category === "스터디&동아리") jobCate = jobEng + "Stu";
     else if (category === "세금&계약") jobCate = jobEng + "Tax";
 
-    console.log(category);
-
     const cateRef = doc(db, "CateNum", jobCate);
     const cateNumSnap = await getDoc(cateRef);
 
-    const user = authService.currentUser;
-    const nickname = user.providerData[0].displayName;
-    const uid = user.uid;
-    let displayName = "";
+    //로그인 유무에 따라서 익명 또는 displayName author에 넣기.
+    let writerName = "";
 
-    if (nickname === "") displayName = uid;
-    else displayName = nickname;
+    if (loginState) {
+      const user = authService.currentUser;
+      const displayName = user.displayName;
+      writerName = displayName;
+    } else {
+      writerName = userRN;
+    }
 
-    //date
     const date = new Date();
 
+    //DB에 글 저장하기.
     await setDoc(doc(db, jobEng, `${docSnap.data().num}`), {
       num: docSnap.data().num,
       cateNum: cateNumSnap.data().num,
-      user: displayName,
+      user: writerName,
       header: header,
       category: category,
       content: content,
@@ -106,12 +111,10 @@ function Write({
       reply: [],
     });
 
-    console.log(jobEng);
     await updateDoc(doc(db, "WritingNum", jobEng), {
       num: docSnap.data().num + 1,
     });
 
-    console.log(jobCate);
     await updateDoc(doc(db, "CateNum", jobCate), {
       num: cateNumSnap.data().num + 1,
     });
@@ -126,66 +129,69 @@ function Write({
   }, []);
 
   return (
-    <form className={styles.flexWrite} onSubmit={onSubmit}>
-      <div className={write.category}>
-        <span>카테고리</span>
-        <WriteCate selectedGroup={selectedGroup} setCategory={setCategory}/>
-      </div>
+    <>
+      <form className={styles.flexWrite} onSubmit={onSubmit}>
+        <div className={write.category}>
+          <span>카테고리</span>
+          <WriteCate selectedGroup={selectedGroup} setCategory={setCategory} />
+        </div>
 
-      <br />
+        <br />
 
-      <Input
-        key="header"
-        onChange={onChange}
-        style={{ width: "500px" }}
-        placeholder="제목"
-      />
+        <Input
+          key="header"
+          onChange={onChange}
+          style={{ width: "500px" }}
+          placeholder="제목"
+        />
 
-      <br />
+        <br />
 
-      <div className={write.watch}>
-        음란물, 차별, 비하, 혐오 및 초상권, 저작권 침해 게시물은 민, 형사상의
-        책임을 질 수 있습니다. [저작권법 안내] [게시물 활용 안내]
-      </div>
+        <div className={write.watch}>
+          음란물, 차별, 비하, 혐오 및 초상권, 저작권 침해 게시물은 민, 형사상의
+          책임을 질 수 있습니다. [저작권법 안내] [게시물 활용 안내]
+        </div>
 
-      <br />
+        <br />
 
-      <CKEditor
-        key="content"
-        height="1000px"
-        editor={ClassicEditor}
-        onReady={(editor) => {
-          // You can store the "editor" and use when it is needed.
-          console.log("Editor is ready to use!", editor);
-        }}
-        onChange={(event, editor) => {
-          const data = editor.getData();
-          setContent(data);
-        }}
-        onBlur={(event, editor) => {
-          //console.log("Blur.", editor);
-        }}
-        onFocus={(event, editor) => {
-          //console.log("Focus.", editor);
-        }}
-      />
+        <CKEditor
+          key="content"
+          height="1000px"
+          editor={ClassicEditor}
+          onReady={(editor) => {
+            // You can store the "editor" and use when it is needed.
+            console.log("Editor is ready to use!", editor);
+          }}
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            setContent(data);
+          }}
+          onBlur={(event, editor) => {
+            //console.log("Blur.", editor);
+          }}
+          onFocus={(event, editor) => {
+            //console.log("Focus.", editor);
+          }}
+        />
 
-      <br />
+        <br />
 
-      <div className={write.btnMargin}>
-        <Button
-          type="primary"
-          htmlType="button"
-          className={write.btnMarginRight}
-          onClick={onWriteFinish}
-        >
-          취소
-        </Button>
-        <Button type="primary" htmlType="submit">
-          저장
-        </Button>
-      </div>
-    </form>
+        <div className={write.btnMargin}>
+          <Button
+            type="primary"
+            htmlType="button"
+            className={write.btnMarginRight}
+            onClick={onWriteFinish}
+          >
+            취소
+          </Button>
+          <Button type="primary" htmlType="submit">
+            저장
+          </Button>
+        </div>
+      </form>
+      <Footer />
+    </>
   );
 }
 

@@ -1,3 +1,4 @@
+import Footer from "./Footer.js";
 import { db } from "../fbase.js";
 import {
   collection,
@@ -21,7 +22,7 @@ const { TextArea } = Input;
 const CommentList = ({ comments }) => (
   <List
     dataSource={comments}
-    header={`${comments.length} ${comments.length > 1 ? "replies" : "reply"}`}
+    header={`${comments.length}개 ${comments.length > 1 ? "답변들" : "답변"}`}
     itemLayout="horizontal"
     renderItem={(props) => <Comment {...props} />}
   />
@@ -48,29 +49,51 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 let data = {};
 let aryCount = 0;
 
-function Writing({
-  job,
-  writingInfo,
-  setWrite,
-  setCommunity,
-  setWriting,
-  jobEng,
-}) {
+function Writing({ writingInfo, jobEng, userRN, loginState }) {
   const [comments, setComments] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [value, setValue] = useState("");
   const [dataChanged, setDataChanged] = useState(false);
 
-  const user = authService.currentUser;
+  /*
+  sunmit function : 
+  글의 댓글수 가져와서 n-1개(인기글 기준 댓글수 n개)면 favNum 부여하는(인기글 pagination만들기 위해) handleSubmitReplyCount함수 실행하고
+  n-1이 아니라면 댓글만 db에 추가하는 handleSubmit함수 실행
+  */
+  const submit = async () => {
+    const docSnapReplyCount = await getDoc(
+      doc(db, jobEng, `${writingInfo.글번호}`)
+    );
 
-  const handleSubmit = async () => {
+    aryCount = docSnapReplyCount.data().replyCount;
+
+    if (aryCount === 4) handleSubmitReplyCount(aryCount);
+    else handleSubmit(aryCount);
+  };
+
+  const handleSubmit = async (aryCount) => {
     const date = new Date();
     const dateTime = `${("0" + (date.getMonth() + 1)).slice(-2)}-${(
       "0" + date.getDate()
     ).slice(-2)}  ${("0" + date.getHours()).slice(-2)}:${(
       "0" + date.getMinutes()
     ).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`;
+
+    const docSnapReplyCount = await getDoc(
+      doc(db, jobEng, `${writingInfo.글번호}`)
+    );
+
     aryCount += 1;
+
+    let writerName = "";
+
+    if (loginState) {
+      const user = authService.currentUser;
+      const displayName = user.displayName;
+      writerName = displayName;
+    } else {
+      writerName = userRN;
+    }
 
     if (!value) return;
     setSubmitting(true);
@@ -80,14 +103,11 @@ function Writing({
       setComments([
         ...comments,
         {
-          author: user.providerData[0].displayName,
+          author: `${writerName}님`,
           content: value,
           datetime: dateTime,
           actions: [
-            <span
-              accessKey={user.providerData[0].displayName}
-              onClick={onClick}
-            >
+            <span accessKey={writerName} onClick={onClick}>
               태그
             </span>,
           ],
@@ -100,7 +120,7 @@ function Writing({
     await updateDoc(updateRef, {
       replyCount: aryCount,
       reply: arrayUnion({
-        author: user.providerData[0].displayName,
+        author: writerName,
         content: value,
         datetime: dateTime,
         actions: [],
@@ -108,14 +128,25 @@ function Writing({
     });
   };
 
-  const handleSubmitReplyCount = async () => {
+  const handleSubmitReplyCount = async (aryCount) => {
     const date = new Date();
     const dateTime = `${("0" + (date.getMonth() + 1)).slice(-2)}-${(
       "0" + date.getDate()
     ).slice(-2)}  ${("0" + date.getHours()).slice(-2)}:${(
       "0" + date.getMinutes()
     ).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`;
+
     aryCount += 1;
+
+    let writerName = "";
+
+    if (loginState) {
+      const user = authService.currentUser;
+      const displayName = user.providerData[0].displayName;
+      writerName = displayName;
+    } else {
+      writerName = userRN;
+    }
 
     if (!value) return;
     setSubmitting(true);
@@ -125,14 +156,11 @@ function Writing({
       setComments([
         ...comments,
         {
-          author: user.providerData[0].displayName,
+          author: writerName,
           content: value,
           datetime: dateTime,
           actions: [
-            <span
-              accessKey={user.providerData[0].displayName}
-              onClick={onClick}
-            >
+            <span accessKey={writerName} onClick={onClick}>
               태그
             </span>,
           ],
@@ -145,13 +173,11 @@ function Writing({
 
     const docSnap = await getDoc(doc(db, "CateNum", jobEng + "Fav"));
 
-    console.log("favNum: ",docSnap.data().num);
-    
     await updateDoc(updateRef, {
       replyCount: aryCount,
       favNum: docSnap.data().num,
       reply: arrayUnion({
-        author: user.providerData[0].displayName,
+        author: writerName,
         content: value,
         datetime: dateTime,
         actions: [],
@@ -168,7 +194,7 @@ function Writing({
   };
 
   const onClick = (e) => {
-    setValue(`@${e.target.accessKey}`);
+    setValue(`@${e.target.accessKey}님`);
   };
 
   const asyncFn = async () => {
@@ -212,45 +238,46 @@ function Writing({
   }, []);
 
   return (
-    <div className={writing.flex}>
-      <div>
+    <>
+      <div className={writing.flex}>
         <div>
-          <div className={writing.heading}>
-            {writingInfo.제목.props.children[0].key}
+          <div>
+            <div className={writing.heading}>
+              {writingInfo.제목.props.children[0].key}
+            </div>
+          </div>
+          <div className={writing.detail}>
+            <span>[{writingInfo.카테고리}]</span>
+            <span className={writing.writer}>{writingInfo.글쓴이}님</span>
+            <span className={writing.detailLeft}>조회 {writingInfo.조회}</span>
+            <span>댓글 {comments.length}</span>
+          </div>
+          <div className={writing.detail2}>
+            <span className={writing.date}>
+              {data.year}-{data.date}{" "}
+            </span>
+            <span>{data.time}</span>
           </div>
         </div>
-        <div className={writing.detail}>
-          <span>[{writingInfo.카테고리}]</span>
-          <span className={writing.writer}>{writingInfo.글쓴이}</span>
-          <span>조회 {writingInfo.조회}</span>
-          <span>댓글 {comments.length}</span>
+        <div className={writing.content}>
+          <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
         </div>
-        <div className={writing.detail2}>
-          <span>
-            {data.year}-{data.date}{" "}
-          </span>
-          <span>{data.time}</span>
+        <div>
+          {comments.length > 0 && <CommentList comments={comments} />}
+          <Comment
+            content={
+              <Editor
+                onChange={handleChange}
+                onSubmit={submit}
+                submitting={submitting}
+                value={value}
+              />
+            }
+          />
         </div>
       </div>
-      <div className={writing.content}>
-        <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
-      </div>
-      <div>
-        {comments.length > 0 && <CommentList comments={comments} />}
-        <Comment
-          content={
-            <Editor
-              onChange={handleChange}
-              onSubmit={
-                aryCount >= 2 ? handleSubmitReplyCount : handleSubmit
-              }
-              submitting={submitting}
-              value={value}
-            />
-          }
-        />
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

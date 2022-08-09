@@ -1,0 +1,16 @@
+.flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px 20px 0px;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 60px;
+    color: gray;
+    font-family: none;
+    font-size: 12px;
+}
+
+.item{
+    margin-bottom: 5px;
+}

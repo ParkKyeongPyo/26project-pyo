@@ -9,17 +9,15 @@ import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 
 import float from "../CSS/float.module.css";
 
-function FloatingBtn({night, setNight}) {
+function FloatingBtn({ night, setNight }) {
   const body = document.querySelector("body");
 
   const onSwitchClick = () => {
     if (night) {
-        
       body.style.backgroundColor = "#151515";
       body.style.color = "#ccc";
       setNight(false);
     } else {
-        console.log("whiy")
       body.style.backgroundColor = "white";
       body.style.color = "black";
       setNight(true);

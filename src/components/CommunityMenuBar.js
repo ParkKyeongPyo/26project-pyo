@@ -1,76 +1,52 @@
-import { Menu } from "antd";
-import "antd/dist/antd.min.css";
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-let item = [];
+import menu from "../CSS/menu.module.css";
 
-const CommunityMenuBar = ({ job, selectedGroup }) => {
-  const [current, setCurrent] = useState("");
+const CommunityMenuBar = ({
+  job,
+  selectedGroup,
+  loginState,
+  selectedJobEng
+}) => {
 
-  const item1 = [
-    {
-      label: <Link to="/">Home</Link>,
-      key: "Home",
-    },
-    {
-      label: <Link to="/커뮤니티/프리랜서">All 프리랜서</Link>,
-      key: "freelancer",
-    },
-    {
-      label: <Link to="/커뮤니티">{job}</Link>,
-      key: "커뮤니티",
-    },
-  ];
+  if (loginState) {
+    return (
+      <div className={menu.flexMenus}>
+        <span className={menu.flexItem}>
+          <Link to="/">로고</Link>
+        </span>
+        <span className={menu.flexItem}>
+          <Link to="/groupCommunity">All {selectedGroup}</Link>
+        </span>
+        <span className={menu.flexItem}>
+          <Link to="/community">{job}</Link>
+        </span>
 
-  const item2 = [
-    {
-      label: <Link to="/">Home</Link>,
-      key: "Home",
-    },
-    {
-      label: <Link to="/커뮤니티/크리에이터">All 크리에이터</Link>,
-      key: "freelancer",
-    },
-    {
-      label: <Link to="/커뮤니티">{job}</Link>,
-      key: "커뮤니티",
-    },
-  ];
+        <span className={menu.flexItemLast}>
+          <Link to="/profile">프로필</Link>
+        </span>
+      </div>
+    );
+  } else {
+    return (
+      <div className={menu.flexMenus}>
+        <Link className={menu.flexItem} to="/">
+          로고
+        </Link>
 
-  const item3 = [
-    {
-      label: <Link to="/">Home</Link>,
-      key: "Home",
-    },
-    {
-      label: <Link to="/커뮤니티/프리랜서">All 자영업자</Link>,
-      key: "freelancer",
-    },
-    {
-      label: <Link to="/커뮤니티">{job}</Link>,
-      key: "커뮤니티",
-    },
-  ];
-
-  if (selectedGroup === "프리랜서") item = item1;
-  else if (selectedGroup === "크리에이터") item = item2;
-  else if (selectedGroup === "자영업자") item = item3;
-
-  const onClick = (e) => {
-    console.log("click ", e);
-    setCurrent(e.key);
-  };
-
-  return (
-    <Menu
-      onClick={onClick}
-      theme="dark"
-      selectedKeys={[current]}
-      mode="horizontal"
-      items={item}
-    />
-  );
+        <span className={menu.flexItem}>
+          <Link to="/groupCommunity">All {selectedGroup}</Link>
+        </span>
+        <span className={menu.flexItem}>
+          <Link to="/community">{job}</Link>
+        </span>
+        <span className={menu.flexItemLast}>
+          <Link to="/login">로그인</Link>
+        </span>
+      </div>
+    );
+  }
 };
 
 export default CommunityMenuBar;

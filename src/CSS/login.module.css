@@ -43,8 +43,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 70%;
-  margin: 7px 0px 7px 0px;
+  width: 77%;
+  margin: 7px 0px 7px 150px;
 }
 
 .flexWrite {
@@ -52,6 +52,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  margin-left: 150px;
+  width: 77%;
 }
 
 .stepDiv {
@@ -69,7 +71,15 @@
 }
 
 .loginPage{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   background-color: white;
   color: black;
   height: inherit;
+}
+
+.message{
+  margin: 0px 0px 10px 30px
 }

@@ -4,6 +4,7 @@ import menuStyles from "../CSS/homeMenu.module.css";
 import Jobchosing from "../components/Jobchosing";
 import FloatingBtn from "../components/FloatingBtn";
 import { SettingsBrightness } from "@mui/icons-material";
+import Footer from "../components/Footer";
 
 
 function Home({
@@ -19,7 +20,7 @@ function Home({
 
   return (
     <div>
-      <MenuBar loginState={loginState} />
+      <MenuBar loginState={loginState} night={night}/>
       <FloatingBtn night={night} setNight={setNight}/>
       <Jobchosing
         selectedJob={selectedJob}
@@ -29,6 +30,7 @@ function Home({
         setSelectedGroup={setSelectedGroup}
         selectedGroup={selectedGroup}
       />
+      <Footer/>
     </div>
   );
 }

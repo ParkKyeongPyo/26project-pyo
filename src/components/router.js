@@ -3,6 +3,7 @@ import Home from "../routes/Home";
 import Login from "../routes/Login";
 import Profile from "../routes/Profile";
 import Community from "./Community";
+import GroupCommunity from "../routes/GroupCommunity";
 
 import { useState, useEffect } from "react";
 
@@ -18,6 +19,7 @@ function RouterCom() {
   const [selectedJob, setSelectedJob] = useState("");
   const [selectedJobEng, setSelectedJobEng] = useState("");
   const [night, setNight] = useState(true);
+  const [userRN, setUserRN] = useState("");
 
   useEffect(() => {
     //Auth state observer
@@ -26,6 +28,7 @@ function RouterCom() {
         const uid = user.uid;
         const protoEmail = user.email;
         email = user.email;
+
         // ...
         setLoginState(true);
       } else {
@@ -34,6 +37,12 @@ function RouterCom() {
         setLoginState(false);
       }
     });
+
+    if (!loginState) {
+      const randomNumber = Math.ceil(Math.random() * 10000);
+      const userRNproto = `익명${randomNumber}`;
+      setUserRN(userRNproto);
+    }
   }, []);
 
   return (
@@ -71,6 +80,22 @@ function RouterCom() {
               selectedJobEng={selectedJobEng}
               night={night}
               setNight={setNight}
+              loginState={loginState}
+              userRN={userRN}
+            />
+          }
+        ></Route>
+        <Route
+          path="/groupCommunity"
+          element={
+            <GroupCommunity
+              selectedJob={selectedJob}
+              selectedGroup={selectedGroup}
+              selectedJobEng={selectedJobEng}
+              night={night}
+              setNight={setNight}
+              loginState={loginState}
+              userRN={userRN}
             />
           }
         ></Route>

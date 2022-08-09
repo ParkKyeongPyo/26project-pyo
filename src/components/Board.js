@@ -18,6 +18,7 @@ import {
   limit,
   where,
 } from "firebase/firestore";
+import { authService } from "../fbase.js";
 
 import Combar from "./Combar.js";
 
@@ -66,7 +67,15 @@ let data = [];
 let pageOrCate = false;
 
 //게시판 component
-function Board({ job, onWrite, onWriting, setWritingNum, jobEng, selectedGroup }) {
+function Board({
+  job,
+  onWrite,
+  onWriting,
+  setWritingNum,
+  jobEng,
+  selectedGroup,
+  loginState,
+}) {
   const [pageSize, setPageSize] = useState(10);
   const [lastNum, setLastNum] = useState(1000000);
   const [favNum, setFavNum] = useState(1000000);
@@ -74,6 +83,7 @@ function Board({ job, onWrite, onWriting, setWritingNum, jobEng, selectedGroup }
   const [selectedCategory, setSelectedCategory] = useState("");
   const [cateChanged, setCateChanged] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [myWriting, setMyWriting] = useState(false);
 
   const getListAllFirst = async (page) => {
     data = [];
@@ -195,6 +205,52 @@ function Board({ job, onWrite, onWriting, setWritingNum, jobEng, selectedGroup }
           if (itemsProcessed === dataLength) setCateNum(data[0].카테고리글번호);
         });
     }
+  };
+
+  const getListMyWriting = async (page) => {
+    data = [];
+    let itemsProcessed = 0;
+
+    const userName = authService.currentUser.displayName;
+    console.log(userName);
+
+    const q = query(
+      collection(db, jobEng),
+      where("user", "==", userName),
+      orderBy("num", "desc"),
+      limit(pageSize)
+    );
+
+    const querySnapshot = await getDocs(q);
+    const dataLength = querySnapshot.docs.length;
+
+    querySnapshot.forEach((doc) => {
+      data.push({
+        key: doc.data().num,
+        글번호: doc.data().num,
+        카테고리: doc.data().category,
+        제목: (
+          <>
+            <span
+              key={doc.data().header}
+              onClick={msg}
+              onMouseOver={mouseOver}
+              onMouseOut={mouseOut}
+            >
+              {doc.data().header}
+            </span>
+            <span className={board.replyCount}>[{doc.data().replyCount}]</span>
+          </>
+        ),
+        글쓴이: doc.data().user,
+        작성일: doc.data().time.substr(0, 5),
+        조회: doc.data().count,
+        댓글수: doc.data().replyCount,
+        FavNum: doc.data().favNum,
+      });
+      itemsProcessed++;
+      if (itemsProcessed === dataLength) setPageSize(10);
+    });
   };
 
   const getListFavorite = async (page) => {
@@ -340,6 +396,8 @@ function Board({ job, onWrite, onWriting, setWritingNum, jobEng, selectedGroup }
       await getListAllFirst(page);
     } else if (selectedCategory === "인기") {
       await getListFavorite(page);
+    } else if (selectedCategory === "내 글") {
+      await getListMyWriting(page);
     } else {
       await getListCategory(page);
     }
@@ -390,6 +448,9 @@ function Board({ job, onWrite, onWriting, setWritingNum, jobEng, selectedGroup }
         setLastNum={setLastNum}
         setCateNum={setCateNum}
         selectedGroup={selectedGroup}
+        loginState={loginState}
+        setPageSize={setPageSize}
+        setMyWriting={setMyWriting}
       />
       <Table
         columns={columns}
@@ -399,14 +460,16 @@ function Board({ job, onWrite, onWriting, setWritingNum, jobEng, selectedGroup }
         size="small"
         rowSelection={rowSelection}
       />
-      <Pagination
-        className={board.pagination}
-        page={currentPage}
-        variant="outlined"
-        color="primary"
-        count={100}
-        onChange={onChange}
-      />
+      {myWriting ? null : (
+        <Pagination
+          className={board.pagination}
+          page={currentPage}
+          variant="outlined"
+          color="primary"
+          count={100}
+          onChange={onChange}
+        />
+      )}
     </>
   );
 }

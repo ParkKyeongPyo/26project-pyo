@@ -11,7 +11,8 @@ import { db } from "../fbase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
 import MenuBar from "../components/MenuBar";
-import { PresetColorTypes } from "antd/lib/_util/colors";
+import Footer from "../components/Footer";
+
 
 const layout = {
   labelCol: {
@@ -61,7 +62,7 @@ function Profile({ loginState}) {
       displayName: userNickname,
     })
       .then(() => {
-        // ...
+        navigate("/");
       })
       .catch((error) => {
         // An error occurred
@@ -70,12 +71,11 @@ function Profile({ loginState}) {
   };
 
   const user = authService.currentUser;
-  let displayName = user.providerData[0].displayName;
+  let displayName = user.displayName;
 
-  if (displayName === "") displayName = user.uid;
 
   return (
-    <div style={{ height: "inherit" }}>
+    <div style={{ height: "inherit", backgroundColor: "white", color: "black" }}>
       <MenuBar loginState={loginState} />
       <div className={styles.flexHome}>
         <Form
@@ -110,6 +110,7 @@ function Profile({ loginState}) {
           </Form.Item>
         </Form>
       </div>
+      <Footer/>
     </div>
   );
 }
