@@ -1,5 +1,6 @@
 .wide {
-  height: inherit;
+  height: auto;
+  margin-top: 10%;
 }
 
 .halfboard {

@@ -37,6 +37,7 @@ function FloatingBtn2({ night, setNight, setWrite, setWriting, setCommunity }) {
     <Box className={float.flex} sx={{ "& > :not(style)": { m: 1 } }}>
       <Fab size="small" aria-label="like">
         <ArrowBackIcon onClick={onBackClick} />
+
       </Fab>
       <Fab size="small" aria-label="like">
         {night ? (

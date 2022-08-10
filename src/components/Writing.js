@@ -248,8 +248,9 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
           </div>
           <div className={writing.detail}>
             <span>[{writingInfo.카테고리}]</span>
-            <span className={writing.writer}>{writingInfo.글쓴이}님</span>
-            <span className={writing.detailLeft}>조회 {writingInfo.조회}</span>
+            <span className={writing.writer}>{writingInfo.글쓴이}</span>
+            <span className={writing.fire}>[신고]</span> 
+            <span className={writing.item}>조회 {writingInfo.조회}</span>
             <span>댓글 {comments.length}</span>
           </div>
           <div className={writing.detail2}>

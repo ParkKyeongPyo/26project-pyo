@@ -1,10 +1,11 @@
 import styles from "../CSS/login.module.css";
 import Combar from "../components/Combar.js";
 import Board from "../components/Board.js";
-import Footer from "./Footer";
 
 import { useState } from "react";
 import React from "react";
+
+import Footer from "./Footer";
 
 function CommunityFrameSub({
   job,
@@ -15,7 +16,6 @@ function CommunityFrameSub({
   selectedGroup,
   loginState,
 }) {
-  console.log("1");
 
   return (
     <>
@@ -30,7 +30,7 @@ function CommunityFrameSub({
           loginState={loginState}
         />
       </div>
-      <Footer />
+      <Footer/>
     </>
   );
 }

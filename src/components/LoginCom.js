@@ -1,10 +1,23 @@
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, Popover } from "antd";
 import "antd/dist/antd.min.css";
 import React from "react";
 
 import styles from "../CSS/login.module.css";
 
-function LoginCom({ onSubmitLogin, onChange, onSwitch, onFinishFailed, onSubmitGoogle}) {
+function LoginCom({
+  onSubmitLogin,
+  onChange,
+  onSwitch,
+  onFinishFailed,
+  onSubmitGoogle,
+  setLocalLoginState
+}) {
+
+  const checked = (e) => {
+    if(e.target.checked) setLocalLoginState(true)
+    else setLocalLoginState(false)
+  }
+
   return (
     <div className={styles.flex}>
       <Form
@@ -28,7 +41,7 @@ function LoginCom({ onSubmitLogin, onChange, onSwitch, onFinishFailed, onSubmitG
           rules={[
             {
               required: true,
-              message: "비밀번호를 입력해주세요!",
+              message: "이메일을 입력해주세요!",
             },
           ]}
         >
@@ -41,7 +54,7 @@ function LoginCom({ onSubmitLogin, onChange, onSwitch, onFinishFailed, onSubmitG
           rules={[
             {
               required: true,
-              message: "사용할 닉네임을 적어주세요!",
+              message: "비밀번호를 입력해주세요!",
             },
           ]}
         >
@@ -55,7 +68,11 @@ function LoginCom({ onSubmitLogin, onChange, onSwitch, onFinishFailed, onSubmitG
             span: 16,
           }}
         >
-          <Checkbox>Remember me</Checkbox>
+          <Checkbox onChange={checked}>
+            <Popover content="체크시 브라우저를 닫아도 로그인이 유지됩니다. 로그아웃시 해제됩니다." title="자동 로그인" trigger="hover">
+              자동 로그인
+            </Popover>
+          </Checkbox>
         </Form.Item>
 
         <Form.Item
@@ -81,7 +98,9 @@ function LoginCom({ onSubmitLogin, onChange, onSwitch, onFinishFailed, onSubmitG
               alt="Google sign-in"
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
             />
-            <span style={{marginLeft: "10px", verticalAlign: "middle"}}>Coninue with google</span>
+            <span style={{ marginLeft: "10px", verticalAlign: "middle" }}>
+              Coninue with google
+            </span>
           </Button>
         </Form.Item>
 

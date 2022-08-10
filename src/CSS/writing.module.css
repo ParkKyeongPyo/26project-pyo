@@ -4,6 +4,7 @@
   justify-content: flex-start;
   height: auto;
   width: 77%;
+  padding-right: 15%;
   margin-left: 150px;
 }
 
@@ -46,7 +47,12 @@
   margin-right: 5px;
 }
 
-.detailLeft {
+.fire {
   margin-left: auto;
+  margin-right: 7px;
+  color: red;
+}
+
+.item{
   margin-right: 7px;
 }

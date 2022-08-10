@@ -76,7 +76,7 @@ function Board({
   selectedGroup,
   loginState,
 }) {
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(15);
   const [lastNum, setLastNum] = useState(1000000);
   const [favNum, setFavNum] = useState(1000000);
   const [cateNum, setCateNum] = useState(1000000);
@@ -249,7 +249,7 @@ function Board({
         FavNum: doc.data().favNum,
       });
       itemsProcessed++;
-      if (itemsProcessed === dataLength) setPageSize(10);
+      if (itemsProcessed === dataLength) setPageSize(15);
     });
   };
 

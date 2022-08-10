@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { authService } from "../fbase.js";
 import {
   createUserWithEmailAndPassword,
+  getRedirectResult,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
@@ -10,6 +11,9 @@ import {
   GithubAuthProvider,
   signInWithPopup,
   signInWithRedirect,
+  setPersistence,
+  browserSessionPersistence,
+  browserLocalPersistence,
 } from "firebase/auth";
 
 import { useNavigate } from "react-router-dom";
@@ -27,8 +31,7 @@ const Login = ({ loginState }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(false);
-
-  let stepNum = 0;
+  const [localLoginState, setLocalLoginState] = useState(true);
 
   const navigate = useNavigate();
 
@@ -36,36 +39,46 @@ const Login = ({ loginState }) => {
     console.log("Failed:", errorInfo);
   };
 
-  const onSubmitGoogle = () => {
-    const provider = new GoogleAuthProvider();
-
-    signInWithRedirect(authService, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        // ...
-        navigate("/");
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
+  const onSubmitGoogle = async () => {
+    if (!localLoginState) {
+      setPersistence(authService, browserSessionPersistence)
+        .then(() => {
+          const provider = new GoogleAuthProvider();
+          // Existing and future Auth states are now persisted in the current
+          // session only. Closing the window would clear any existing state even
+          // if a user forgets to sign out.
+          // ...
+          // New sign-in will be persisted with session persistence.
+          return signInWithRedirect(authService, provider).then(navigate("/"));
+        })
+        .catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
+    } else {
+      setPersistence(authService, browserLocalPersistence)
+        .then(() => {
+          const provider = new GoogleAuthProvider();
+          // Existing and future Auth states are now persisted in the current
+          // session only. Closing the window would clear any existing state even
+          // if a user forgets to sign out.
+          // ...
+          // New sign-in will be persisted with session persistence.
+          return signInWithRedirect(authService, provider).then(navigate("/"));
+        })
+        .catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
+    }
   };
 
   //Login Submit Event process
   const onSubmitAccount = async (e) => {
     console.log(e);
     //새 계정 만드는 처리
-    stepNum = 1;
     await createUserWithEmailAndPassword(authService, email, password)
       .then((userCredential) => {
         // Signed in
@@ -96,27 +109,78 @@ const Login = ({ loginState }) => {
   };
 
   const onSubmitLogin = async () => {
-    stepNum = 1;
-    await signInWithEmailAndPassword(authService, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        // ...
-        navigate("/");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        if (errorCode === "auth/invalid-email") {
-          message.error(
-            "이메일 형식이 아닙니다. 입력하신 내용을 다시 확인해주세요."
+    if (!localLoginState) {
+      setPersistence(authService, browserSessionPersistence)
+        .then(() => {
+          // Existing and future Auth states are now persisted in the current
+          // session only. Closing the window would clear any existing state even
+          // if a user forgets to sign out.
+          // ...
+          // New sign-in will be persisted with session persistence.
+          return signInWithEmailAndPassword(authService, email, password).then(
+            navigate("/")
           );
-        } else if (errorCode === "auth/wrong-password") {
-          message.error(
-            "비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요."
+        })
+        .catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          if (errorCode === "auth/invalid-email") {
+            message.error(
+              "이메일 형식이 아닙니다. 입력하신 내용을 다시 확인해주세요."
+            );
+          } else if (errorCode === "auth/wrong-password") {
+            message.error(
+              "비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요."
+            );
+          }
+        });
+    } else {
+      setPersistence(authService, browserLocalPersistence)
+        .then(() => {
+          // Existing and future Auth states are now persisted in the current
+          // session only. Closing the window would clear any existing state even
+          // if a user forgets to sign out.
+          // ...
+          // New sign-in will be persisted with session persistence.
+          return signInWithEmailAndPassword(authService, email, password).then(
+            navigate("/")
           );
-        }
-      });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          if (errorCode === "auth/invalid-email") {
+            message.error(
+              "이메일 형식이 아닙니다. 입력하신 내용을 다시 확인해주세요."
+            );
+          } else if (errorCode === "auth/wrong-password") {
+            message.error(
+              "비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요."
+            );
+          }
+        });
+      /*await signInWithEmailAndPassword(authService, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          // ...
+          navigate("/");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          if (errorCode === "auth/invalid-email") {
+            message.error(
+              "이메일 형식이 아닙니다. 입력하신 내용을 다시 확인해주세요."
+            );
+          } else if (errorCode === "auth/wrong-password") {
+            message.error(
+              "비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요."
+            );
+          }
+        });*/
+    }
   };
 
   //Username, email, password onChange event
@@ -126,10 +190,6 @@ const Login = ({ loginState }) => {
     } else if (e.target.name === "Password") {
       setPassword(e.target.value);
     }
-  };
-
-  const toggleOAuth = () => {
-    console.log("hihi");
   };
 
   //newAccount page or login page
@@ -162,10 +222,11 @@ const Login = ({ loginState }) => {
             onFinishFailed={onFinishFailed}
             loginState={loginState}
             onSubmitGoogle={onSubmitGoogle}
+            setLocalLoginState={setLocalLoginState}
           />
         )}
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

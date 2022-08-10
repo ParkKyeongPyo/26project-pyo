@@ -71,17 +71,6 @@ function NewAccount({ onSubmitAccount, onChange, onSwitch, onFinishFailed, onSub
         <div className={styles.message}>*닉네임은 추후 프로필에서 수정할 수 있습니다.</div>
 
         <Form.Item
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-
-        <Form.Item
           wrapperCol={{
             offset: 8,
             span: 16,
