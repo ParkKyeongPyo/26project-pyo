@@ -18,7 +18,8 @@ import {
   updateDoc,
   setDoc,
 } from "firebase/firestore";
-import { authService } from "../fbase.js";
+import { authService, storage } from "../fbase.js";
+import { ref, uploadBytes } from "firebase/storage";
 
 import WriteCate from "./WriteCate";
 import Footer from "./Footer";
@@ -79,11 +80,12 @@ function Write({
 
     //로그인 유무에 따라서 익명 또는 displayName author에 넣기.
     let writerName = "";
+    let email = "";
 
     if (loginState) {
       const user = authService.currentUser;
-      const displayName = user.displayName;
-      writerName = displayName;
+      writerName = user.displayName;
+      email = user.email;
     } else {
       writerName = userRN;
     }
@@ -91,30 +93,61 @@ function Write({
     const date = new Date();
 
     //DB에 글 저장하기.
-    await setDoc(doc(db, jobEng, `${docSnap.data().num}`), {
-      num: docSnap.data().num,
-      cateNum: cateNumSnap.data().num,
-      user: writerName,
-      header: header,
-      category: category,
-      content: content,
-      count: 0,
-      time: `${("0" + date.getHours()).slice(-2)}:${(
-        "0" + date.getMinutes()
-      ).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`,
-      date: `${("0" + (date.getMonth() + 1)).slice(-2)}-${(
-        "0" + date.getDate()
-      ).slice(-2)}`,
-      year: `${date.getFullYear()}`,
-      replyCount: 0,
-      favNum: 0,
-      reply: [],
-    });
+    //로그인 사용자면 email 정보 추가
+    if (loginState) {
+      await setDoc(doc(db, jobEng, `${docSnap.data().num}`), {
+        num: docSnap.data().num,
+        cateNum: cateNumSnap.data().num,
+        user: writerName,
+        email: email,
+        header: header,
+        category: category,
+        content: content,
+        symCount: 0,
+        symArray: [],
+        symNum: 0,
+        count: 0,
+        time: `${("0" + date.getHours()).slice(-2)}:${(
+          "0" + date.getMinutes()
+        ).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`,
+        date: `${("0" + (date.getMonth() + 1)).slice(-2)}-${(
+          "0" + date.getDate()
+        ).slice(-2)}`,
+        year: `${date.getFullYear()}`,
+        replyCount: 0,
+        favNum: 0,
+        reply: [],
+      });
+    } else {
+      await setDoc(doc(db, jobEng, `${docSnap.data().num}`), {
+        num: docSnap.data().num,
+        cateNum: cateNumSnap.data().num,
+        user: writerName,
+        header: header,
+        category: category,
+        content: content,
+        symNum: 0,
+        symCount: 0,
+        symArray: [],
+        count: 0,
+        time: `${("0" + date.getHours()).slice(-2)}:${(
+          "0" + date.getMinutes()
+        ).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`,
+        date: `${("0" + (date.getMonth() + 1)).slice(-2)}-${(
+          "0" + date.getDate()
+        ).slice(-2)}`,
+        year: `${date.getFullYear()}`,
+        replyCount: 0,
+        favNum: 0,
+        reply: [],
+      });
+    }
 
     await updateDoc(doc(db, "WritingNum", jobEng), {
       num: docSnap.data().num + 1,
     });
 
+    //DB) 인기, 공감, 내 글 제외한 나머지 카테고리 num + 1. 
     await updateDoc(doc(db, "CateNum", jobCate), {
       num: cateNumSnap.data().num + 1,
     });
@@ -146,17 +179,17 @@ function Write({
         />
 
         <br />
-
-        <div className={write.watch}>
-          음란물, 차별, 비하, 혐오 및 초상권, 저작권 침해 게시물은 민, 형사상의
-          책임을 질 수 있습니다. [저작권법 안내] [게시물 활용 안내]
-        </div>
-
         <br />
+
+        <div>
+          *사진, 미디어 삽입, 인용, 표 기능은 아직 이용 불가능하니 참고바랍니다.
+        </div>
 
         <CKEditor
           key="content"
           height="1000px"
+          width="100%"
+          min
           editor={ClassicEditor}
           onReady={(editor) => {
             // You can store the "editor" and use when it is needed.
@@ -178,6 +211,7 @@ function Write({
 
         <div className={write.btnMargin}>
           <Button
+            size="large"
             type="primary"
             htmlType="button"
             className={write.btnMarginRight}
@@ -185,7 +219,12 @@ function Write({
           >
             취소
           </Button>
-          <Button type="primary" htmlType="submit">
+          <Button
+            className={write.btn}
+            size="large"
+            type="primary"
+            htmlType="submit"
+          >
             저장
           </Button>
         </div>

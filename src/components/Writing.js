@@ -1,6 +1,14 @@
 import Footer from "./Footer.js";
 import { db } from "../fbase.js";
 import {
+  LikeOutlined,
+  HeartOutlined,
+  EyeOutlined,
+  MessageOutlined,
+} from "@ant-design/icons";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
+import {
   collection,
   query,
   where,
@@ -14,7 +22,7 @@ import { authService } from "../fbase.js";
 
 import writing from "../CSS/writing.module.css";
 
-import { Button, Comment, Form, Input, List } from "antd";
+import { Button, Comment, Form, Input, List, message } from "antd";
 import moment from "moment";
 import React, { useState, useEffect } from "react";
 const { TextArea } = Input;
@@ -48,12 +56,17 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 
 let data = {};
 let aryCount = 0;
+let username = "";
+let email = "";
+let synOnlyOne = 0;
+let symNum = 2;
 
 function Writing({ writingInfo, jobEng, userRN, loginState }) {
   const [comments, setComments] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [value, setValue] = useState("");
   const [dataChanged, setDataChanged] = useState(false);
+  const [synCount, setSynCount] = useState(writingInfo.공감);
 
   /*
   sunmit function : 
@@ -88,9 +101,7 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
     let writerName = "";
 
     if (loginState) {
-      const user = authService.currentUser;
-      const displayName = user.displayName;
-      writerName = displayName;
+      writerName = authService.currentUser.displayName;
     } else {
       writerName = userRN;
     }
@@ -141,9 +152,7 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
     let writerName = "";
 
     if (loginState) {
-      const user = authService.currentUser;
-      const displayName = user.providerData[0].displayName;
-      writerName = displayName;
+      writerName = authService.currentUser.displayName;
     } else {
       writerName = userRN;
     }
@@ -197,6 +206,7 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
     setValue(`@${e.target.accessKey}님`);
   };
 
+  //첫 랜더링 후 DB에서 글 정보 불러오는 함수
   const asyncFn = async () => {
     const q = query(
       collection(db, jobEng),
@@ -214,6 +224,8 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
         date: doc.data().date,
         replyCount: doc.data().replyCount,
         reply: doc.data().reply,
+        symCount: doc.data().symCount,
+        symArray: doc.data().symArray,
       };
       itemsProcessed++;
       let i = 0;
@@ -233,8 +245,63 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
     setDataChanged(true);
   };
 
+  const onSymClick = async () => {
+    //공감 email 배열에 공감 버튼을 클릭한 사용자의 이메일이 있는지 확인 state.
+    let state = true;
+
+    //사용자가 글 페이지에 들어와서 딱 한번만 공감버튼을 클릭할 수 있도록 만드는 변수
+    synOnlyOne += 1;
+
+    //공감 로직은 로그인 사용자의 email로 판별한다.
+    email = authService.currentUser.email;
+
+    //DB 공감 배열에 공감버튼 누른 사용자 있는지 확인.
+    data.symArray.map((item) => {
+      if (item.email === email) state = false;
+    });
+
+    //DB 곰감배열에 공감버튼 누른 사용자가 없고 처음 눌렀다면 공감 카운트 + 1.
+    if (state && synOnlyOne === 1) {
+      const updateRef = doc(db, jobEng, `${writingInfo.글번호}`);
+
+      await updateDoc(updateRef, {
+        symCount: data.symCount + 1,
+        symArray: arrayUnion({
+          email: email,
+        }),
+      });
+
+      //공감수 n-1개라면 symNum + 1
+      if (data.symCount === symNum) {
+        const docSnap = await getDoc(doc(db, "CateNum", jobEng + "Sym"));
+        const updateCateRef = doc(db, "CateNum", `${jobEng}Sym`);
+        const updateRef = doc(db, jobEng, `${writingInfo.글번호}`);
+
+        await updateDoc(updateCateRef, {
+          num: docSnap.data().num + 1,
+        });
+
+        await updateDoc(updateRef, {
+          symNum: docSnap.data().num + 1,
+        });
+      }
+
+      data.symCount += 1;
+      setSynCount(data.symCount);
+    } else {
+      message.info("글 하나당 최대 한번 공감할 수 있습니다.");
+    }
+  };
+
+  //공감 버튼은 로그인한 사용자만 사용 가능하도록 하는 함수.
+  const onSymCondition = () => {
+    if (loginState) onSymClick();
+    else message.info("로그인 후 사용할 수 있습니다.");
+  };
+
   useEffect(() => {
     asyncFn();
+    synOnlyOne = 0;
   }, []);
 
   return (
@@ -249,9 +316,16 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
           <div className={writing.detail}>
             <span>[{writingInfo.카테고리}]</span>
             <span className={writing.writer}>{writingInfo.글쓴이}</span>
-            <span className={writing.fire}>[신고]</span> 
-            <span className={writing.item}>조회 {writingInfo.조회}</span>
-            <span>댓글 {comments.length}</span>
+
+            <span className={writing.item}>
+              <EyeOutlined /> {writingInfo.조회 + 1}
+            </span>
+            <span className={writing.item2}>
+              <MessageOutlined /> {comments.length}
+            </span>
+            <span>
+              <HeartOutlined /> {synCount}
+            </span>
           </div>
           <div className={writing.detail2}>
             <span className={writing.date}>
@@ -262,6 +336,19 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
         </div>
         <div className={writing.content}>
           <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
+        </div>
+        <div className={writing.btns}>
+          <Button
+            className={writing.symBtn}
+            htmlType="button"
+            onClick={onSymCondition}
+          >
+            <FavoriteIcon fontSize="small" />
+            <span className={writing.symWord}>공감</span>
+          </Button>
+          <Button className={writing.symCount} htmlType="button">
+            <span>{data.symCount}명</span>
+          </Button>
         </div>
         <div>
           {comments.length > 0 && <CommentList comments={comments} />}

@@ -10,6 +10,7 @@ function Combar({
   setCurrentPage,
   setLastNum,
   setCateNum,
+  setSymNum,
   selectedGroup,
   loginState,
   setPageSize,
@@ -21,6 +22,7 @@ function Combar({
     setCurrentPage(1);
     setLastNum(10000000);
     setCateNum(10000000);
+    setSymNum(10000000)
     setMyWriting(false);
   };
 
@@ -29,8 +31,9 @@ function Combar({
       setSelectedCategory(e.target.innerText);
       setCateChanged(true);
       setCurrentPage(1);
-      setLastNum(10000000);
-      setCateNum(10000000);
+      //setLastNum(10000000);
+      //setCateNum(10000000);
+      //setSymNum(10000000);
       setPageSize(20);
       setMyWriting(true);
     } else {
@@ -52,13 +55,21 @@ function Combar({
         <div>
           <Button onClick={onClick}>전체</Button>
           <Button onClick={onClick}>인기</Button>
-          <Button onClick={onClick}>Q&A</Button>
+          <Button onClick={onClick}>공감</Button>
           <Popover content="내 글은 가장 최근 글을 기준으로 최대 20개까지 볼 수 있습니다." title="주의사항" trigger="hover">
             <Button onClick={onMyWritingClick}>내 글</Button>
           </Popover>
 
         </div>
         <div>
+        <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            Q&A
+          </span>
           <span
             className={Frame.middleBtn}
             onClick={onClick}

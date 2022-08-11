@@ -7,10 +7,6 @@ import styles from "../CSS/login.module.css";
 
 function NewAccount({ onSubmitAccount, onChange, onSwitch, onFinishFailed, onSubmitGoogle }) {
 
-  const onClick = () => {
-    message.info("최대한 겹치지 않을 것 같은 닉네임으로 입력해주세요! :)")
-  }
-
   return (
     <div className={styles.flex}>
       <Form
@@ -65,7 +61,7 @@ function NewAccount({ onSubmitAccount, onChange, onSwitch, onFinishFailed, onSub
             },
           ]}
         >
-          <Input onClick={onClick} onChange={onChange} />
+          <Input onChange={onChange} />
         </Form.Item>
 
         <div className={styles.message}>*닉네임은 추후 프로필에서 수정할 수 있습니다.</div>

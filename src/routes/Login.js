@@ -77,7 +77,7 @@ const Login = ({ loginState }) => {
 
   //Login Submit Event process
   const onSubmitAccount = async (e) => {
-    console.log(e);
+   
     //새 계정 만드는 처리
     await createUserWithEmailAndPassword(authService, email, password)
       .then((userCredential) => {
@@ -129,10 +129,17 @@ const Login = ({ loginState }) => {
             message.error(
               "이메일 형식이 아닙니다. 입력하신 내용을 다시 확인해주세요."
             );
+            navigate("/login");
           } else if (errorCode === "auth/wrong-password") {
             message.error(
               "비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요."
             );
+            navigate("/login");
+          } else if (errorCode === "auth/user-not-found") {
+            message.error(
+              "이메일 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요."
+            );
+            navigate("/login");
           }
         });
     } else {
@@ -154,32 +161,19 @@ const Login = ({ loginState }) => {
             message.error(
               "이메일 형식이 아닙니다. 입력하신 내용을 다시 확인해주세요."
             );
+            navigate("/login");
           } else if (errorCode === "auth/wrong-password") {
             message.error(
               "비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요."
             );
+            navigate("/login");
+          } else if (errorCode === "auth/user-not-found") {
+            message.error(
+              "이메일 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요."
+            );
+            navigate("/login");
           }
         });
-      /*await signInWithEmailAndPassword(authService, email, password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          // ...
-          navigate("/");
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          if (errorCode === "auth/invalid-email") {
-            message.error(
-              "이메일 형식이 아닙니다. 입력하신 내용을 다시 확인해주세요."
-            );
-          } else if (errorCode === "auth/wrong-password") {
-            message.error(
-              "비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요."
-            );
-          }
-        });*/
     }
   };
 

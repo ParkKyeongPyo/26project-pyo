@@ -12,7 +12,7 @@
   max-height: auto;
   min-height: 300px;
   margin-top: 5px;
-  margin-left: 30px;
+  margin-left: 2%;
   font-size: 17px;
 }
 
@@ -47,12 +47,37 @@
   margin-right: 5px;
 }
 
-.fire {
-  margin-left: auto;
-  margin-right: 7px;
-  color: red;
-}
+
 
 .item{
   margin-right: 7px;
+  margin-left: auto;
 }
+
+.item2{
+  margin-right: 7px
+}
+
+.btns{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 70px 0px 70px 0px;
+}
+
+.symBtn{
+  display: flex;
+}
+
+.symWord{
+  margin-left: 3px;
+}
+
+.symCount{
+  color: #40a9ff;
+  border-color: #40a9ff;
+}
+
+
+
