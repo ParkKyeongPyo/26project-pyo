@@ -6,6 +6,8 @@ import board from "../CSS/board.module.css";
 
 import styles from "../CSS/login.module.css";
 import { Button } from "antd";
+import { HeartTwoTone } from "@ant-design/icons";
+import RecommendIcon from "@mui/icons-material/Recommend";
 import "antd/dist/antd.min.css";
 import Frame from "../CSS/communityFrame.module.css";
 
@@ -124,7 +126,7 @@ function Board({
         글쓴이: doc.data().user,
         작성일: doc.data().time.substr(0, 5),
         조회: doc.data().count,
-        공감: doc.data().symCount
+        공감: doc.data().symCount,
       });
       itemsProcessed++;
       if (itemsProcessed === querySnapshot.docs.length)
@@ -164,7 +166,7 @@ function Board({
         글쓴이: doc.data().user,
         작성일: doc.data().time.substr(0, 5),
         조회: doc.data().count,
-        공감: doc.data().symCount
+        공감: doc.data().symCount,
       });
     });
   };
@@ -208,7 +210,7 @@ function Board({
             글쓴이: doc.data().user,
             작성일: doc.data().time.substr(0, 5),
             조회: doc.data().count,
-            공감: doc.data().symCount
+            공감: doc.data().symCount,
           });
           itemsProcessed++;
           if (itemsProcessed === dataLength) setCateNum(data[0].카테고리글번호);
@@ -238,6 +240,55 @@ function Board({
             글번호: doc.data().num,
             카테고리: doc.data().category,
             제목: (
+              <div className={board.sym}>
+                <RecommendIcon className={board.icon} />
+                <span
+           
+                  key={doc.data().header}
+                  onClick={msg}
+                  onMouseOver={mouseOver}
+                  onMouseOut={mouseOut}
+                >
+                  {doc.data().header}
+                </span>
+                <span className={board.replyCount}>
+                  [{doc.data().replyCount}]
+                </span>
+              </div>
+            ),
+            카테고리글번호: doc.data().cateNum,
+            글쓴이: doc.data().user,
+            작성일: doc.data().time.substr(0, 5),
+            조회: doc.data().count,
+            공감: doc.data().symCount,
+            공감수: doc.data().symNum,
+          });
+          itemsProcessed++;
+          if (itemsProcessed === dataLength) setSymNum(data[0].공감수);
+        });
+    }
+  };
+
+  const getListSympathyPageChanged = async (page) => {
+    data = [];
+    const q = query(
+      collection(db, jobEng),
+      where("symNum", "!=", 0),
+      where("symNum", "<=", symNum - (page - 1) * pageSize),
+      orderBy("symNum", "desc"),
+      limit(pageSize)
+    );
+
+    const querySnapshot = await getDocs(q);
+    const dataLength = querySnapshot.docs.length;
+    {
+      dataLength != 0 &&
+        querySnapshot.forEach((doc) => {
+          data.push({
+            key: doc.data().num,
+            글번호: doc.data().num,
+            카테고리: doc.data().category,
+            제목: (
               <>
                 <span
                   key={doc.data().header}
@@ -257,10 +308,8 @@ function Board({
             작성일: doc.data().time.substr(0, 5),
             조회: doc.data().count,
             공감: doc.data().symCount,
-            공감수: doc.data().symNum
+            공감수: doc.data().symNum,
           });
-          itemsProcessed++;
-          if (itemsProcessed === dataLength) setSymNum(data[0].공감수);
         });
     }
   };
@@ -305,7 +354,7 @@ function Board({
         조회: doc.data().count,
         댓글수: doc.data().replyCount,
         FavNum: doc.data().favNum,
-        공감: doc.data().symCount
+        공감: doc.data().symCount,
       });
       itemsProcessed++;
       if (itemsProcessed === dataLength) setPageSize(15);
@@ -349,7 +398,7 @@ function Board({
         조회: doc.data().count,
         댓글수: doc.data().replyCount,
         FavNum: doc.data().favNum,
-        공감: doc.data().symCount
+        공감: doc.data().symCount,
       });
       itemsProcessed++;
       if (itemsProcessed === querySnapshot.docs.length) {
@@ -394,7 +443,7 @@ function Board({
         조회: doc.data().count,
         댓글수: doc.data().replyCount,
         FavNum: doc.data().favNum,
-        공감: doc.data().symCount
+        공감: doc.data().symCount,
       });
     });
   };
@@ -437,7 +486,7 @@ function Board({
             글쓴이: doc.data().user,
             작성일: doc.data().time.substr(0, 5),
             조회: doc.data().count,
-            공감: doc.data().symCount
+            공감: doc.data().symCount,
           });
         });
     }
@@ -448,6 +497,8 @@ function Board({
       await getListAll(page);
     } else if (selectedCategory === "인기") {
       await getListFavoritePageChanged(page);
+    } else if (selectedCategory === "공감") {
+      await getListSympathyPageChanged(page);
     } else {
       await getListPageChange(page);
     }
@@ -460,8 +511,8 @@ function Board({
       await getListFavorite(page);
     } else if (selectedCategory === "내 글") {
       await getListMyWriting(page);
-    } else if(selectedCategory === "공감"){
-      await getListSympathy(page)
+    } else if (selectedCategory === "공감") {
+      await getListSympathy(page);
     } else {
       await getListCategory(page);
     }
@@ -511,6 +562,7 @@ function Board({
         setCurrentPage={setCurrentPage}
         setLastNum={setLastNum}
         setCateNum={setCateNum}
+        setFavNum={setFavNum}
         setSymNum={setSymNum}
         selectedGroup={selectedGroup}
         loginState={loginState}

@@ -1,0 +1,17 @@
+.flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    margin-top: 7%;
+}
+
+.item{
+    font-size: large;
+}
+
+.heading{
+    font-size: x-large;
+    margin-bottom: 1%;
+}

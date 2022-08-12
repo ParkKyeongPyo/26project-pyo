@@ -6,11 +6,15 @@ import Brightness3Icon from "@mui/icons-material/Brightness3";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import BedtimeRoundedIcon from "@mui/icons-material/BedtimeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
+import HomeIcon from "@mui/icons-material/Home";
 
 import float from "../CSS/float.module.css";
 
+import { useNavigate } from "react-router-dom";
+
 function FloatingBtn2({ night, setNight, setWrite, setWriting, setCommunity }) {
   const body = document.querySelector("body");
+  const navigate = useNavigate();
 
   const onSwitchClick = () => {
     if (night) {
@@ -18,7 +22,6 @@ function FloatingBtn2({ night, setNight, setWrite, setWriting, setCommunity }) {
       body.style.color = "#ccc";
       setNight(false);
     } else {
-      console.log("whiy");
       body.style.backgroundColor = "white";
       body.style.color = "black";
       setNight(true);
@@ -30,14 +33,20 @@ function FloatingBtn2({ night, setNight, setWrite, setWriting, setCommunity }) {
     setWriting(false);
     setCommunity(true);
   };
-  
-  console.log(night);
+
+  //홈 Floating 버튼 클릭 처리 함수
+  const onHomeClick = () => {
+    navigate("/");
+  };
+
 
   return (
     <Box className={float.flex} sx={{ "& > :not(style)": { m: 1 } }}>
       <Fab size="small" aria-label="like">
         <ArrowBackIcon onClick={onBackClick} />
-
+      </Fab>
+      <Fab size="small" aria-label="like">
+        <HomeIcon onClick={onHomeClick} />
       </Fab>
       <Fab size="small" aria-label="like">
         {night ? (

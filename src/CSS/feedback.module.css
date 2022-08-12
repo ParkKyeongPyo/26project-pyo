@@ -1,0 +1,34 @@
+.flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+}
+
+.inherit{
+    height: inherit;
+}
+
+.textArea{
+    width: 40%;
+    margin-top: 2%;
+}
+
+.h{
+    font-size: x-large;
+    margin-bottom: 2%;
+}
+
+.h2{
+    font-size: large;
+}
+
+.h3{
+    font-size: medium;
+}
+
+.btn{
+    margin-top: 1%;
+    margin-left: 35%;
+}

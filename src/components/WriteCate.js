@@ -50,7 +50,7 @@ function WriteCate({ selectedGroup, setCategory }) {
       <Select
         defaultValue="전체"
         style={{
-          width: 200,
+          width: 150,
         }}
         onChange={handleChange}
       >

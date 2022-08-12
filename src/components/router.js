@@ -4,8 +4,11 @@ import Login from "../routes/Login";
 import Profile from "../routes/Profile";
 import Community from "./Community";
 import GroupCommunity from "../routes/GroupCommunity";
+import FAQ from "../routes/FAQ";
+import Feedback from "../routes/Feedback";
 
 import { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 
 import { onAuthStateChanged } from "firebase/auth";
 import { authService, db } from "../fbase";
@@ -98,6 +101,22 @@ function RouterCom() {
               userRN={userRN}
             />
           }
+        ></Route>
+        <Route
+          path="/FAQ"
+          element={
+            <FAQ night={night} setNight={setNight} loginState={loginState} />
+          }
+        ></Route>
+        <Route
+          path="/Feedback"
+          element={
+            <Feedback night={night} setNight={setNight} loginState={loginState}/>
+          }
+        ></Route>
+        <Route
+          path="*"
+          element={<Navigate to="/" replace/>}
         ></Route>
       </Routes>
     </Router>

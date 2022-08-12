@@ -20,3 +20,19 @@
   background-color: inherit;
 }
 
+.icon{
+  width: 3px;
+  height: 3px;
+}
+
+.font{
+  font-family: Noto Sans KR !important;
+}
+
+.sym{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+

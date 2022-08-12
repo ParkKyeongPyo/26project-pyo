@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: center;
     margin-top: 4%;
-    margin-bottom: 2%;
+    margin-bottom: 1%;
     color: inherit;
     background-color: inherit;
 }
@@ -13,9 +13,10 @@
     flex-direction: row;
     justify-content: center;
     margin-top: 5%;
-    margin-bottom: 10px;
+    margin-bottom: 1.5%;
     color: inherit;
     background-color: inherit;
+    font-size: x-large;
 }
 
 .flexRowMiddle{
@@ -26,6 +27,7 @@
     margin-bottom: 3%;
     color: inherit;
     background-color: inherit;
+    font-size: large;
 }
 
 .flexCol{
@@ -38,4 +40,8 @@
     color: inherit;
     background-color: inherit;
 
+}
+
+.popover{
+    font-size: 16px !important;
 }

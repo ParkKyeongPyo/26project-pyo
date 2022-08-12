@@ -10,6 +10,7 @@ function Combar({
   setCurrentPage,
   setLastNum,
   setCateNum,
+  setFavNum,
   setSymNum,
   selectedGroup,
   loginState,
@@ -22,6 +23,7 @@ function Combar({
     setCurrentPage(1);
     setLastNum(10000000);
     setCateNum(10000000);
+    setFavNum(10000000);
     setSymNum(10000000)
     setMyWriting(false);
   };
@@ -53,11 +55,11 @@ function Combar({
     return (
       <div className={styles.flexThinBar}>
         <div>
-          <Button onClick={onClick}>전체</Button>
-          <Button onClick={onClick}>인기</Button>
-          <Button onClick={onClick}>공감</Button>
+          <Button className={Frame.btn} onClick={onClick}>전체</Button>
+          <Button  className={Frame.btn} onClick={onClick}>인기</Button>
+          <Button  className={Frame.btn} onClick={onClick}>공감</Button>
           <Popover content="내 글은 가장 최근 글을 기준으로 최대 20개까지 볼 수 있습니다." title="주의사항" trigger="hover">
-            <Button onClick={onMyWritingClick}>내 글</Button>
+            <Button  className={Frame.btn} onClick={onMyWritingClick}>내 글</Button>
           </Popover>
 
         </div>
@@ -120,7 +122,7 @@ function Combar({
           </span>
         </div>
         <div>
-          <Button onClick={onWrite}>글쓰기</Button>
+          <Button  className={Frame.btn} onClick={onWrite}>글쓰기</Button>
         </div>
       </div>
     );
@@ -128,11 +130,11 @@ function Combar({
     return (
       <div className={styles.flexThinBar}>
         <div>
-          <Button onClick={onClick}>전체</Button>
-          <Button onClick={onClick}>인기</Button>
-          <Button onClick={onClick}>Q&A</Button>
+          <Button className={Frame.btn}  onClick={onClick}>전체</Button>
+          <Button className={Frame.btn} onClick={onClick}>인기</Button>
+          <Button className={Frame.btn} onClick={onClick}>Q&A</Button>
           <Popover content="내 글은 최근 날짜를 기준으로 최대 20개까지 볼 수 있습니다." title="주의사항" trigger="hover">
-            <Button onClick={onMyWritingClick}>내 글</Button>
+            <Button className={Frame.btn} onClick={onMyWritingClick}>내 글</Button>
           </Popover>
         </div>
         <div>
@@ -194,7 +196,7 @@ function Combar({
           </span>
         </div>
         <div>
-          <Button onClick={onWrite}>글쓰기</Button>
+          <Button className={Frame.btn} onClick={onWrite}>글쓰기</Button>
         </div>
       </div>
     );
@@ -202,11 +204,11 @@ function Combar({
     return (
       <div className={styles.flexThinBar}>
         <div>
-          <Button onClick={onClick}>전체</Button>
-          <Button onClick={onClick}>인기</Button>
-          <Button onClick={onClick}>Q&A</Button>
+          <Button className={Frame.btn} onClick={onClick}>전체</Button>
+          <Button className={Frame.btn} onClick={onClick}>인기</Button>
+          <Button className={Frame.btn} onClick={onClick}>Q&A</Button>
           <Popover content="내 글은 최근 날짜를 기준으로 최대 20개까지 볼 수 있습니다." title="주의사항" trigger="hover">
-            <Button onClick={onMyWritingClick}>내 글</Button>
+            <Button className={Frame.btn} onClick={onMyWritingClick}>내 글</Button>
           </Popover>
         </div>
         <div>
@@ -268,7 +270,7 @@ function Combar({
           </span>
         </div>
         <div>
-          <Button onClick={onWrite}>글쓰기</Button>
+          <Button className={Frame.btn} onClick={onWrite}>글쓰기</Button>
         </div>
       </div>
     );

@@ -1,4 +1,5 @@
 import Footer from "./Footer.js";
+import { useSpring, animated } from "react-spring";
 import { db } from "../fbase.js";
 import {
   LikeOutlined,
@@ -67,6 +68,11 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
   const [value, setValue] = useState("");
   const [dataChanged, setDataChanged] = useState(false);
   const [synCount, setSynCount] = useState(writingInfo.공감);
+
+  const animation1 = useSpring({
+    opacity: 1,
+    from: { opacity: 0 },
+  });
 
   /*
   sunmit function : 
@@ -306,7 +312,7 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
 
   return (
     <>
-      <div className={writing.flex}>
+      <animated.div className={writing.flex} style={animation1}>
         <div>
           <div>
             <div className={writing.heading}>
@@ -363,7 +369,7 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
             }
           />
         </div>
-      </div>
+      </animated.div>
       <Footer />
     </>
   );

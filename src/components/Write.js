@@ -1,7 +1,7 @@
 import styles from "../CSS/login.module.css";
 import write from "../CSS/write.module.css";
 import "antd/dist/antd.min.css";
-import { Input, Button } from "antd";
+import { Input, Button, message } from "antd";
 import { Select } from "antd";
 
 import { useState, useEffect } from "react";
@@ -52,6 +52,15 @@ function Write({
 
   const handleChange = (value) => {
     setCategory(value);
+  };
+
+  //제목과 내용입력 확인 로직
+  const onSubmitCondition = () => {
+    if (header === "" || content === "") {
+      message.error("제목 또는 내용을 입력해주세요.");
+    } else {
+      onSubmit();
+    }
   };
 
   //글 제출.
@@ -147,7 +156,7 @@ function Write({
       num: docSnap.data().num + 1,
     });
 
-    //DB) 인기, 공감, 내 글 제외한 나머지 카테고리 num + 1. 
+    //DB) 인기, 공감, 내 글 제외한 나머지 카테고리 num + 1.
     await updateDoc(doc(db, "CateNum", jobCate), {
       num: cateNumSnap.data().num + 1,
     });
@@ -163,7 +172,7 @@ function Write({
 
   return (
     <>
-      <form className={styles.flexWrite} onSubmit={onSubmit}>
+      <form className={styles.flexWrite} onSubmit={onSubmitCondition} >
         <div className={write.category}>
           <span>카테고리</span>
           <WriteCate selectedGroup={selectedGroup} setCategory={setCategory} />
@@ -181,7 +190,7 @@ function Write({
         <br />
         <br />
 
-        <div>
+        <div className={write.font}>
           *사진, 미디어 삽입, 인용, 표 기능은 아직 이용 불가능하니 참고바랍니다.
         </div>
 

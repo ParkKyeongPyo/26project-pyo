@@ -13,6 +13,9 @@ const MenuBar = ({ loginState }) => {
         <span className={menu.flexItem}>
           <Link to="/FAQ">FAQ</Link>
         </span>
+        <span className={menu.flexItem}>
+          <Link to="/Feedback">에러/건의사항</Link>
+        </span>
         <span className={menu.flexItemLast}>
           <Link to="/profile">프로필</Link>
         </span>

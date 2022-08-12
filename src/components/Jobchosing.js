@@ -110,16 +110,17 @@ function Jobchosing({
 
   return (
     <div style={{ height: "inherit" }}>
-      <animated.h2 style={animation1} className={common.flexRowh2}>
+      <animated.div style={animation1} className={common.flexRowh2}>
         "혼자번당은 대한민국에서 혼자 일하는 모든분들을 위한 커뮤니티입니다:)"
-      </animated.h2>
+      </animated.div>
 
-      <animated.h3 style={animation2} className={common.flexRowMiddle}>
+      <animated.div style={animation2} className={common.flexRowMiddle}>
         같은 일을 하는 사람들과 소통하고 배우고 나누며 성장해보세요!
-      </animated.h3>
+      </animated.div>
       <animated.div style={animation3}>
         <div className={common.flexRow}>
           <Segmented
+            size="large"
             className={common.nigthMode}
             value={selectedGroup}
             onChange={onChange}
@@ -131,7 +132,7 @@ function Jobchosing({
           <div className={styles.flexHome}>
             <div style={{ marginBottom: "40px" }}>
               <Popover content={content} title="Title" trigger="hover">
-                프리랜서란?
+                <span className={common.popover}>프리랜서란?</span>
               </Popover>
             </div>
 
@@ -407,7 +408,7 @@ function Jobchosing({
           <div className={styles.flexHome}>
             <div style={{ marginBottom: "40px" }}>
               <Popover content={content} title="Title" trigger="hover">
-                크리에이터란?
+              <span className={common.popover}>크리에이터란?</span>
               </Popover>
             </div>
             <div className={groupStyles.groupFlex}>
@@ -521,7 +522,7 @@ function Jobchosing({
           <div className={styles.flexHome}>
             <div style={{ marginBottom: "40px" }}>
               <Popover content={content} title="Title" trigger="hover">
-                자영업자란?
+              <span className={common.popover}>자영업자란?</span>
               </Popover>
             </div>
             <div className={groupStyles.groupFlex}>
