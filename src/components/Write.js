@@ -68,12 +68,6 @@ function Write({
     const docRef = doc(db, "WritingNum", jobEng);
     const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-      console.log("Getting docSnap!");
-    } else {
-      console.log("No docSnap");
-    }
-
     let jobCate = "";
     if (category === "Q&A") jobCate = jobEng + "QA";
     else if (category === "전체") jobCate = jobEng + "All";

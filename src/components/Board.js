@@ -111,7 +111,7 @@ function Board({
         글번호: doc.data().num,
         카테고리: doc.data().category,
         제목: (
-          <>
+          <div className={board.flex}>
             <span
               key={doc.data().header}
               onClick={msg}
@@ -121,7 +121,7 @@ function Board({
               {doc.data().header}
             </span>
             <span className={board.replyCount}>[{doc.data().replyCount}]</span>
-          </>
+          </div>
         ),
         글쓴이: doc.data().user,
         작성일: doc.data().time.substr(0, 5),
@@ -151,7 +151,7 @@ function Board({
         글번호: doc.data().num,
         카테고리: doc.data().category,
         제목: (
-          <>
+          <div className={board.flex}>
             <span
               key={doc.data().header}
               onClick={msg}
@@ -161,7 +161,7 @@ function Board({
               {doc.data().header}
             </span>
             <span className={board.replyCount}>[{doc.data().replyCount}]</span>
-          </>
+          </div>
         ),
         글쓴이: doc.data().user,
         작성일: doc.data().time.substr(0, 5),
@@ -192,7 +192,7 @@ function Board({
             글번호: doc.data().num,
             카테고리: doc.data().category,
             제목: (
-              <>
+              <div className={board.flex}>
                 <span
                   key={doc.data().header}
                   onClick={msg}
@@ -204,7 +204,7 @@ function Board({
                 <span className={board.replyCount}>
                   [{doc.data().replyCount}]
                 </span>
-              </>
+              </div>
             ),
             카테고리글번호: doc.data().cateNum,
             글쓴이: doc.data().user,
@@ -240,10 +240,9 @@ function Board({
             글번호: doc.data().num,
             카테고리: doc.data().category,
             제목: (
-              <div className={board.sym}>
-                <RecommendIcon className={board.icon} />
+              <div className={board.flex}>
+                <div className={board.symIcon}></div>
                 <span
-           
                   key={doc.data().header}
                   onClick={msg}
                   onMouseOver={mouseOver}
@@ -289,7 +288,8 @@ function Board({
             글번호: doc.data().num,
             카테고리: doc.data().category,
             제목: (
-              <>
+              <div className={board.flex}>
+                <div className={board.symIcon}></div>
                 <span
                   key={doc.data().header}
                   onClick={msg}
@@ -301,7 +301,7 @@ function Board({
                 <span className={board.replyCount}>
                   [{doc.data().replyCount}]
                 </span>
-              </>
+              </div>
             ),
             카테고리글번호: doc.data().cateNum,
             글쓴이: doc.data().user,
@@ -337,7 +337,7 @@ function Board({
         글번호: doc.data().num,
         카테고리: doc.data().category,
         제목: (
-          <>
+          <div className={board.flex}>
             <span
               key={doc.data().header}
               onClick={msg}
@@ -347,7 +347,7 @@ function Board({
               {doc.data().header}
             </span>
             <span className={board.replyCount}>[{doc.data().replyCount}]</span>
-          </>
+          </div>
         ),
         글쓴이: doc.data().user,
         작성일: doc.data().time.substr(0, 5),
@@ -381,7 +381,8 @@ function Board({
         글번호: doc.data().num,
         카테고리: doc.data().category,
         제목: (
-          <>
+          <div className={board.flex}>
+            <div className={board.favIcon}></div>
             <span
               key={doc.data().header}
               onClick={msg}
@@ -391,7 +392,7 @@ function Board({
               {doc.data().header}
             </span>
             <span className={board.replyCount}>[{doc.data().replyCount}]</span>
-          </>
+          </div>
         ),
         글쓴이: doc.data().user,
         작성일: doc.data().time.substr(0, 5),
@@ -426,7 +427,8 @@ function Board({
         글번호: doc.data().num,
         카테고리: doc.data().category,
         제목: (
-          <>
+          <div className={board.flex}>
+            <div className={board.favIcon}></div>
             <span
               key={doc.data().header}
               onClick={msg}
@@ -436,7 +438,7 @@ function Board({
               {doc.data().header}
             </span>
             <span className={board.replyCount}>[{doc.data().replyCount}]</span>
-          </>
+          </div>
         ),
         글쓴이: doc.data().user,
         작성일: doc.data().time.substr(0, 5),
@@ -469,7 +471,7 @@ function Board({
             글번호: doc.data().num,
             카테고리: doc.data().category,
             제목: (
-              <>
+              <div className={board.flex}>
                 <span
                   key={doc.data().header}
                   onClick={msg}
@@ -481,7 +483,7 @@ function Board({
                 <span className={board.replyCount}>
                   [{doc.data().replyCount}]
                 </span>
-              </>
+              </div>
             ),
             글쓴이: doc.data().user,
             작성일: doc.data().time.substr(0, 5),

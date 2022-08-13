@@ -19,8 +19,10 @@ let email = "";
 function RouterCom() {
   const [loginState, setLoginState] = useState(false);
   const [selectedGroup, setSelectedGroup] = useState("프리랜서");
-  const [selectedJob, setSelectedJob] = useState("");
-  const [selectedJobEng, setSelectedJobEng] = useState("");
+  const [selectedJob, setSelectedJob] = useState(sessionStorage.getItem("job"));
+  const [selectedJobEng, setSelectedJobEng] = useState(
+    sessionStorage.getItem("jobEng")
+  );
   const [night, setNight] = useState(true);
   const [userRN, setUserRN] = useState("");
 
@@ -111,13 +113,14 @@ function RouterCom() {
         <Route
           path="/Feedback"
           element={
-            <Feedback night={night} setNight={setNight} loginState={loginState}/>
+            <Feedback
+              night={night}
+              setNight={setNight}
+              loginState={loginState}
+            />
           }
         ></Route>
-        <Route
-          path="*"
-          element={<Navigate to="/" replace/>}
-        ></Route>
+        <Route path="*" element={<Navigate to="/" replace />}></Route>
       </Routes>
     </Router>
   );

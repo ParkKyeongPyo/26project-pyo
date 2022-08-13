@@ -15,3 +15,8 @@
 .item{
     margin-bottom: 5px;
 }
+
+.icon{
+    font-size: 10px;
+    color: gray !important;
+}

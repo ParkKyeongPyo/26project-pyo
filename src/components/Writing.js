@@ -295,14 +295,14 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
       data.symCount += 1;
       setSynCount(data.symCount);
     } else {
-      message.info("글 하나당 최대 한번 공감할 수 있습니다.");
+      message.warning("글 하나당 최대 한번 공감할 수 있습니다.");
     }
   };
 
   //공감 버튼은 로그인한 사용자만 사용 가능하도록 하는 함수.
   const onSymCondition = () => {
     if (loginState) onSymClick();
-    else message.info("로그인 후 사용할 수 있습니다.");
+    else message.warning("로그인 후 사용할 수 있습니다.");
   };
 
   useEffect(() => {

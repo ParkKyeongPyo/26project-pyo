@@ -29,10 +29,28 @@
   font-family: Noto Sans KR !important;
 }
 
-.sym{
+.flex{
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.favIcon{
+  background-image: url("../../public/img/z.png");
+  background-size: contain;
+  width: 22px;
+  height: 22px;
+  background-repeat: no-repeat;
+  margin-right: 7px;
+}
+
+.symIcon{
+  background-image: url("../../public/img/q.png");
+  background-size: contain;
+  width: 22px;
+  height: 22px;
+  background-repeat: no-repeat;
+  margin-right: 5px;
 }
 
 

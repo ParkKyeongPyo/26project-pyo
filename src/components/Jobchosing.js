@@ -46,6 +46,11 @@ function Jobchosing({
   const onJobClick = (e) => {
     setSelectedJobEng(e.target.title);
     setSelectedJob(e.target.innerText);
+
+    //직업 sessionStorage에 저장해 새로고침시 jobEng 유지하도록 함.
+    sessionStorage.clear();
+    sessionStorage.setItem("job", e.target.innerText);
+    sessionStorage.setItem("jobEng", e.target.title);
   };
 
   const onChange = (value) => {

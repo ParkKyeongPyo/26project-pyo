@@ -1,7 +1,7 @@
 import styles from "../CSS/login.module.css";
 import frame from "../CSS/communityFrame.module.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import CommunityFrameSub from "./CommunityFrameSub";
 import Write from "../components/Write.js";
@@ -27,6 +27,8 @@ function CommunityFrame({
   const [community, setCommunity] = useState(true);
   const [writingNum, setWritingNum] = useState(0);
   const [writingInfo, setWritingInfo] = useState({});
+
+  console.log(write, writing, community)
 
   const onWrite = () => {
     setWrite(true);

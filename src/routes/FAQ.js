@@ -4,19 +4,14 @@ import Footer from "../components/Footer";
 
 import faq from "../CSS/faq.module.css";
 
-import { useSpring, animated } from "react-spring";
-
 function FAQ({ night, setNight, loginState }) {
-  const animation1 = useSpring({
-    opacity: 1,
-    from: { opacity: 0 },
-  });
+
 
   return (
     <div>
       <MenuBar loginState={loginState} />
       <FloatingBtn night={night} setNight={setNight} />
-      <animated.div className={faq.flex} style={animation1}>
+      <div className={faq.flex}>
         <div className={faq.heading}>Q. 에러/오류가 있어요.</div>
         <div>
           A. 현재 테스트 기간이라 에러/오류가 잦을 수 있는 점 양해 부탁드립니다.
@@ -62,7 +57,7 @@ function FAQ({ night, setNight, loginState }) {
         <div>
           A. 로그인한 유저는 내 글보기 기능, 공감 기능을 이용하실 수 있습니다.
         </div>
-      </animated.div>
+      </div>
       <Footer />
     </div>
   );
