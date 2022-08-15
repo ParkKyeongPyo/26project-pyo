@@ -5,7 +5,7 @@ import "./CSS/font.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <div style={{height: "inherit"}}>
+  <div style={{height: "inherit", minWidth: "1280px"}}>
     <App />
   </div>
 );

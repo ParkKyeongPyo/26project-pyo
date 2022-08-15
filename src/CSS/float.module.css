@@ -1,5 +1,8 @@
-.flex{
-    position: fixed;
-    margin-left: auto;
-    right: 0px;
+.flex2{
+    padding-left: 500px;
+}
+
+.box{
+    width: 1160px;
+    margin: 0 auto 0 auto;
 }

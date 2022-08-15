@@ -338,6 +338,7 @@ function Board({
         카테고리: doc.data().category,
         제목: (
           <div className={board.flex}>
+             <div className={board.myIcon}></div>
             <span
               key={doc.data().header}
               onClick={msg}

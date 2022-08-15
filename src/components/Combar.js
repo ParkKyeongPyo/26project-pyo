@@ -266,7 +266,7 @@ function Combar({
             onMouseOut={onGroupMouseOut}
             onMouseOver={onGroupMouseOver}
           >
-            직원/알바
+            직원&알바
           </span>
         </div>
         <div>

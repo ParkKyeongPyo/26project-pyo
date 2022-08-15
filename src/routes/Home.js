@@ -21,7 +21,6 @@ function Home({
   return (
     <div>
       <MenuBar loginState={loginState} night={night}/>
-      <FloatingBtn night={night} setNight={setNight}/>
       <Jobchosing
         selectedJob={selectedJob}
         setSelectedJob={setSelectedJob}

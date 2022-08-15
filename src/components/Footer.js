@@ -17,8 +17,10 @@ function Footer() {
           특히 잘하는 아이콘 제작자: Freepik - Flaticon,
         </a>
         <a href="https://www.flaticon.com/kr/free-icons/" title="불꽃 아이콘" className={footer.icon}>
-        &nbsp;불꽃 아이콘 제작자: DinosoftLabs - Flaticon
+        &nbsp;불꽃 아이콘 제작자: DinosoftLabs - Flaticon,
         </a>
+        <a href="https://www.flaticon.com/kr/free-icons/" title="함께 아이콘" className={footer.icon}>&nbsp;함께 아이콘  제작자: Good Ware - Flaticon</a>
+        <a href="https://www.flaticon.com/kr/free-icons/-" title="내 프로필 아이콘" className={footer.icon}> &nbsp;내 프로필 아이콘  제작자: Lizel Arina - Flaticon</a>
       </div>
     </footer>
   );

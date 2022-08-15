@@ -14,8 +14,7 @@ function FAQ({ night, setNight, loginState }) {
       <div className={faq.flex}>
         <div className={faq.heading}>Q. 에러/오류가 있어요.</div>
         <div>
-          A. 현재 테스트 기간이라 에러/오류가 잦을 수 있는 점 양해 부탁드립니다.
-          아래 이메일로 연락주시면 감사하겠습니다:)
+          A. 현재 테스트 기간이라 에러/오류가 잦을 수 있는 점 양해 부탁드립니다. 오류/건의사항 탭에서 운영자에게 메세지를 보내주시면 됩니다.
         </div>
 
         <br />
@@ -44,10 +43,10 @@ function FAQ({ night, setNight, loginState }) {
         <br />
 
         <div className={faq.heading}>
-          Q. 제 직업이 혼자번당에 없어요. 추가 됐으면 좋겠어요.
+          Q. 제 직업이  없어요. 추가 해주셨으면 좋겠어요.
         </div>
         <div>
-          A. 건의사항 및 에러/오류는 아래 이메일로 연락주시면 감사하겠습니다:)
+          A. 건의사항은 에러/건의사항 탭에서 운영자에게 메세지를 보내주시면 됩니다.
         </div>
 
         <br />

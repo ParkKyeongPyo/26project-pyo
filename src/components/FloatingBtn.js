@@ -32,20 +32,21 @@ function FloatingBtn({ night, setNight }) {
     navigate("/");
   };
 
-
   return (
-    <Box className={float.flex} sx={{ "& > :not(style)": { m: 1 } }}>
-      <Fab size="small" aria-label="like">
-        <HomeIcon onClick={onHomeClick} />
-      </Fab>
-      <Fab size="small" aria-label="like">
-        {night ? (
-          <Brightness3Icon onClick={onSwitchClick} />
-        ) : (
-          <LightModeRoundedIcon onClick={onSwitchClick} />
-        )}
-      </Fab>
-    </Box>
+    <div className={float.box}>
+      <Box  sx={{ "& > :not(style)": { m: 1 } }}>
+        <Fab  className={float.flex2} size="small" aria-label="like">
+          <HomeIcon onClick={onHomeClick} />
+        </Fab>
+        <Fab size="small" aria-label="like">
+          {night ? (
+            <Brightness3Icon onClick={onSwitchClick} />
+          ) : (
+            <LightModeRoundedIcon onClick={onSwitchClick} />
+          )}
+        </Fab>
+      </Box>
+    </div>
   );
 }
 

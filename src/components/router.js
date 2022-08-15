@@ -12,7 +12,7 @@ import { Navigate } from "react-router-dom";
 
 import { onAuthStateChanged } from "firebase/auth";
 import { authService, db } from "../fbase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 let email = "";
 
@@ -49,6 +49,46 @@ function RouterCom() {
       setUserRN(userRNproto);
     }
   }, []);
+
+  //const free = ["dev","dsn", "wit", "wton", "cpr", "rpo", "trans", "inter", "copy", "tch", "psy", "vdo", "pic", "vce", "ket", "sul", "act", "mdl", "up", "hair", "htr"];
+  //const creator = ["wbap", "smt", "shop", "tube", "istar", "tik", "blog", "perb", "broad"];
+  //const seller = ["din", "cof", "dsrt", "acol", "franc", "mini", "none", "study", "pc", "sing", "health", "hshop", "nail", "phone", "cloth", "test", "exer", "art", "sing"]
+  
+  //const freeCate = ["Fav", "Sym", "QA", "Info", "Ex", "Re", "Rev", "Stu", "Tax"];
+  //const creatorCate = ["Fav", "Sym", "QA", "Info", "Ex", "Re", "Rev", "Tax", "Man", "Coo"];
+  //const SellerCate = ["Fav", "Sym", "QA", "Info", "Ex", "Re", "Rev", "Tax", "Man", "Emp"];
+
+  /*const dbMaker = async () => {
+
+    for (let i = 0; i < seller.length; i++) {
+      for (let j = 0; j < SellerCate.length; j++) {
+        await setDoc(doc(db, `${seller[i]}Cate`, `${seller[i]}${SellerCate[j]}`), {
+          num: 1
+        });
+      }
+    }
+  };
+  */
+
+  /*const dbMaker3 = async () => {
+
+    for (let i = 0; i < creatorCate.length; i++) {
+        await setDoc(doc(db, 'allCreaCate', `allCrea${creatorCate[i]}`), {
+          num: 1
+        });   
+    }
+  };
+  */
+
+
+  /*const dbMaker2 = async () => {
+
+    for (let i = 0; i < seller.length; i++) {
+        await setDoc(doc(db, "writingNum", seller[i]), {
+          num: 1
+        });
+    }
+  }*/
 
   return (
     <Router>

@@ -28,7 +28,7 @@ function CommunityFrame({
   const [writingNum, setWritingNum] = useState(0);
   const [writingInfo, setWritingInfo] = useState({});
 
-  console.log(write, writing, community)
+  console.log(write, writing, community);
 
   const onWrite = () => {
     setWrite(true);
@@ -73,17 +73,20 @@ function CommunityFrame({
 
   return (
     <>
-      <FloatingBtn2
-        night={night}
-        setNight={setNight}
-        setWrite={setWrite}
-        setWriting={setWriting}
-        setCommunity={setCommunity}
-      />
       <div className={frame.wide} style={animation1}>
         {selectedGroup === "프리랜서" && (
           <animated.h1 style={animation1} className={frame.h1}>
             {selectedGroup} {job} 커뮤니티
+            <div style={{ marginRight: "14%" }}>
+              <FloatingBtn2
+               
+                night={night}
+                setNight={setNight}
+                setWrite={setWrite}
+                setWriting={setWriting}
+                setCommunity={setCommunity}
+              />
+            </div>
           </animated.h1>
         )}
         {selectedGroup === "크리에이터" && (

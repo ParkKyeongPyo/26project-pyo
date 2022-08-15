@@ -19,7 +19,6 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { authService, storage } from "../fbase.js";
-import { ref, uploadBytes } from "firebase/storage";
 
 import WriteCate from "./WriteCate";
 import Footer from "./Footer";
@@ -42,7 +41,7 @@ function Write({
   userRN,
   loginState,
 }) {
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("전체");
   const [header, setHeader] = useState("");
   const [content, setContent] = useState("");
 
@@ -65,21 +64,31 @@ function Write({
 
   //글 제출.
   const onSubmit = async () => {
+
     const docRef = doc(db, "WritingNum", jobEng);
     const docSnap = await getDoc(docRef);
 
+    //Man == Manage, CoW == Cowork, Wkr === Worker
     let jobCate = "";
     if (category === "Q&A") jobCate = jobEng + "QA";
-    else if (category === "전체") jobCate = jobEng + "All";
     else if (category === "정보공유") jobCate = jobEng + "Info";
     else if (category === "경험공유") jobCate = jobEng + "Ex";
     else if (category === "현실고충") jobCate = jobEng + "Re";
     else if (category === "수익") jobCate = jobEng + "Rev";
     else if (category === "스터디&동아리") jobCate = jobEng + "Stu";
     else if (category === "세금&계약") jobCate = jobEng + "Tax";
+    else if (category === "운영") jobCate = jobEng + "Man";
+    else if (category === "협업") jobCate = jobEng + "CoW";
+    else if (category === "직원&알바") jobCate = jobEng + "Wkr";
 
-    const cateRef = doc(db, "CateNum", jobCate);
-    const cateNumSnap = await getDoc(cateRef);
+    let cateNumSnap = "";
+    let cateNum = 0;
+
+    if (category != "전체") {
+      const cateRef = doc(db, `${jobEng}Cate`, jobCate);
+      cateNumSnap = await getDoc(cateRef);
+      cateNum = cateNumSnap.data().num;
+    }
 
     //로그인 유무에 따라서 익명 또는 displayName author에 넣기.
     let writerName = "";
@@ -100,7 +109,7 @@ function Write({
     if (loginState) {
       await setDoc(doc(db, jobEng, `${docSnap.data().num}`), {
         num: docSnap.data().num,
-        cateNum: cateNumSnap.data().num,
+        cateNum: cateNum,
         user: writerName,
         email: email,
         header: header,
@@ -124,7 +133,7 @@ function Write({
     } else {
       await setDoc(doc(db, jobEng, `${docSnap.data().num}`), {
         num: docSnap.data().num,
-        cateNum: cateNumSnap.data().num,
+        cateNum: cateNum,
         user: writerName,
         header: header,
         category: category,
@@ -151,25 +160,28 @@ function Write({
     });
 
     //DB) 인기, 공감, 내 글 제외한 나머지 카테고리 num + 1.
-    await updateDoc(doc(db, "CateNum", jobCate), {
-      num: cateNumSnap.data().num + 1,
-    });
+    if (category != "전체") {
+      await updateDoc(doc(db, `${jobEng}Cate`, jobCate), {
+        num: cateNumSnap.data().num + 1,
+      });
+    }
 
     setWrite(false);
     setCommunity(true);
     setWriting(false);
   };
 
+  /*
   useEffect(() => {
     setCategory("전체");
   }, []);
-
+*/
   return (
     <>
-      <form className={styles.flexWrite} onSubmit={onSubmitCondition} >
+      <form className={styles.flexWrite}>
         <div className={write.category}>
           <span>카테고리</span>
-          <WriteCate selectedGroup={selectedGroup} setCategory={setCategory} />
+          <WriteCate selectedGroup={selectedGroup} setCategory={handleChange} />
         </div>
 
         <br />
@@ -226,7 +238,8 @@ function Write({
             className={write.btn}
             size="large"
             type="primary"
-            htmlType="submit"
+            htmlType="button"
+            onClick={onSubmitCondition}
           >
             저장
           </Button>

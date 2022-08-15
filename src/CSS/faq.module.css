@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     font-size: large;
-    margin-top: 7%;
+    margin: 7% auto 0 auto;
 }
 
 .item{

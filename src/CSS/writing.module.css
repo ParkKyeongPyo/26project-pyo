@@ -3,9 +3,9 @@
   flex-direction: column;
   justify-content: flex-start;
   height: auto;
-  width: 77%;
-  padding-right: 15%;
-  margin-left: 150px;
+  width: 87%;
+  margin: 7px 0px 7px 0;
+  padding-right: 2%;
 }
 
 .content {
