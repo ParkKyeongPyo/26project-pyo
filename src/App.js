@@ -17,7 +17,7 @@ function App() {
     <div style={{ height: "inherit" }}>
       {j === "" && h === "" && c === "" ? (
         <Helmet>
-          <title>혼자번당</title>
+          <title>혼자번당-WorkAlone</title>
         </Helmet>
       ) : <MetaTag heading={h} content={c} job={j}/>}
 

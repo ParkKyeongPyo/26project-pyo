@@ -15,7 +15,7 @@ function Home({
   setJ,
 }) {
   useEffect(() => {
-    setH("워크얼론-Work Alone");
+    setH("워크얼론-WorkAlone");
     setC("대한민국에서 혼자 일하는 모든 프리랜서, 크리에이터, 자영업자분들을 위한 커뮤니티");
   }, []);
 

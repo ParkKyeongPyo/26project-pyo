@@ -14,8 +14,8 @@ const CommunityMenuBar = ({
         <div className={menu.menuDetail}>
           <span className={menu.logo}>
             <Link to="/">
-              <img alt="워크얼론 로고" style={{ width: "30px", height: "30px" }} src="img/logo2.png" />
-              워크얼론
+              <img alt="워크얼론" style={{ width: "30px", height: "30px" }} src="img/logo2.png" />
+              WorkAlone
             </Link>
           </span>
           <span className={menu.flexItem}>
@@ -36,8 +36,8 @@ const CommunityMenuBar = ({
       <div className={menu.flexMenus}>
         <div className={menu.menuDetail}>
           <Link className={menu.logo} to="/">
-            <img alt="워크얼론 로고" style={{ width: "30px", height: "30px" }} src="img/logo2.png" />
-            워크얼론
+            <img alt="워크얼론" style={{ width: "30px", height: "30px" }} src="img/logo2.png" />
+            WorkAlone
           </Link>
 
           <span className={menu.flexItem}>

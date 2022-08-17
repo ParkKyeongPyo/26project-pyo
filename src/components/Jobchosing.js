@@ -118,7 +118,7 @@ function Jobchosing({
       </animated.div>
       <animated.div style={animation3}>
         <div className={common.imgFlex}>
-          <img className={common.img} src="/img/logo2.png" />
+          <img alt="워크얼론 로고" className={common.img} src="img/logo2.png" />
         </div>
         <div className={common.flexRow}>
           <Segmented
