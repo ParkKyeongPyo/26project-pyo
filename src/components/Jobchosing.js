@@ -4,10 +4,9 @@ import common from "../CSS/common.module.css";
 import { Popover } from "antd";
 import "antd/dist/antd.min.css";
 
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { Segmented, Radio } from "antd";
+import { Segmented } from "antd";
 
 import {
   useSpring,
@@ -111,7 +110,7 @@ function Jobchosing({
   return (
     <div style={{ height: "inherit", marginLeft: "auto", marginRight: "auto" }}>
       <animated.div style={animation1} className={common.flexRowh2}>
-        "워크어론(Work Alone)은 대한민국에서 혼자 일하는 모든 분들을 위한 커뮤니티입니다:)"
+        "워크얼론(Work Alone)은 대한민국에서 혼자 일하는 모든 분들을 위한 커뮤니티입니다:)"
       </animated.div>
 
       <animated.div style={animation2} className={common.flexRowMiddle}>

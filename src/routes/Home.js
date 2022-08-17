@@ -15,8 +15,8 @@ function Home({
   setJ,
 }) {
   useEffect(() => {
-    setH("혼자번당-혼자 일하는 모든 분들을 위한 커뮤니티");
-    setC("혼자 일하는 모든 프리랜서,크리에이터, 자영업자 커뮤니티");
+    setH("워크얼론-Work Alone");
+    setC("대한민국에서 혼자 일하는 모든 프리랜서, 크리에이터, 자영업자분들을 위한 커뮤니티");
   }, []);
 
   const MemorizedMenuBar= React.memo(MenuBar);
