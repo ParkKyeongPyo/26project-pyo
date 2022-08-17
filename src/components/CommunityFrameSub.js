@@ -20,20 +20,20 @@ function CommunityFrameSub({
 }) {
   useEffect(() => {
     if (job === "") {
-      setH(`${selectedGroup} 커뮤니티-혼자번당`);
+      setH(`${selectedGroup} 커뮤니티 - 혼자번당`);
       setC(
         `${selectedGroup} 커뮤니티에서 같은 일을 하는 사람들과 소통하고 배우고 나누며 성장해보세요!`
       );
     } else {
       if (selectedGroup === "자영업자") {
-        setH(`${job} 사장님 커뮤니티-혼자번당`);
+        setH(`${job} 사장님 커뮤니티 - 혼자번당`);
         setC(
           `${selectedGroup} ${job} 사장님 커뮤니티에서 같은 일을 하는 사람들과 소통하고 배우고 나누며 성장해보세요!`
         );
       } else {
-        setH(`${job} 커뮤니티-혼자번당`);
+        setH(`${job} 커뮤니티 - 혼자번당`);
         setC(
-          `${selectedGroup} ${job} 커뮤니티에서 같은 일을 하는 사람들과 소통ㄷㄷㄷ하고 배우고 나누며 성장해보세요!`
+          `${selectedGroup} ${job} 커뮤니티에서 같은 일을 하는 사람들과 소통하고 배우고 나누며 성장해보세요!`
         );
       }
     }
