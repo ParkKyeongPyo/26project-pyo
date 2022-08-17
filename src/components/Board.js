@@ -67,14 +67,12 @@ ajax 사용시에는 비동기로 처리 됨.
 */
 let data = [];
 
+const MemorizedCombar = React.memo(Combar);
+const MemorizedTable = React.memo(Table);
+const MemorizedPagination = React.memo(Pagination);
+
 //게시판 component
-function Board({
-  onWrite,
-  onWriting,
-  jobEng,
-  selectedGroup,
-  loginState,
-}) {
+function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
   const [pageSize, setPageSize] = useState(20);
   const [lastNum, setLastNum] = useState(1000000);
   const [favNum, setFavNum] = useState(1000000);
@@ -84,6 +82,8 @@ function Board({
   const [cateChanged, setCateChanged] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [myWriting, setMyWriting] = useState(false);
+  //첫 렌더링 후 직업 바뀌었으면 data에 빈 배열 넣고 한번더 렌더링 하기 위한 state
+  const [render, setRender] = useState(false);
 
   const getListAllFirst = async (page) => {
     data = [];
@@ -234,8 +234,8 @@ function Board({
             제목: (
               <div className={board.flex}>
                 <div className={board.iconPad}>
-              <div className={board.symIcon}></div>
-            </div>
+                  <div className={board.symIcon}></div>
+                </div>
                 <span
                   key={doc.data().header}
                   onClick={msg}
@@ -284,8 +284,8 @@ function Board({
             제목: (
               <div className={board.flex}>
                 <div className={board.iconPad}>
-              <div className={board.symIcon}></div>
-            </div>
+                  <div className={board.symIcon}></div>
+                </div>
                 <span
                   key={doc.data().header}
                   onClick={msg}
@@ -334,7 +334,7 @@ function Board({
         카테고리: doc.data().category,
         제목: (
           <div className={board.flex}>
-           <div className={board.iconPad}>
+            <div className={board.iconPad}>
               <div className={board.myIcon}></div>
             </div>
             <span
@@ -532,9 +532,13 @@ function Board({
     await getListAllFirst(1);
   };
 
+  console.log("render");
+
   useEffect(() => {
+    data = [];
     asyncFn();
-  }, []);
+    setRender((prev) => !prev);
+  }, [jobEng]);
 
   const onChange = async (event, page) => {
     await getListPage(page);
@@ -560,7 +564,7 @@ function Board({
 
   return (
     <>
-      <Combar
+      <MemorizedCombar
         onWrite={onWrite}
         setSelectedCategory={setSelectedCategory}
         setCateChanged={setCateChanged}
@@ -574,7 +578,7 @@ function Board({
         setPageSize={setPageSize}
         setMyWriting={setMyWriting}
       />
-      <Table
+      <MemorizedTable
         columns={columns}
         dataSource={[...data]}
         pagination={false}
@@ -583,7 +587,7 @@ function Board({
         rowSelection={rowSelection}
       />
       {myWriting ? null : (
-        <Pagination
+        <MemorizedPagination
           className={board.pagination}
           page={currentPage}
           variant="outlined"
