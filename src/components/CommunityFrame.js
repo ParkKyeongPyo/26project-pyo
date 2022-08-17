@@ -1,7 +1,6 @@
-import styles from "../CSS/login.module.css";
 import frame from "../CSS/communityFrame.module.css";
 
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import CommunityFrameSub from "./CommunityFrameSub";
 import Write from "../components/Write.js";
@@ -13,6 +12,11 @@ import { db } from "../fbase.js";
 
 import { useSpring, useSpringRef, animated, useChain } from "react-spring";
 
+const MemorizedFloatingBtn2 = React.memo(FloatingBtn2);
+const MemorizedWrite = React.memo(Write);
+const MemorizedWriting = React.memo(Writing);
+const MemorizedCommunityFrameSub = React.memo(CommunityFrameSub);
+
 function CommunityFrame({
   job,
   jobEng,
@@ -21,14 +25,13 @@ function CommunityFrame({
   setNight,
   userRN,
   loginState,
+  setH,
+  setC,
 }) {
   const [write, setWrite] = useState(false);
   const [writing, setWriting] = useState(false);
   const [community, setCommunity] = useState(true);
-  const [writingNum, setWritingNum] = useState(0);
   const [writingInfo, setWritingInfo] = useState({});
-
-  console.log(write, writing, community);
 
   const onWrite = () => {
     setWrite(true);
@@ -74,12 +77,11 @@ function CommunityFrame({
   return (
     <>
       <div className={frame.wide} style={animation1}>
-        {selectedGroup === "프리랜서" && (
+        {(selectedGroup === "프리랜서" || selectedGroup === "크리에이터") && (
           <animated.h1 style={animation1} className={frame.h1}>
             {selectedGroup} {job} 커뮤니티
             <div style={{ marginRight: "14%" }}>
-              <FloatingBtn2
-               
+              <MemorizedFloatingBtn2
                 night={night}
                 setNight={setNight}
                 setWrite={setWrite}
@@ -89,18 +91,22 @@ function CommunityFrame({
             </div>
           </animated.h1>
         )}
-        {selectedGroup === "크리에이터" && (
-          <animated.h1 style={animation1} className={frame.h1}>
-            {selectedGroup} {job} 커뮤니티
-          </animated.h1>
-        )}
         {selectedGroup === "자영업자" && (
           <animated.h1 style={animation1} className={frame.h1}>
             {selectedGroup} {job} 사장님 커뮤니티
+            <div style={{ marginRight: "14%" }}>
+              <MemorizedFloatingBtn2
+                night={night}
+                setNight={setNight}
+                setWrite={setWrite}
+                setWriting={setWriting}
+                setCommunity={setCommunity}
+              />
+            </div>
           </animated.h1>
         )}
         {write && (
-          <Write
+          <MemorizedWrite
             style={animation2}
             setWrite={setWrite}
             setCommunity={setCommunity}
@@ -115,25 +121,30 @@ function CommunityFrame({
         )}
         {community && (
           <animated.div style={animation2}>
-            <CommunityFrameSub
+            <MemorizedCommunityFrameSub
               style={animation2}
               job={job}
               onWrite={onWrite}
               onWriting={onWriting}
-              setWritingNum={setWritingNum}
               jobEng={jobEng}
               selectedGroup={selectedGroup}
               loginState={loginState}
+              setH={setH}
+              setC={setC}
             />
           </animated.div>
         )}
         {writing && (
-          <Writing
+          <MemorizedWriting
             style={animation2}
             writingInfo={writingInfo}
             jobEng={jobEng}
             userRN={userRN}
             loginState={loginState}
+            setH={setH}
+            setC={setC}
+            job={job}
+            selectedGroup={selectedGroup}
           />
         )}
       </div>

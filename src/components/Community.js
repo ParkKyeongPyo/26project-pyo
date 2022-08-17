@@ -1,7 +1,12 @@
 import CommunityMenuBar from "./CommunityMenuBar";
 import CommunityFrame from "./CommunityFrame";
 
-import { useState, useEffect } from "react";
+
+
+import React, { useState, useEffect } from "react";
+
+const MemorizedCommunityMenuBar = React.memo(CommunityMenuBar);
+const MemorizedCommunityFrame = React.memo(CommunityFrame);
 
 function Community({
   selectedJob,
@@ -11,6 +16,8 @@ function Community({
   setNight,
   loginState,
   userRN,
+  setH,
+  setC,
 }) {
   const [render, setRender] = useState(false);
 
@@ -19,13 +26,12 @@ function Community({
   }, []);
   return (
     <div style={{ height: "inherit" }}>
-      <CommunityMenuBar
+      <MemorizedCommunityMenuBar
         job={selectedJob}
         selectedGroup={selectedGroup}
         loginState={loginState}
-        selectedJobEng={selectedJobEng}
       />
-      <CommunityFrame
+      <MemorizedCommunityFrame
         job={selectedJob}
         jobEng={selectedJobEng}
         selectedGroup={selectedGroup}
@@ -33,6 +39,8 @@ function Community({
         setNight={setNight}
         userRN={userRN}
         loginState={loginState}
+        setH={setH}
+        setC={setC}
       />
     </div>
   );

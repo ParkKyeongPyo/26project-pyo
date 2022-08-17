@@ -2,29 +2,21 @@ import styles from "../CSS/login.module.css";
 import write from "../CSS/write.module.css";
 import "antd/dist/antd.min.css";
 import { Input, Button, message } from "antd";
-import { Select } from "antd";
 
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import { db } from "../fbase.js";
-import {
-  collection,
-  addDoc,
-  doc,
-  getDoc,
-  updateDoc,
-  setDoc,
-} from "firebase/firestore";
-import { authService, storage } from "../fbase.js";
+import { doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
+import { authService } from "../fbase.js";
 
 import WriteCate from "./WriteCate";
 import Footer from "./Footer";
 
-const { Option } = Select;
-
+const MemorizedWriteCate = React.memo(WriteCate);
+const MemorizedFooter = React.memo(Footer);
 /*
 문제
 1. devNum 새로고칭하면 초기화 됨
@@ -64,8 +56,7 @@ function Write({
 
   //글 제출.
   const onSubmit = async () => {
-
-    const docRef = doc(db, "WritingNum", jobEng);
+    const docRef = doc(db, "writingNum", jobEng);
     const docSnap = await getDoc(docRef);
 
     //Man == Manage, CoW == Cowork, Wkr === Worker
@@ -84,7 +75,7 @@ function Write({
     let cateNumSnap = "";
     let cateNum = 0;
 
-    if (category != "전체") {
+    if (category !== "전체") {
       const cateRef = doc(db, `${jobEng}Cate`, jobCate);
       cateNumSnap = await getDoc(cateRef);
       cateNum = cateNumSnap.data().num;
@@ -155,12 +146,12 @@ function Write({
       });
     }
 
-    await updateDoc(doc(db, "WritingNum", jobEng), {
+    await updateDoc(doc(db, "writingNum", jobEng), {
       num: docSnap.data().num + 1,
     });
 
     //DB) 인기, 공감, 내 글 제외한 나머지 카테고리 num + 1.
-    if (category != "전체") {
+    if (category !== "전체") {
       await updateDoc(doc(db, `${jobEng}Cate`, jobCate), {
         num: cateNumSnap.data().num + 1,
       });
@@ -181,7 +172,7 @@ function Write({
       <form className={styles.flexWrite}>
         <div className={write.category}>
           <span>카테고리</span>
-          <WriteCate selectedGroup={selectedGroup} setCategory={handleChange} />
+          <MemorizedWriteCate selectedGroup={selectedGroup} setCategory={handleChange} />
         </div>
 
         <br />
@@ -197,7 +188,7 @@ function Write({
         <br />
 
         <div className={write.font}>
-          *사진, 미디어 삽입, 인용, 표 기능은 아직 이용 불가능하니 참고바랍니다.
+          *Bold, 사진, 미디어 삽입, 인용, 표 기능은 아직 이용 불가능하니 참고바랍니다.
         </div>
 
         <CKEditor
@@ -206,19 +197,9 @@ function Write({
           width="100%"
           min
           editor={ClassicEditor}
-          onReady={(editor) => {
-            // You can store the "editor" and use when it is needed.
-            console.log("Editor is ready to use!", editor);
-          }}
           onChange={(event, editor) => {
             const data = editor.getData();
             setContent(data);
-          }}
-          onBlur={(event, editor) => {
-            //console.log("Blur.", editor);
-          }}
-          onFocus={(event, editor) => {
-            //console.log("Focus.", editor);
           }}
         />
 
@@ -245,7 +226,7 @@ function Write({
           </Button>
         </div>
       </form>
-      <Footer />
+      <MemorizedFooter />
     </>
   );
 }

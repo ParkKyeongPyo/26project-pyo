@@ -4,12 +4,7 @@ import { useState, useEffect } from "react";
 import Pagination from "@mui/material/Pagination";
 import board from "../CSS/board.module.css";
 
-import styles from "../CSS/login.module.css";
-import { Button } from "antd";
-import { HeartTwoTone } from "@ant-design/icons";
-import RecommendIcon from "@mui/icons-material/Recommend";
 import "antd/dist/antd.min.css";
-import Frame from "../CSS/communityFrame.module.css";
 
 import { db } from "../fbase.js";
 import {
@@ -71,19 +66,16 @@ ajax 사용시에는 비동기로 처리 됨.
 1. 글 0개 또는 1개시 글넘버 못불러 오는 문제 (비동기에 따른 순서 문제)
 */
 let data = [];
-let pageOrCate = false;
 
 //게시판 component
 function Board({
-  job,
   onWrite,
   onWriting,
-  setWritingNum,
   jobEng,
   selectedGroup,
   loginState,
 }) {
-  const [pageSize, setPageSize] = useState(15);
+  const [pageSize, setPageSize] = useState(20);
   const [lastNum, setLastNum] = useState(1000000);
   const [favNum, setFavNum] = useState(1000000);
   const [cateNum, setCateNum] = useState(1000000);
@@ -185,7 +177,7 @@ function Board({
     const dataLength = querySnapshot.docs.length;
     let itemsProcessed = 0;
     {
-      dataLength != 0 &&
+      dataLength !== 0 &&
         querySnapshot.forEach((doc) => {
           data.push({
             key: doc.data().num,
@@ -233,7 +225,7 @@ function Board({
     const dataLength = querySnapshot.docs.length;
     let itemsProcessed = 0;
     {
-      dataLength != 0 &&
+      dataLength !== 0 &&
         querySnapshot.forEach((doc) => {
           data.push({
             key: doc.data().num,
@@ -241,7 +233,9 @@ function Board({
             카테고리: doc.data().category,
             제목: (
               <div className={board.flex}>
-                <div className={board.symIcon}></div>
+                <div className={board.iconPad}>
+              <div className={board.symIcon}></div>
+            </div>
                 <span
                   key={doc.data().header}
                   onClick={msg}
@@ -281,7 +275,7 @@ function Board({
     const querySnapshot = await getDocs(q);
     const dataLength = querySnapshot.docs.length;
     {
-      dataLength != 0 &&
+      dataLength !== 0 &&
         querySnapshot.forEach((doc) => {
           data.push({
             key: doc.data().num,
@@ -289,7 +283,9 @@ function Board({
             카테고리: doc.data().category,
             제목: (
               <div className={board.flex}>
-                <div className={board.symIcon}></div>
+                <div className={board.iconPad}>
+              <div className={board.symIcon}></div>
+            </div>
                 <span
                   key={doc.data().header}
                   onClick={msg}
@@ -338,7 +334,9 @@ function Board({
         카테고리: doc.data().category,
         제목: (
           <div className={board.flex}>
-             <div className={board.myIcon}></div>
+           <div className={board.iconPad}>
+              <div className={board.myIcon}></div>
+            </div>
             <span
               key={doc.data().header}
               onClick={msg}
@@ -383,7 +381,9 @@ function Board({
         카테고리: doc.data().category,
         제목: (
           <div className={board.flex}>
-            <div className={board.favIcon}></div>
+            <div className={board.iconPad}>
+              <div className={board.favIcon}></div>
+            </div>
             <span
               key={doc.data().header}
               onClick={msg}
@@ -429,7 +429,9 @@ function Board({
         카테고리: doc.data().category,
         제목: (
           <div className={board.flex}>
-            <div className={board.favIcon}></div>
+            <div className={board.iconPad}>
+              <div className={board.favIcon}></div>
+            </div>
             <span
               key={doc.data().header}
               onClick={msg}
@@ -465,7 +467,7 @@ function Board({
     const querySnapshot = await getDocs(q);
     const dataLength = querySnapshot.docs.length;
     {
-      dataLength != 0 &&
+      dataLength !== 0 &&
         querySnapshot.forEach((doc) => {
           data.push({
             key: doc.data().num,

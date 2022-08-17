@@ -10,8 +10,8 @@ const MenuBar = ({ loginState }) => {
         <div className={menu.menuDetail}>
           <span className={menu.logo}>
             <Link to="/">
-            <img style={{ width: "30px", height: "30px" }} src="img/dd.png" />
-              혼자번당
+              <img alt="워크어론 로고" style={{ width: "30px", height: "30px" }} src="img/logo2.png" />
+              워크어론
             </Link>
           </span>
           <span className={menu.flexItem}>
@@ -32,8 +32,8 @@ const MenuBar = ({ loginState }) => {
         <div className={menu.menuDetail}>
           <span className={menu.logo}>
             <Link to="/">
-              <img style={{ width: "30px", height: "30px" }} src="img/dd.png" />
-              혼자번당
+              <img alt="워크어론 로고" style={{ width: "30px", height: "30px" }} src="img/logo2.png" />
+              워크어론
             </Link>
           </span>
           <span className={menu.flexItem}>

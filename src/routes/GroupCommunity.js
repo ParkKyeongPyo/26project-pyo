@@ -1,8 +1,9 @@
 import CommunityMenuBar from "../components/CommunityMenuBar";
 import CommunityFrame from "../components/CommunityFrame";
 
-import { useEffect, useState } from "react";
-import { render } from "@testing-library/react";
+import React, { useEffect, useState } from "react";
+
+const MemorizedCommunityMenuBar = React.memo(CommunityMenuBar);
 
 function GroupCommunity({
   selectedJob,
@@ -11,6 +12,8 @@ function GroupCommunity({
   night,
   setNight,
   loginState,
+  setH,
+  setC
 }) {
   const [render, setRender] = useState(false);
 
@@ -21,7 +24,7 @@ function GroupCommunity({
   if (selectedGroup === "프리랜서") {
     return (
       <>
-        <CommunityMenuBar
+        <MemorizedCommunityMenuBar
           job={selectedJob}
           selectedGroup={selectedGroup}
           loginState={loginState}
@@ -34,13 +37,15 @@ function GroupCommunity({
           night={night}
           setNight={setNight}
           loginState={loginState}
+          setH={setH}
+          setC={setC}
         />
       </>
     );
   } else if (selectedGroup === "크리에이터") {
     return (
       <>
-        <CommunityMenuBar
+        <MemorizedCommunityMenuBar
           job={selectedJob}
           selectedGroup={selectedGroup}
           loginState={loginState}
@@ -53,13 +58,15 @@ function GroupCommunity({
           night={night}
           setNight={setNight}
           loginState={loginState}
+          setH={setH}
+          setC={setC}
         />
       </>
     );
   } else if (selectedGroup === "자영업자") {
     return (
       <>
-        <CommunityMenuBar
+        <MemorizedCommunityMenuBar
           job={selectedJob}
           selectedGroup={selectedGroup}
           loginState={loginState}
@@ -72,11 +79,11 @@ function GroupCommunity({
           night={night}
           setNight={setNight}
           loginState={loginState}
+          setH={setH}
+          setC={setC}
         />
       </>
     );
-  } else {
-    console.log("error");
   }
 }
 

@@ -2,21 +2,18 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../routes/Home";
 import Login from "../routes/Login";
 import Profile from "../routes/Profile";
-import Community from "./Community";
+import Community from "../components/Community";
 import GroupCommunity from "../routes/GroupCommunity";
 import FAQ from "../routes/FAQ";
 import Feedback from "../routes/Feedback";
+import React from "react";
 
 import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
 
 import { onAuthStateChanged } from "firebase/auth";
-import { authService, db } from "../fbase";
-import { doc, setDoc } from "firebase/firestore";
+import { authService} from "../fbase";
 
-let email = "";
-
-function RouterCom() {
+function RouterCom({ setH, setC, setJ }) {
   const [loginState, setLoginState] = useState(false);
   const [selectedGroup, setSelectedGroup] = useState("프리랜서");
   const [selectedJob, setSelectedJob] = useState(sessionStorage.getItem("job"));
@@ -30,10 +27,6 @@ function RouterCom() {
     //Auth state observer
     onAuthStateChanged(authService, async (user) => {
       if (user) {
-        const uid = user.uid;
-        const protoEmail = user.email;
-        email = user.email;
-
         // ...
         setLoginState(true);
       } else {
@@ -41,6 +34,8 @@ function RouterCom() {
         // ...
         setLoginState(false);
       }
+
+      //dbMaker2();
     });
 
     if (!loginState) {
@@ -53,7 +48,8 @@ function RouterCom() {
   //const free = ["dev","dsn", "wit", "wton", "cpr", "rpo", "trans", "inter", "copy", "tch", "psy", "vdo", "pic", "vce", "ket", "sul", "act", "mdl", "up", "hair", "htr"];
   //const creator = ["wbap", "smt", "shop", "tube", "istar", "tik", "blog", "perb", "broad"];
   //const seller = ["din", "cof", "dsrt", "acol", "franc", "mini", "none", "study", "pc", "sing", "health", "hshop", "nail", "phone", "cloth", "test", "exer", "art", "sing"]
-  
+  //const group = ["allFree", "allCrea", "allSelf"]
+
   //const freeCate = ["Fav", "Sym", "QA", "Info", "Ex", "Re", "Rev", "Stu", "Tax"];
   //const creatorCate = ["Fav", "Sym", "QA", "Info", "Ex", "Re", "Rev", "Tax", "Man", "Coo"];
   //const SellerCate = ["Fav", "Sym", "QA", "Info", "Ex", "Re", "Rev", "Tax", "Man", "Emp"];
@@ -80,11 +76,10 @@ function RouterCom() {
   };
   */
 
-
   /*const dbMaker2 = async () => {
 
-    for (let i = 0; i < seller.length; i++) {
-        await setDoc(doc(db, "writingNum", seller[i]), {
+    for (let i = 0; i < group.length; i++) {
+        await setDoc(doc(db, "writingNum", group[i]), {
           num: 1
         });
     }
@@ -98,13 +93,13 @@ function RouterCom() {
           element={
             <Home
               loginState={loginState}
-              selectedJob={selectedJob}
               setSelectedJob={setSelectedJob}
               setSelectedJobEng={setSelectedJobEng}
               setSelectedGroup={setSelectedGroup}
               selectedGroup={selectedGroup}
-              night={night}
-              setNight={setNight}
+              setH={setH}
+              setC={setC}
+              setJ={setJ}
             />
           }
         ></Route>
@@ -127,6 +122,8 @@ function RouterCom() {
               setNight={setNight}
               loginState={loginState}
               userRN={userRN}
+              setH={setH}
+              setC={setC}
             />
           }
         ></Route>
@@ -141,6 +138,8 @@ function RouterCom() {
               setNight={setNight}
               loginState={loginState}
               userRN={userRN}
+              setH={setH}
+              setC={setC}
             />
           }
         ></Route>
@@ -160,7 +159,6 @@ function RouterCom() {
             />
           }
         ></Route>
-        <Route path="*" element={<Navigate to="/" replace />}></Route>
       </Routes>
     </Router>
   );

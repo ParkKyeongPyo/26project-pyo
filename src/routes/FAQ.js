@@ -1,20 +1,23 @@
 import MenuBar from "../components/MenuBar";
-import FloatingBtn from "../components/FloatingBtn";
 import Footer from "../components/Footer";
 
 import faq from "../CSS/faq.module.css";
 
+import React from "react";
+
+const MemorizedMenuBar = React.memo(MenuBar);
+const MemorizedFooter = React.memo(Footer);
+
 function FAQ({ night, setNight, loginState }) {
-
-
   return (
     <div>
-      <MenuBar loginState={loginState} />
-      <FloatingBtn night={night} setNight={setNight} />
+      <MemorizedMenuBar loginState={loginState} />
+
       <div className={faq.flex}>
         <div className={faq.heading}>Q. 에러/오류가 있어요.</div>
         <div>
-          A. 현재 테스트 기간이라 에러/오류가 잦을 수 있는 점 양해 부탁드립니다. 오류/건의사항 탭에서 운영자에게 메세지를 보내주시면 됩니다.
+          A. 현재 테스트 기간이라 에러/오류가 잦을 수 있는 점 양해 부탁드립니다.
+          오류/건의사항 탭에서 운영자에게 메세지를 보내주시면 됩니다.
         </div>
 
         <br />
@@ -43,10 +46,11 @@ function FAQ({ night, setNight, loginState }) {
         <br />
 
         <div className={faq.heading}>
-          Q. 제 직업이  없어요. 추가 해주셨으면 좋겠어요.
+          Q. 제 직업이 없어요. 추가 해주셨으면 좋겠어요.
         </div>
         <div>
-          A. 건의사항은 에러/건의사항 탭에서 운영자에게 메세지를 보내주시면 됩니다.
+          A. 건의사항은 에러/건의사항 탭에서 운영자에게 메세지를 보내주시면
+          됩니다.
         </div>
 
         <br />
@@ -57,7 +61,7 @@ function FAQ({ night, setNight, loginState }) {
           A. 로그인한 유저는 내 글보기 기능, 공감 기능을 이용하실 수 있습니다.
         </div>
       </div>
-      <Footer />
+      <MemorizedFooter />
     </div>
   );
 }

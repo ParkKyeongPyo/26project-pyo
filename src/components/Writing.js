@@ -1,14 +1,11 @@
 import Footer from "./Footer.js";
-import { useSpring, animated } from "react-spring";
 import { db } from "../fbase.js";
 import {
-  LikeOutlined,
   HeartOutlined,
   EyeOutlined,
   MessageOutlined,
 } from "@ant-design/icons";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import {
   collection,
   query,
@@ -24,7 +21,6 @@ import { authService } from "../fbase.js";
 import writing from "../CSS/writing.module.css";
 
 import { Button, Comment, Form, Input, List, message } from "antd";
-import moment from "moment";
 import React, { useState, useEffect } from "react";
 const { TextArea } = Input;
 
@@ -37,7 +33,7 @@ const CommentList = ({ comments }) => (
   />
 );
 
-const Editor = ({ onChange, onSubmit, submitting, value }) => (
+const Editor = ({ onChange, onSubmit, submitting, value, setH, setC }) => (
   <>
     <Form.Item>
       <TextArea rows={4} onChange={onChange} value={value} />
@@ -57,22 +53,27 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 
 let data = {};
 let aryCount = 0;
-let username = "";
 let email = "";
 let synOnlyOne = 0;
-let symNum = 2;
+let symNum = 4;
 
-function Writing({ writingInfo, jobEng, userRN, loginState }) {
+const MemorizedFooter = React.memo(Footer);
+
+function Writing({
+  writingInfo,
+  jobEng,
+  userRN,
+  loginState,
+  setH,
+  setC,
+  job,
+  selectedGroup,
+}) {
   const [comments, setComments] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [value, setValue] = useState("");
   const [dataChanged, setDataChanged] = useState(false);
   const [synCount, setSynCount] = useState(writingInfo.공감);
-
-  const animation1 = useSpring({
-    opacity: 1,
-    from: { opacity: 0 },
-  });
 
   /*
   sunmit function : 
@@ -98,10 +99,6 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
       "0" + date.getMinutes()
     ).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`;
 
-    const docSnapReplyCount = await getDoc(
-      doc(db, jobEng, `${writingInfo.글번호}`)
-    );
-
     aryCount += 1;
 
     let writerName = "";
@@ -120,7 +117,7 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
       setComments([
         ...comments,
         {
-          author: `${writerName}님`,
+          author: `${writerName}`,
           content: value,
           datetime: dateTime,
           actions: [
@@ -184,9 +181,9 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
     }, 1000);
 
     const updateRef = doc(db, jobEng, `${writingInfo.글번호}`);
-    const updateFav = doc(db, "CateNum", jobEng + "Fav");
+    const updateFav = doc(db, `${jobEng}Cate`, jobEng + "Fav");
 
-    const docSnap = await getDoc(doc(db, "CateNum", jobEng + "Fav"));
+    const docSnap = await getDoc(doc(db, `${jobEng}Cate`, jobEng + "Fav"));
 
     await updateDoc(updateRef, {
       replyCount: aryCount,
@@ -245,10 +242,20 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
           if (i === data.reply.length - 1) setComments(data.reply);
         }
         aryCount = data.replyCount;
+        setDataChanged(true);
+
+        //meta data
+        if (job === "") {
+          setH(
+            `${writingInfo.제목.props.children[0].key}-${selectedGroup} 커뮤니티`
+          );
+          setC(`${writingInfo.카테고리}, ${data.content}`);
+        } else {
+          setH(`${writingInfo.제목.props.children[0].key}-${job} 커뮤니티`);
+          setC(`${writingInfo.카테고리}, ${data.content}`);
+        }
       }
     });
-
-    setDataChanged(true);
   };
 
   const onSymClick = async () => {
@@ -279,8 +286,8 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
 
       //공감수 n-1개라면 symNum + 1
       if (data.symCount === symNum) {
-        const docSnap = await getDoc(doc(db, "CateNum", jobEng + "Sym"));
-        const updateCateRef = doc(db, "CateNum", `${jobEng}Sym`);
+        const docSnap = await getDoc(doc(db, `${jobEng}Cate`, jobEng + "Sym"));
+        const updateCateRef = doc(db, `${jobEng}Cate`, `${jobEng}Sym`);
         const updateRef = doc(db, jobEng, `${writingInfo.글번호}`);
 
         await updateDoc(updateCateRef, {
@@ -312,7 +319,7 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
 
   return (
     <>
-      <animated.div className={writing.flex} style={animation1}>
+      <div className={writing.flex}>
         <div>
           <div>
             <div className={writing.heading}>
@@ -369,8 +376,8 @@ function Writing({ writingInfo, jobEng, userRN, loginState }) {
             }
           />
         </div>
-      </animated.div>
-      <Footer />
+      </div>
+      <MemorizedFooter />
     </>
   );
 }

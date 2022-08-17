@@ -4,7 +4,7 @@ function Footer() {
   return (
     <footer className={footer.flex}>
       <div className={footer.item}>
-        Copyright © 2022 workalone. All rights reserved.
+        Copyright © 2022 WorkAlone. All rights reserved.
       </div>
       <div className={footer.item}>문의 : as8798as@gmail.com</div>
       <div className={footer.icon}>
@@ -20,7 +20,7 @@ function Footer() {
         &nbsp;불꽃 아이콘 제작자: DinosoftLabs - Flaticon,
         </a>
         <a href="https://www.flaticon.com/kr/free-icons/" title="함께 아이콘" className={footer.icon}>&nbsp;함께 아이콘  제작자: Good Ware - Flaticon</a>
-        <a href="https://www.flaticon.com/kr/free-icons/-" title="내 프로필 아이콘" className={footer.icon}> &nbsp;내 프로필 아이콘  제작자: Lizel Arina - Flaticon</a>
+        <a href="https://www.flaticon.com/kr/free-icons/" title="프로필 아이콘" className={footer.icon}>&nbsp;프로필 아이콘  제작자: Freepik - Flaticon</a>
       </div>
     </footer>
   );

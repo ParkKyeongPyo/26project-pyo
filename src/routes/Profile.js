@@ -1,14 +1,12 @@
 import styles from "../CSS/login.module.css";
-import { Button, Form, Input, InputNumber, Popover } from "antd";
+import { Button, Form, Input, message } from "antd";
 import "antd/dist/antd.min.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
 import { signOut, updateProfile } from "firebase/auth";
 import { authService } from "../fbase";
-import { db } from "../fbase";
-import { doc, setDoc, getDoc } from "firebase/firestore";
 
 import MenuBar from "../components/MenuBar";
 import Footer from "../components/Footer";
@@ -22,18 +20,10 @@ const layout = {
   },
 };
 
-const validateMessages = {
-  required: "${label} is required!",
-  types: {
-    email: "${label} is not a valid email!",
-    number: "${label} is not a valid number!",
-  },
-  number: {
-    range: "${label} must be between ${min} and ${max}",
-  },
-};
-
 let displayName = "";
+
+const MemorizedMenuBar = React.memo(MenuBar);
+const MemorizedFooter = React.memo(Footer);
 
 function Profile({ loginState }) {
   const [userNickname, setUserNickname] = useState("");
@@ -44,6 +34,15 @@ function Profile({ loginState }) {
     if (e.target.name === "nickname") {
       setUserNickname(e.target.value);
     }
+  };
+
+  const onSubmitFilter = () => {
+    if (
+      userNickname.includes("운영자") &&
+      authService.currentUser.email !== "as8798as@gmail.com"
+    )
+      message.error("운영자가 들어간 닉네임은 사용할 수 없습니다.");
+    else onSave();
   };
 
   const onSubmit = () => {
@@ -84,13 +83,12 @@ function Profile({ loginState }) {
     <div
       style={{ height: "inherit", backgroundColor: "white", color: "black" }}
     >
-      <MenuBar loginState={loginState} />
+      <MemorizedMenuBar loginState={loginState} />
       <div className={styles.flexHome}>
         <Form
           {...layout}
           name="nest-messages"
-          validateMessages={validateMessages}
-          onFinish={onSave}
+          onFinish={onSubmitFilter}
         >
           <Form.Item name={["user", "nickname"]} label="닉네임">
             <Input
@@ -100,10 +98,12 @@ function Profile({ loginState }) {
             />
           </Form.Item>
 
-
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-  
-            <Button type="primary" htmlType="submit" style={{marginTop: "10px"}}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ marginTop: "10px" }}
+            >
               저장
             </Button>
           </Form.Item>
@@ -120,7 +120,7 @@ function Profile({ loginState }) {
           </Form.Item>
         </Form>
       </div>
-      <Footer />
+      <MemorizedFooter />
     </div>
   );
 }

@@ -1,15 +1,12 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { authService } from "../fbase.js";
 import {
   createUserWithEmailAndPassword,
-  getRedirectResult,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
 import {
   GoogleAuthProvider,
-  GithubAuthProvider,
-  signInWithPopup,
   signInWithRedirect,
   setPersistence,
   browserSessionPersistence,
@@ -26,6 +23,11 @@ import NewAccount from "../components/NewAccount.js";
 import Footer from "../components/Footer.js";
 
 import { message } from "antd";
+
+const MemorizedMenuBar = React.memo(MenuBar);
+const MemorizedFooter = React.memo(Footer);
+const MemorizedLoginCom = React.memo(LoginCom);
+const MemorizedNewAccount = React.memo(NewAccount);
 
 const Login = ({ loginState }) => {
   const [email, setEmail] = useState("");
@@ -53,8 +55,7 @@ const Login = ({ loginState }) => {
         })
         .catch((error) => {
           // Handle Errors here.
-          const errorCode = error.code;
-          const errorMessage = error.message;
+          message.error("오류가 발생했습니다. 다시 로그인해주세요.")
         });
     } else {
       setPersistence(authService, browserLocalPersistence)
@@ -69,15 +70,13 @@ const Login = ({ loginState }) => {
         })
         .catch((error) => {
           // Handle Errors here.
-          const errorCode = error.code;
-          const errorMessage = error.message;
+          message.error("오류가 발생했습니다. 다시 로그인해주세요.")
         });
     }
   };
 
   //Login Submit Event process
   const onSubmitAccount = async (e) => {
-   
     //새 계정 만드는 처리
     await createUserWithEmailAndPassword(authService, email, password)
       .then((userCredential) => {
@@ -96,7 +95,6 @@ const Login = ({ loginState }) => {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
         if (errorCode === "auth/invalid-email") {
           message.error(
             "이메일 형식이 아닙니다. 입력하신 내용을 다시 확인해주세요."
@@ -124,7 +122,6 @@ const Login = ({ loginState }) => {
         .catch((error) => {
           // Handle Errors here.
           const errorCode = error.code;
-          const errorMessage = error.message;
           if (errorCode === "auth/invalid-email") {
             message.error(
               "이메일 형식이 아닙니다. 입력하신 내용을 다시 확인해주세요."
@@ -197,10 +194,10 @@ const Login = ({ loginState }) => {
 
   return (
     <>
-      <MenuBar loginState={loginState} />
+      <MemorizedMenuBar loginState={loginState} />
       <div className={styles.loginPage}>
         {newAccount ? (
-          <NewAccount
+          <MemorizedNewAccount
             onSubmitAccount={onSubmitAccount}
             onChange={onChange}
             onSwitch={onSwitch}
@@ -209,7 +206,7 @@ const Login = ({ loginState }) => {
             onSubmitGoogle={onSubmitGoogle}
           />
         ) : (
-          <LoginCom
+          <MemorizedLoginCom
             onSubmitLogin={onSubmitLogin}
             onChange={onChange}
             onSwitch={onSwitch}
@@ -220,7 +217,7 @@ const Login = ({ loginState }) => {
           />
         )}
       </div>
-      <Footer />
+      <MemorizedFooter />
     </>
   );
 };

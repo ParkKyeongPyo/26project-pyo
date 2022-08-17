@@ -1,12 +1,16 @@
-import { textAlign } from "@mui/system";
-import { Button, Checkbox, Form, Input, message } from "antd";
+import { Button, Form, Input } from "antd";
 import "antd/dist/antd.min.css";
 import React from "react";
 
 import styles from "../CSS/login.module.css";
 
-function NewAccount({ onSubmitAccount, onChange, onSwitch, onFinishFailed, onSubmitGoogle }) {
-
+function NewAccount({
+  onSubmitAccount,
+  onChange,
+  onSwitch,
+  onFinishFailed,
+  onSubmitGoogle,
+}) {
   return (
     <div className={styles.flex}>
       <Form
@@ -64,7 +68,9 @@ function NewAccount({ onSubmitAccount, onChange, onSwitch, onFinishFailed, onSub
           <Input onChange={onChange} />
         </Form.Item>
 
-        <div className={styles.message}>*닉네임은 추후 프로필에서 수정할 수 있습니다.</div>
+        <div className={styles.message}>
+          *닉네임은 추후 프로필에서 수정할 수 있습니다.
+        </div>
 
         <Form.Item
           wrapperCol={{
@@ -89,7 +95,9 @@ function NewAccount({ onSubmitAccount, onChange, onSwitch, onFinishFailed, onSub
               alt="Google sign-in"
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
             />
-            <span style={{marginLeft: "10px", verticalAlign: "middle"}}>Coninue with google</span>
+            <span style={{ marginLeft: "10px", verticalAlign: "middle" }}>
+              Coninue with google
+            </span>
           </Button>
         </Form.Item>
 

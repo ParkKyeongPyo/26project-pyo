@@ -1,35 +1,38 @@
-import { Link } from "react-router-dom";
 import MenuBar from "../components/MenuBar";
-import menuStyles from "../CSS/homeMenu.module.css";
 import Jobchosing from "../components/Jobchosing";
-import FloatingBtn from "../components/FloatingBtn";
-import { SettingsBrightness } from "@mui/icons-material";
 import Footer from "../components/Footer";
 
+import React, { useEffect } from "react";
 
 function Home({
   loginState,
-  selectedJob,
   setSelectedJob,
   setSelectedJobEng,
   setSelectedGroup,
   selectedGroup,
-  night,
-  setNight
+  setH,
+  setC,
+  setJ,
 }) {
+  useEffect(() => {
+    setH("혼자번당-혼자 일하는 모든 분들을 위한 커뮤니티");
+    setC("혼자 일하는 모든 프리랜서,크리에이터, 자영업자 커뮤니티");
+  }, []);
+
+  const MemorizedMenuBar= React.memo(MenuBar);
+  const MemorizedFooter= React.memo(Footer);
 
   return (
     <div>
-      <MenuBar loginState={loginState} night={night}/>
+      <MemorizedMenuBar loginState={loginState} />
       <Jobchosing
-        selectedJob={selectedJob}
         setSelectedJob={setSelectedJob}
-        loginState={loginState}
         setSelectedJobEng={setSelectedJobEng}
         setSelectedGroup={setSelectedGroup}
         selectedGroup={selectedGroup}
+        setJ={setJ}
       />
-      <Footer/>
+      <MemorizedFooter />
     </div>
   );
 }

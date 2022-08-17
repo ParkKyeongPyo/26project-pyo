@@ -1,16 +1,16 @@
 import * as React from "react";
-import { useState } from "react";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import Brightness3Icon from "@mui/icons-material/Brightness3";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import BedtimeRoundedIcon from "@mui/icons-material/BedtimeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
+import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import HomeIcon from "@mui/icons-material/Home";
 
 import float from "../CSS/float.module.css";
 
 import { useNavigate } from "react-router-dom";
+import { message } from "antd";
 
 function FloatingBtn2({ night, setNight, setWrite, setWriting, setCommunity }) {
   const body = document.querySelector("body");
@@ -39,6 +39,9 @@ function FloatingBtn2({ night, setNight, setWrite, setWriting, setCommunity }) {
     navigate("/");
   };
 
+  const onMobileClick = () => {
+    message.info("모바일 버전은 추후 업데이트 될 예정입니다!")
+  };
 
   return (
     <Box className={float.flex} sx={{ "& > :not(style)": { m: 1 } }}>
@@ -54,6 +57,9 @@ function FloatingBtn2({ night, setNight, setWrite, setWriting, setCommunity }) {
         ) : (
           <LightModeRoundedIcon onClick={onSwitchClick} />
         )}
+      </Fab>
+      <Fab size="small" aria-label="like" onClick={onMobileClick}>
+        <PhoneIphoneIcon/>
       </Fab>
     </Box>
   );
