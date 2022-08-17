@@ -17,7 +17,7 @@ function FAQ({ night, setNight, loginState }) {
         <div className={faq.heading}>Q. 에러/오류가 있어요.</div>
         <div>
           A. 현재 테스트 기간이라 에러/오류가 잦을 수 있는 점 양해 부탁드립니다.
-          오류/건의사항 탭에서 운영자에게 메세지를 보내주시면 됩니다.
+          오류/건의사항 탭에서 운영자에게 메세지를 보내주시면 운영에 큰 도움이 됩니다. (로그인 유저만 가능)
         </div>
 
         <br />
@@ -50,7 +50,7 @@ function FAQ({ night, setNight, loginState }) {
         </div>
         <div>
           A. 건의사항은 에러/건의사항 탭에서 운영자에게 메세지를 보내주시면
-          됩니다.
+          됩니다. (로그인 유저만 가능)
         </div>
 
         <br />
@@ -58,7 +58,7 @@ function FAQ({ night, setNight, loginState }) {
 
         <div className={faq.heading}>Q. 꼭 회원가입을 해야하나요?</div>
         <div>
-          A. 로그인한 유저는 내 글보기 기능, 공감 기능을 이용하실 수 있습니다.
+          A. 로그인한 유저는 내 글보기, 공감, 에러/건의사항 탭을 이용하실 수 있습니다.
         </div>
       </div>
       <MemorizedFooter />
