@@ -29,7 +29,6 @@ function Community({
       <MemorizedCommunityMenuBar
         job={selectedJob}
         selectedGroup={selectedGroup}
-        loginState={loginState}
       />
       <MemorizedCommunityFrame
         job={selectedJob}

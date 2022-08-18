@@ -5,7 +5,6 @@ import Footer from "../components/Footer";
 import React, { useEffect } from "react";
 
 function Home({
-  loginState,
   setSelectedJob,
   setSelectedJobEng,
   setSelectedGroup,
@@ -24,7 +23,7 @@ function Home({
 
   return (
     <div>
-      <MemorizedMenuBar loginState={loginState} />
+      <MemorizedMenuBar/>
       <Jobchosing
         setSelectedJob={setSelectedJob}
         setSelectedJobEng={setSelectedJobEng}

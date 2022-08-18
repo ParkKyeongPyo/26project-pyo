@@ -110,7 +110,7 @@ function Jobchosing({
   return (
     <div style={{ height: "inherit", marginLeft: "auto", marginRight: "auto" }}>
       <animated.div style={animation1} className={common.flexRowh2}>
-        "혼자번당은 대한민국에서 혼자 일하는 모든 분들을 위한 커뮤니티입니다"
+        "혼자번당은 대한민국에서 혼자 일하는 모든 프리랜서, 크리에이터, 자영업자분들을 위한 커뮤니티입니다"
       </animated.div>
 
       <animated.div style={animation2} className={common.flexRowMiddle}>
@@ -118,7 +118,7 @@ function Jobchosing({
       </animated.div>
       <animated.div style={animation3}>
         <div className={common.imgFlex}>
-          <img alt="워크얼론 로고" className={common.img} src="img/logo2.png" />
+          <img alt="혼자당" className={common.img} src="img/logonew.png" />
         </div>
         <div className={common.flexRow}>
           <Segmented
@@ -144,7 +144,7 @@ function Jobchosing({
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="dev"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -162,7 +162,7 @@ function Jobchosing({
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="dsn"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -173,7 +173,7 @@ function Jobchosing({
 
                   <Link
                     title="wit"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -183,7 +183,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="wton"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -193,7 +193,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="cpr"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -211,7 +211,7 @@ function Jobchosing({
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="rpo"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -221,7 +221,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="trans"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -231,7 +231,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="inter"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -241,7 +241,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="copy"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -259,7 +259,7 @@ function Jobchosing({
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="tch"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -269,7 +269,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="psy"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -287,7 +287,7 @@ function Jobchosing({
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="vdo"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -297,7 +297,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="pic"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -307,7 +307,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="vce"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -325,7 +325,7 @@ function Jobchosing({
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="ket"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -335,7 +335,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="sul"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -353,7 +353,7 @@ function Jobchosing({
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="act"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -363,7 +363,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="mdl"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -373,7 +373,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="up"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -383,7 +383,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="hair"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -393,7 +393,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="htr"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -419,7 +419,7 @@ function Jobchosing({
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="wbap"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -429,7 +429,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="smt"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -439,7 +439,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="shop"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -457,7 +457,7 @@ function Jobchosing({
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="tube"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -467,7 +467,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="istar"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -477,7 +477,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="tik"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -487,7 +487,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="blog"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -497,7 +497,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="perb"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -507,7 +507,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="broad"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -533,7 +533,7 @@ function Jobchosing({
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="din"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -543,7 +543,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="cof"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -553,7 +553,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="dsrt"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -563,7 +563,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="acol"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -573,7 +573,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="franc"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -591,7 +591,7 @@ function Jobchosing({
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="mini"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -601,7 +601,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="none"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -611,7 +611,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="study"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -621,7 +621,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="pc"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -631,7 +631,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="sing"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -649,7 +649,7 @@ function Jobchosing({
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="health"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -659,7 +659,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="hshop"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -669,7 +669,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="nail"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -679,7 +679,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="phone"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -689,7 +689,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="cloth"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -707,7 +707,7 @@ function Jobchosing({
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="test"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -717,7 +717,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="exer"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -727,7 +727,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="art"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}
@@ -737,7 +737,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="sing"
-                    to="/community"
+                    to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
                     onMouseOver={onGroupMouseOver}

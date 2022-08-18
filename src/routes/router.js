@@ -7,13 +7,14 @@ import GroupCommunity from "../routes/GroupCommunity";
 import FAQ from "../routes/FAQ";
 import Feedback from "../routes/Feedback";
 import React from "react";
+import Honjadang from "./Honjadang";
 
 import { useState, useEffect } from "react";
 
 import { onAuthStateChanged } from "firebase/auth";
-import { authService} from "../fbase";
+import { authService } from "../fbase";
 
-function RouterCom({ setH, setC, setJ }) {
+function RouterCom({ setH, setC, setJ, setD }) {
   const [loginState, setLoginState] = useState(false);
   const [selectedGroup, setSelectedGroup] = useState("프리랜서");
   const [selectedJob, setSelectedJob] = useState(sessionStorage.getItem("job"));
@@ -91,55 +92,11 @@ function RouterCom({ setH, setC, setJ }) {
         <Route
           path="/"
           element={
-            <Home
+            <Honjadang
               loginState={loginState}
-              setSelectedJob={setSelectedJob}
-              setSelectedJobEng={setSelectedJobEng}
-              setSelectedGroup={setSelectedGroup}
-              selectedGroup={selectedGroup}
               setH={setH}
               setC={setC}
-              setJ={setJ}
-            />
-          }
-        ></Route>
-        <Route
-          path="/login"
-          element={<Login loginState={loginState} />}
-        ></Route>
-        <Route
-          path="/profile"
-          element={<Profile loginState={loginState} />}
-        ></Route>
-        <Route
-          path="/community"
-          element={
-            <Community
-              selectedJob={selectedJob}
-              selectedGroup={selectedGroup}
-              selectedJobEng={selectedJobEng}
-              night={night}
-              setNight={setNight}
-              loginState={loginState}
-              userRN={userRN}
-              setH={setH}
-              setC={setC}
-            />
-          }
-        ></Route>
-        <Route
-          path="/groupCommunity"
-          element={
-            <GroupCommunity
-              selectedJob={selectedJob}
-              selectedGroup={selectedGroup}
-              selectedJobEng={selectedJobEng}
-              night={night}
-              setNight={setNight}
-              loginState={loginState}
-              userRN={userRN}
-              setH={setH}
-              setC={setC}
+              setD={setD}
             />
           }
         ></Route>
@@ -156,6 +113,63 @@ function RouterCom({ setH, setC, setJ }) {
               night={night}
               setNight={setNight}
               loginState={loginState}
+            />
+          }
+        ></Route>
+        <Route
+          path="/login"
+          element={<Login loginState={loginState} />}
+        ></Route>
+        <Route
+          path="/profile"
+          element={<Profile loginState={loginState} />}
+        ></Route>
+      </Routes>
+      <Routes>
+        <Route
+          path="/honjabundang"
+          element={
+            <Home
+              loginState={loginState}
+              setSelectedJob={setSelectedJob}
+              setSelectedJobEng={setSelectedJobEng}
+              setSelectedGroup={setSelectedGroup}
+              selectedGroup={selectedGroup}
+              setH={setH}
+              setC={setC}
+              setJ={setJ}
+            />
+          }
+        ></Route>
+        <Route
+          path="/honjabundang/community"
+          element={
+            <Community
+              selectedJob={selectedJob}
+              selectedGroup={selectedGroup}
+              selectedJobEng={selectedJobEng}
+              night={night}
+              setNight={setNight}
+              loginState={loginState}
+              userRN={userRN}
+              setH={setH}
+              setC={setC}
+            />
+          }
+        ></Route>
+        <Route
+          path="/honjabundang/groupCommunity"
+          element={
+            <GroupCommunity
+              selectedJob={selectedJob}
+              selectedGroup={selectedGroup}
+              selectedJobEng={selectedJobEng}
+              night={night}
+              setNight={setNight}
+              loginState={loginState}
+              userRN={userRN}
+              setH={setH}
+              setC={setC}
             />
           }
         ></Route>

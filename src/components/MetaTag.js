@@ -1,10 +1,13 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 
-function MetaTag({ heading, content, job }) {
-  let defaults = "커뮤니티, 워크어론, WorkAlone, Work Alone ";
+function MetaTag({ heading, content, job, dang }) {
+  let defaults = "커뮤니티, 혼자당";
   let keywords = "";
   let temp = "";
+
+  if(dang === "홈") defaults = "커뮤니티, 혼자당";
+  else if(dang === "혼자번당") defaults = "커뮤니티, 혼자당, 혼자번당";
 
   if (job !== "") {
     switch (job) {

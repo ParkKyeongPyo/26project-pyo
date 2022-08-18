@@ -1,26 +1,57 @@
 import footer from "../CSS/footer.module.css";
 
+import { Popover } from "antd";
+
 function Footer() {
-  return (
-    <footer className={footer.flex}>
-      <div className={footer.item}>
-        Copyright © 2022 WorkAlone. All rights reserved.
-      </div>
-      <div className={footer.item}>문의 : as8798as@gmail.com</div>
-      <div className={footer.icon}>
-        아이콘 :&nbsp; 
+  const content = () => {
+    return (
+      <>
         <a
-        className={footer.icon}
+          className={footer.icon}
           href="https://www.flaticon.com/kr/free-icons/-"
           title="특히 잘하는 아이콘"
         >
           특히 잘하는 아이콘 제작자: Freepik - Flaticon,
         </a>
-        <a href="https://www.flaticon.com/kr/free-icons/" title="불꽃 아이콘" className={footer.icon}>
-        &nbsp;불꽃 아이콘 제작자: DinosoftLabs - Flaticon,
+        <a
+          href="https://www.flaticon.com/kr/free-icons/"
+          title="불꽃 아이콘"
+          className={footer.icon}
+        >
+          &nbsp;불꽃 아이콘 제작자: DinosoftLabs - Flaticon,
         </a>
-        <a href="https://www.flaticon.com/kr/free-icons/" title="함께 아이콘" className={footer.icon}>&nbsp;함께 아이콘  제작자: Good Ware - Flaticon</a>
-        <a href="https://www.flaticon.com/kr/free-icons/" title="프로필 아이콘" className={footer.icon}>&nbsp;프로필 아이콘  제작자: Freepik - Flaticon</a>
+        <a
+          href="https://www.flaticon.com/kr/free-icons/"
+          title="함께 아이콘"
+          className={footer.icon}
+        >
+          &nbsp;함께 아이콘 제작자: Good Ware - Flaticon
+        </a>
+        <a
+          href="https://www.flaticon.com/kr/free-icons/"
+          title="프로필 아이콘"
+          className={footer.icon}
+        >
+          &nbsp;프로필 아이콘 제작자: Freepik - Flaticon
+        </a>
+      </>
+    );
+  };
+
+  return (
+    <footer className={footer.flex}>
+      <div className={footer.item}>
+        Copyright © 2022.08. 혼자당. All rights reserved.
+      </div>
+      <div className={footer.item}>
+        혼자당 홈페이지 무단 도용 및 관련 저작권 침해시 법적 조취를 받을 수
+        있습니다.
+      </div>
+      <div className={footer.item}>문의 : as8798as@gmail.com</div>
+      <div className={footer.icon}>
+        <Popover content={content} title="아이콘 저작권자" trigger="hover">
+          아이콘 저작권 (화살표 올리면 표시)
+        </Popover>
       </div>
     </footer>
   );

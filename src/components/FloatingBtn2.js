@@ -36,7 +36,7 @@ function FloatingBtn2({ night, setNight, setWrite, setWriting, setCommunity }) {
 
   //홈 Floating 버튼 클릭 처리 함수
   const onHomeClick = () => {
-    navigate("/");
+    navigate("/honjabundang");
   };
 
   const onMobileClick = () => {

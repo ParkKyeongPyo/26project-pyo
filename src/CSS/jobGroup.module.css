@@ -7,6 +7,15 @@
   color: black;
 }
 
+.dang{
+  background-color: #e5e7eb;
+  padding: 4px 20px 4px 20px;
+  border-radius: 20px;
+  border: 1px solid white;
+  color: black;
+  margin: 10px 0 5px 0;
+}
+
 .groupFlex {
   display: flex;
   flex-direction: row;
@@ -21,6 +30,15 @@
   justify-content: center;
   color: inherit;
   background-color: inherit;
+}
+
+.hashtag {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: inherit;
+  background-color: inherit;
+  margin-bottom: 10px;
 }
 
 .groupTop {

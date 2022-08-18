@@ -12,20 +12,22 @@ function App() {
   const [h, setH] = useState("");
   const [c, setC] = useState("");
   const [j, setJ] = useState("");
+  const [d, setD] = useState("");
 
   return (
     <div style={{ height: "inherit" }}>
       {j === "" && h === "" && c === "" ? (
         <Helmet>
-          <title>혼자번당</title>
+          <title>혼자당</title>
         </Helmet>
-      ) : <MetaTag heading={h} content={c} job={j}/>}
+      ) : <MetaTag heading={h} content={c} job={j} dang={d}/>}
 
       <MemorizedRouterCom
         style={{ height: "auto" }}
         setH={setH}
         setC={setC}
         setJ={setJ}
+        setD={setD}
       />
     </div>
   );
