@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/26project-pyo/static/css/main.8ade2e41.css",
-    "main.js": "/26project-pyo/static/js/main.57c31389.js",
+    "main.css": "/26project-pyo/static/css/main.273a80d6.css",
+    "main.js": "/26project-pyo/static/js/main.8d074295.js",
     "index.html": "/26project-pyo/index.html",
-    "main.8ade2e41.css.map": "/26project-pyo/static/css/main.8ade2e41.css.map",
-    "main.57c31389.js.map": "/26project-pyo/static/js/main.57c31389.js.map"
+    "main.273a80d6.css.map": "/26project-pyo/static/css/main.273a80d6.css.map",
+    "main.8d074295.js.map": "/26project-pyo/static/js/main.8d074295.js.map"
   },
   "entrypoints": [
-    "static/css/main.8ade2e41.css",
-    "static/js/main.57c31389.js"
+    "static/css/main.273a80d6.css",
+    "static/js/main.8d074295.js"
   ]
 }
