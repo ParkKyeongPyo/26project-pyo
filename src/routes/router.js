@@ -103,15 +103,13 @@ function RouterCom({ setH, setC, setJ, setD }) {
         <Route
           path="/FAQ"
           element={
-            <FAQ night={night} setNight={setNight} loginState={loginState} />
+            <FAQ  loginState={loginState} />
           }
         ></Route>
         <Route
           path="/Feedback"
           element={
             <Feedback
-              night={night}
-              setNight={setNight}
               loginState={loginState}
             />
           }

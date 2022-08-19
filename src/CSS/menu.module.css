@@ -10,6 +10,7 @@
     background-color: #232F3E;
     color: white;
     width: 100%;
+    font-family: 'SDSamliphopangche_Outline';
 }
 
 .flexMobile{
@@ -29,17 +30,22 @@
 }
 
 .flexItem{
-    padding: 13px 12px 7px 12px;
+    padding: 10px 12px 10px 12px;
 }
 
 .logo{
     padding: 10px 12px 10px 0;
-    font-family: 'PyeongChangPeace-Light';
+
+    
+}
+.logoMargin{
+    padding: 10px 12px 10px 12px;
     
 }
 
+
 .flexItemLast{
-    padding: 13px 0 7px 15px;
+    padding: 10px 0 10px 15px;
     margin-left: auto;
 }
 

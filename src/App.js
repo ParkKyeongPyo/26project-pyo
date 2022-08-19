@@ -1,10 +1,9 @@
 import RouterCom from "./routes/router";
-import React from 'react';
 
 import { Helmet } from "react-helmet-async";
 import MetaTag from "./components/MetaTag";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 const MemorizedRouterCom = React.memo(RouterCom);
 

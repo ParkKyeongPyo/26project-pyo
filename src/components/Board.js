@@ -532,8 +532,6 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
     await getListAllFirst(1);
   };
 
-  console.log("render");
-
   useEffect(() => {
     data = [];
     asyncFn();

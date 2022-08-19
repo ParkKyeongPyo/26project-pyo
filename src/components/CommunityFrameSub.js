@@ -1,8 +1,7 @@
 import styles from "../CSS/login.module.css";
 import Board from "../components/Board.js";
 
-import { useEffect } from "react";
-import React from "react";
+import React, { useEffect } from "react";
 
 import Footer from "./Footer";
 

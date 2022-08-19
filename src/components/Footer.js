@@ -34,6 +34,28 @@ function Footer() {
         >
           &nbsp;프로필 아이콘 제작자: Freepik - Flaticon
         </a>
+        <br />
+        <a
+          href="https://www.flaticon.com/kr/free-icons/"
+          className={footer.icon}
+          title="아파트 아이콘"
+        >
+          아파트 아이콘 제작자: Darius Dan - Flaticon
+        </a>
+        <a
+          href="https://www.flaticon.com/kr/free-icons/"
+          className={footer.icon}
+          title="바닷가 아이콘"
+        >
+          바닷가 아이콘 제작자: Flat Icons - Flaticon
+        </a>
+        <a
+          href="https://www.flaticon.com/kr/free-icons/"
+          className={footer.icon}
+          title="일 아이콘"
+        >
+          일 아이콘 제작자: Flat Icons - Flaticon
+        </a>
       </>
     );
   };
@@ -44,13 +66,13 @@ function Footer() {
         Copyright © 2022.08. 혼자당. All rights reserved.
       </div>
       <div className={footer.item}>
-        혼자당 홈페이지 무단 도용 및 관련 저작권 침해시 법적 조취를 받을 수
+        혼자당 홈페이지 무단 도용 및 관련 저작권 침해시 법적 조치를 받을 수
         있습니다.
       </div>
       <div className={footer.item}>문의 : as8798as@gmail.com</div>
       <div className={footer.icon}>
-        <Popover content={content} title="아이콘 저작권자" trigger="hover">
-          아이콘 저작권 (화살표 올리면 표시)
+        <Popover content={content} iconItem title="아이콘 저작권자" trigger="hover">
+          아이콘 저작권 
         </Popover>
       </div>
     </footer>

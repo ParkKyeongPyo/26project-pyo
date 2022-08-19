@@ -17,11 +17,11 @@ import { useSpring, useSpringRef, animated, useChain } from "react-spring";
 
 function DangChosing({ setD }) {
   const onGroupMouseOver = (e) => {
-    e.target.className = groupStyles.mouseOver;
+    e.target.className = groupStyles.mouseOverDang;
   };
 
   const onGroupMouseOut = (e) => {
-    e.target.className = groupStyles.group;
+    e.target.className = groupStyles.dang;
   };
 
   const onDangClick = (e) => {
@@ -62,18 +62,18 @@ function DangChosing({ setD }) {
       </animated.div>
 
       <animated.div style={animation2} className={common.flexRowMiddle}>
-        같은 상황의 혼자인 사람들과 소통하고 배우고 나누며 성장해보세요!
+        원하는 커뮤니티에서 활동해 보세요!
       </animated.div>
       <animated.div style={animation3}>
         <div className={common.imgFlex}>
-          <img alt="혼자당" className={common.img} src="img/logonew.png" />
+          <img alt="혼자당" className={common.img} src="img/honjadang.png" />
         </div>
 
         <div className={styles.flexHome}>
           <div className={groupStyles.groupFlex}>
             <div className={groupStyles.groupTopCreater}>
               <h3 className={groupStyles.groupFlexCreater}>
-                혼자 일하는 모든 분들을 위한 커뮤니티
+                {`<혼자 일하는 모든 분들을 위한 커뮤니티>`}
               </h3>
               <div className={groupStyles.hashtag}>
                 #프리랜서 #크리에이터 #자영업자
@@ -102,7 +102,7 @@ function DangChosing({ setD }) {
           <div className={groupStyles.groupFlex}>
             <div className={groupStyles.groupTopCreater}>
               <h3 className={groupStyles.groupFlexCreater}>
-                혼자 사는 모든 분들을 위한 커뮤니티
+                {`<혼자 사는 모든 분들을 위한 커뮤니티>`}
               </h3>
               <div className={groupStyles.hashtag}>
                 #부동산 #부동산투자 #자취 #생활
@@ -131,7 +131,7 @@ function DangChosing({ setD }) {
           <div className={groupStyles.groupFlex}>
             <div className={groupStyles.groupTopCreater}>
               <h3 className={groupStyles.groupFlexCreater}>
-                혼자 여행가는 모든 분들을 위한 커뮤니티{" "}
+                {`<혼자 여행가는 모든 분들을 위한 커뮤니티>`}
               </h3>
               <div className={groupStyles.hashtag}>
                 #국내여행 #해외여행 #휴가

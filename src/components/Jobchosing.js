@@ -110,7 +110,7 @@ function Jobchosing({
   return (
     <div style={{ height: "inherit", marginLeft: "auto", marginRight: "auto" }}>
       <animated.div style={animation1} className={common.flexRowh2}>
-        "혼자번당은 대한민국에서 혼자 일하는 모든 프리랜서, 크리에이터, 자영업자분들을 위한 커뮤니티입니다"
+        "혼자번당은 대한민국에서 혼자 일하는 모든 분들을 위한 커뮤니티입니다"
       </animated.div>
 
       <animated.div style={animation2} className={common.flexRowMiddle}>
@@ -118,7 +118,7 @@ function Jobchosing({
       </animated.div>
       <animated.div style={animation3}>
         <div className={common.imgFlex}>
-          <img alt="혼자당" className={common.img} src="img/logonew.png" />
+          <img alt="혼자당" className={common.img} src="img/work.png" />
         </div>
         <div className={common.flexRow}>
           <Segmented

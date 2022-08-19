@@ -1,5 +1,5 @@
 import { Input, Button, message } from "antd";
-import MenuBar from "../components/MenuBar";
+import MenuBarHome from "../components/MenuBarHome";
 import Footer from "../components/Footer";
 
 import { db } from "../fbase.js";
@@ -12,10 +12,10 @@ import { useNavigate } from "react-router-dom";
 import fb from "../CSS/feedback.module.css";
 const { TextArea } = Input;
 
-const MemorizedMenuBar = React.memo(MenuBar);
+const MemorizedMenuBarHome = React.memo(MenuBarHome);
 const MemorizedFooter = React.memo(Footer);
 
-function Feedback({ night, setNight, loginState }) {
+function Feedback({ loginState }) {
 
   const [content, setContent] = useState("");
 
@@ -38,7 +38,7 @@ function Feedback({ night, setNight, loginState }) {
 
   return (
     <div className={fb.inherit}>
-      <MemorizedMenuBar loginState={loginState} />
+      <MemorizedMenuBarHome loginState={loginState} />
       <div className={fb.flex}>
         <div className={fb.h}>*에러/오류 및 건의사항*</div>
         <div className={fb.h2}>
@@ -50,10 +50,9 @@ function Feedback({ night, setNight, loginState }) {
         </div>
         <div className={fb.h3}>1. 에러/오류 사항</div>
         <div className={fb.h3}>
-          2. 건의사항(이런 직업 추가됐으면 좋겠습니다, 이런 기능 있었으면 좋겠습니다
-          등등)
+          2. 건의사항 (이런 커뮤니티가 추가됐으면 좋겠습니다, 혼자번당에서 이런 직업 추가됐으면 좋겠습니다 등등)
         </div>
-        <TextArea className={fb.textArea} rows={4} onChange={onChange} />
+        <TextArea className={fb.textArea} placeholder="운영자에게 메세지 보내기" rows={4} onChange={onChange} />
         <Button className={fb.btn} type="primary" onClick={onClick}>
           보내기
         </Button>

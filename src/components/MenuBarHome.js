@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 import menu from "../CSS/menu.module.css";
@@ -10,7 +9,6 @@ const MenuBarHome = ({ loginState }) => {
         <div className={menu.menuDetail}>
           <span className={menu.logo}>
             <Link to="/">
-              <img alt="혼자당" style={{ width: "30px", height: "30px" }} src="img/logonew.png" />
               혼자당
             </Link>
           </span>
@@ -32,8 +30,7 @@ const MenuBarHome = ({ loginState }) => {
         <div className={menu.menuDetail}>
           <span className={menu.logo}>
             <Link to="/">
-              <img alt="혼자당" style={{ width: "30px", height: "30px" }} src="img/logonew.png" />
-              혼자당
+             혼자당
             </Link>
           </span>
           <span className={menu.flexItem}>

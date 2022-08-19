@@ -1,6 +1,5 @@
 import { Button, Form, Input } from "antd";
 import "antd/dist/antd.min.css";
-import React from "react";
 
 import styles from "../CSS/login.module.css";
 

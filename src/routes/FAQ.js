@@ -1,17 +1,17 @@
-import MenuBar from "../components/MenuBar";
+import MenuBarHome from "../components/MenuBarHome";
 import Footer from "../components/Footer";
 
 import faq from "../CSS/faq.module.css";
 
 import React from "react";
 
-const MemorizedMenuBar = React.memo(MenuBar);
+const MemorizedMenuBarHome = React.memo(MenuBarHome);
 const MemorizedFooter = React.memo(Footer);
 
-function FAQ({ night, setNight, loginState }) {
+function FAQ({ loginState }) {
   return (
     <div>
-      <MemorizedMenuBar loginState={loginState} />
+      <MemorizedMenuBarHome loginState={loginState} />
 
       <div className={faq.flex}>
         <div className={faq.heading}>Q. 에러/오류가 있어요.</div>
