@@ -7,21 +7,21 @@ const CommunityMenuBar = ({ job, selectedGroup }) => {
     <div className={menu.flexMenus}>
       <div className={menu.menuDetail}>
         <span className={menu.logo}>
-          <Link to="/">
-            혼자당
-          </Link>
+          <Link to="/">혼자당</Link>
         </span>
         <span className={menu.logoMargin}>
-          <Link to="/honjabundang">
-            혼자번당
-          </Link>
+          <Link to="/honjabundang">혼자번당</Link>
         </span>
-        <span className={menu.flexItem}>
-          <Link to="/honjabundang/groupCommunity">All {selectedGroup}</Link>
-        </span>
-        <span className={menu.flexItem}>
-          <Link to="/honjabundang/community">{job}</Link>
-        </span>
+        {job !== selectedGroup && (
+          <>
+            <span className={menu.flexItem}>
+              <Link to="/honjabundang/groupCommunity">{selectedGroup}</Link>
+            </span>
+            <span className={menu.flexItem}>
+              <Link to="/honjabundang/community">{job}</Link>
+            </span>
+          </>
+        )}
       </div>
     </div>
   );

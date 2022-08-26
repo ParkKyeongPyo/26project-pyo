@@ -8,11 +8,16 @@ import FAQ from "../routes/FAQ";
 import Feedback from "../routes/Feedback";
 import React from "react";
 import Honjadang from "./Honjadang";
+import Weeckly from "./Weeckly";
+import ComWrite from "./ComWrite";
+import ComWriting from "./ComWriting";
 
 import { useState, useEffect } from "react";
 
 import { onAuthStateChanged } from "firebase/auth";
-import { authService } from "../fbase";
+import { authService, db } from "../fbase";
+
+import { setDoc, doc } from "firebase/firestore";
 
 function RouterCom({ setH, setC, setJ, setD }) {
   const [loginState, setLoginState] = useState(false);
@@ -23,6 +28,8 @@ function RouterCom({ setH, setC, setJ, setD }) {
   );
   const [night, setNight] = useState(true);
   const [userRN, setUserRN] = useState("");
+  const [weeklyNum, setWeeklyNum] = useState(0);
+  const [writingNum, setWritingNum] = useState("");
 
   useEffect(() => {
     //Auth state observer
@@ -36,7 +43,7 @@ function RouterCom({ setH, setC, setJ, setD }) {
         setLoginState(false);
       }
 
-      //dbMaker2();
+      //dbMaker3();
     });
 
     if (!loginState) {
@@ -48,39 +55,85 @@ function RouterCom({ setH, setC, setJ, setD }) {
 
   //const free = ["dev","dsn", "wit", "wton", "cpr", "rpo", "trans", "inter", "copy", "tch", "psy", "vdo", "pic", "vce", "ket", "sul", "act", "mdl", "up", "hair", "htr"];
   //const creator = ["wbap", "smt", "shop", "tube", "istar", "tik", "blog", "perb", "broad"];
-  //const seller = ["din", "cof", "dsrt", "acol", "franc", "mini", "none", "study", "pc", "sing", "health", "hshop", "nail", "phone", "cloth", "test", "exer", "art", "sing"]
-  //const group = ["allFree", "allCrea", "allSelf"]
+  /*const seller = [
+    "din",
+    "cof",
+    "dsrt",
+    "acol",
+    "franc",
+    "mini",
+    "none",
+    "study",
+    "pc",
+    "sing",
+    "health",
+    "hshop",
+    "nail",
+    "phone",
+    "cloth",
+    "test",
+    "exer",
+    "art",
+    "sing",
+  ];*/
+  //const group = ["allFree", "allCrea", "allSelf"];
 
   //const freeCate = ["Fav", "Sym", "QA", "Info", "Ex", "Re", "Rev", "Stu", "Tax"];
   //const creatorCate = ["Fav", "Sym", "QA", "Info", "Ex", "Re", "Rev", "Tax", "Man", "Coo"];
-  //const SellerCate = ["Fav", "Sym", "QA", "Info", "Ex", "Re", "Rev", "Tax", "Man", "Emp"];
+  /*const SellerCate = [
+    "Fav",
+    "Sym",
+    "QA",
+    "Info",
+    "Ex",
+    "Re",
+    "Rev",
+    "Tax",
+    "Man",
+    "Emp",
+  ];*/
 
   /*const dbMaker = async () => {
+    for (let i = 0; i < group.length; i++) {
+      
+        await setDoc(doc(db, '혼자번당', `${creator[i]}Cate`), {
+          [`${creator[i]}Fav`]: 1,
+          [`${creator[i]}Sym`]: 1,
+          [`${creator[i]}QA`]: 1,
+          [`${creator[i]}Info`]: 1,
+          [`${creator[i]}Ex`]: 1,
 
-    for (let i = 0; i < seller.length; i++) {
-      for (let j = 0; j < SellerCate.length; j++) {
-        await setDoc(doc(db, `${seller[i]}Cate`, `${seller[i]}${SellerCate[j]}`), {
-          num: 1
+          [`${creator[i]}Re`]: 1,
+          [`${creator[i]}Rev`]: 1,
+          [`${creator[i]}Tax`]: 1,
+          [`${creator[i]}Man`]: 1,
+          [`${creator[i]}Coo`]: 1,
         });
       }
-    }
   };
-  */
 
-  /*const dbMaker3 = async () => {
+  const dbMaker3 = async () => {
 
-    for (let i = 0; i < creatorCate.length; i++) {
-        await setDoc(doc(db, 'allCreaCate', `allCrea${creatorCate[i]}`), {
-          num: 1
-        });   
-    }
+    await setDoc(doc(db, '혼자번당', `allSelfCate`), {
+      allSelfFav: 1,
+      allSelfSym: 1,
+      allSelfQA: 1,
+      allSelfInfo: 1,
+      allSelfEx: 1,
+
+      allSelfRe: 1,
+      allSelfRev: 1,
+      allSelfTax: 1,
+      allSelfMan: 1,
+      allSelfEmp: 1,
+    });
   };
-  */
+  
 
-  /*const dbMaker2 = async () => {
+  const dbMaker2 = async () => {
 
-    for (let i = 0; i < group.length; i++) {
-        await setDoc(doc(db, "writingNum", group[i]), {
+    for (let i = 0; i < seller.length; i++) {
+        await setDoc(doc(db, "혼자번당글번호", seller[i]), {
           num: 1
         });
     }
@@ -97,22 +150,32 @@ function RouterCom({ setH, setC, setJ, setD }) {
               setH={setH}
               setC={setC}
               setD={setD}
+              setJ={setJ}
+              setWeeklyNum={setWeeklyNum}
+              setSelectedJob={setSelectedJob}
+              setSelectedJobEng={setSelectedJobEng}
             />
           }
         ></Route>
         <Route
-          path="/FAQ"
+          path="/Weeckly"
           element={
-            <FAQ  loginState={loginState} />
+            <Weeckly
+              loginState={loginState}
+              setH={setH}
+              setC={setC}
+              jobEng={selectedJobEng}
+              job={selectedJob}
+              selectedGroup={selectedGroup}
+              userRN={userRN}
+              weeklyNum={weeklyNum}
+            />
           }
         ></Route>
+        <Route path="/FAQ" element={<FAQ loginState={loginState} />}></Route>
         <Route
           path="/Feedback"
-          element={
-            <Feedback
-              loginState={loginState}
-            />
-          }
+          element={<Feedback loginState={loginState} />}
         ></Route>
         <Route
           path="/login"
@@ -152,6 +215,7 @@ function RouterCom({ setH, setC, setJ, setD }) {
               userRN={userRN}
               setH={setH}
               setC={setC}
+              setWritingNum={setWritingNum}
             />
           }
         ></Route>
@@ -162,6 +226,40 @@ function RouterCom({ setH, setC, setJ, setD }) {
               selectedJob={selectedJob}
               selectedGroup={selectedGroup}
               selectedJobEng={selectedJobEng}
+              night={night}
+              setNight={setNight}
+              loginState={loginState}
+              userRN={userRN}
+              setH={setH}
+              setC={setC}
+              setWritingNum={setWritingNum}
+            />
+          }
+        ></Route>
+        <Route
+          path="/honjabundang/community/writing"
+          element={
+            <ComWriting
+              job={selectedJob}
+              selectedGroup={selectedGroup}
+              jobEng={selectedJobEng}
+              night={night}
+              setNight={setNight}
+              loginState={loginState}
+              userRN={userRN}
+              setH={setH}
+              setC={setC}
+              writingNum={writingNum}
+            />
+          }
+        ></Route>
+        <Route
+          path="/honjabundang/community/write"
+          element={
+            <ComWrite
+              job={selectedJob}
+              selectedGroup={selectedGroup}
+              jobEng={selectedJobEng}
               night={night}
               setNight={setNight}
               loginState={loginState}

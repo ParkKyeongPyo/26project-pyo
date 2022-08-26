@@ -3,13 +3,27 @@ import "antd/dist/antd.min.css";
 
 import styles from "../CSS/login.module.css";
 
-function NewAccount({
-  onSubmitAccount,
-  onChange,
-  onSwitch,
-  onFinishFailed,
-  onSubmitGoogle,
-}) {
+function NewAccount({ onSubmitAccount, onChange, onSwitch, onFinishFailed }) {
+  /*
+  <Form.Item
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+        >
+          <Button htmlType="button" onClick={onSubmitGoogle}>
+            <img
+              width="17px"
+              alt="Google sign-in"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
+            />
+            <span style={{ marginLeft: "10px", verticalAlign: "middle" }}>
+              Coninue with google
+            </span>
+          </Button>
+        </Form.Item>
+  */
+
   return (
     <div className={styles.flex}>
       <Form
@@ -51,7 +65,11 @@ function NewAccount({
             },
           ]}
         >
-          <Input.Password name="Password" onChange={onChange} />
+          <Input.Password
+            placeholder="6자리 이상으로 입력해주세요."
+            name="Password"
+            onChange={onChange}
+          />
         </Form.Item>
 
         <Form.Item
@@ -64,7 +82,7 @@ function NewAccount({
             },
           ]}
         >
-          <Input onChange={onChange} />
+          <Input  onChange={onChange} placeholder="20자 이하로 입력해주세요." />
         </Form.Item>
 
         <div className={styles.message}>
@@ -79,24 +97,6 @@ function NewAccount({
         >
           <Button type="primary" htmlType="submit">
             계정 생성
-          </Button>
-        </Form.Item>
-
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Button htmlType="button" onClick={onSubmitGoogle}>
-            <img
-              width="17px"
-              alt="Google sign-in"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
-            />
-            <span style={{ marginLeft: "10px", verticalAlign: "middle" }}>
-              Coninue with google
-            </span>
           </Button>
         </Form.Item>
 

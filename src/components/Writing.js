@@ -1,10 +1,6 @@
 import Footer from "./Footer.js";
 import { db } from "../fbase.js";
-import {
-  HeartOutlined,
-  EyeOutlined,
-  MessageOutlined,
-} from "@ant-design/icons";
+import { HeartOutlined, EyeOutlined, MessageOutlined } from "@ant-design/icons";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import {
   collection,
@@ -73,7 +69,11 @@ function Writing({
   const [submitting, setSubmitting] = useState(false);
   const [value, setValue] = useState("");
   const [dataChanged, setDataChanged] = useState(false);
-  const [synCount, setSynCount] = useState(writingInfo.공감);
+  const [synCount, setSynCount] = useState(0);
+
+  const docRef = doc(db, "혼자번당모든글", jobEng);
+  const colRef = collection(docRef, "Writing");
+  const docRefs = doc(docRef, "Writing", `${writingInfo.글번호}`);
 
   /*
   sunmit function : 
@@ -81,9 +81,7 @@ function Writing({
   n-1이 아니라면 댓글만 db에 추가하는 handleSubmit함수 실행
   */
   const submit = async () => {
-    const docSnapReplyCount = await getDoc(
-      doc(db, jobEng, `${writingInfo.글번호}`)
-    );
+    const docSnapReplyCount = await getDoc(docRefs);
 
     aryCount = docSnapReplyCount.data().replyCount;
 
@@ -129,9 +127,7 @@ function Writing({
       ]);
     }, 1000);
 
-    const updateRef = doc(db, jobEng, `${writingInfo.글번호}`);
-
-    await updateDoc(updateRef, {
+    await updateDoc(docRefs, {
       replyCount: aryCount,
       reply: arrayUnion({
         author: writerName,
@@ -180,12 +176,11 @@ function Writing({
       ]);
     }, 1000);
 
-    const updateRef = doc(db, jobEng, `${writingInfo.글번호}`);
-    const updateFav = doc(db, `${jobEng}Cate`, jobEng + "Fav");
+    const updateFav = doc(db, '혼자번당', `${jobEng}Cate`);
 
-    const docSnap = await getDoc(doc(db, `${jobEng}Cate`, jobEng + "Fav"));
+    const docSnap = await getDoc(updateFav);
 
-    await updateDoc(updateRef, {
+    await updateDoc(docRefs, {
       replyCount: aryCount,
       favNum: docSnap.data().num,
       reply: arrayUnion({
@@ -197,7 +192,7 @@ function Writing({
     });
 
     await updateDoc(updateFav, {
-      num: docSnap.data().num + 1,
+      [`${jobEng}Fav`]: docSnap.data()[`${jobEng}Fav`] + 1,
     });
   };
 
@@ -211,16 +206,16 @@ function Writing({
 
   //첫 랜더링 후 DB에서 글 정보 불러오는 함수
   const asyncFn = async () => {
-    const q = query(
-      collection(db, jobEng),
-      where("num", "==", writingInfo.글번호)
-    );
+    const q = query(colRef, where("num", "==", writingInfo.글번호));
     const querySnapshot = await getDocs(q);
     const dataLength = querySnapshot.docs.length;
     let itemsProcessed = 0;
 
     querySnapshot.forEach((doc) => {
       data = {
+        header: doc.data().header,
+        user: doc.data().user,
+        category: doc.data().category,
         content: doc.data().content,
         year: doc.data().year,
         time: doc.data().time,
@@ -229,6 +224,7 @@ function Writing({
         reply: doc.data().reply,
         symCount: doc.data().symCount,
         symArray: doc.data().symArray,
+        count: doc.data().count
       };
       itemsProcessed++;
       let i = 0;
@@ -243,16 +239,16 @@ function Writing({
         }
         aryCount = data.replyCount;
         setDataChanged(true);
-
+        setSynCount(data.symCount);
         //meta data
         if (job === "") {
           setH(
-            `${writingInfo.제목.props.children[0].key}-${selectedGroup} 커뮤니티`
+            `${data.header}-${selectedGroup} 커뮤니티`
           );
-          setC(`${writingInfo.카테고리}, ${data.content}`);
+          setC(`${data.category}, ${data.content}`);
         } else {
-          setH(`${writingInfo.제목.props.children[0].key}-${job} 커뮤니티`);
-          setC(`${writingInfo.카테고리}, ${data.content}`);
+          setH(`${data.header}-${job} 커뮤니티`);
+          setC(`${data.category}, ${data.content}`);
         }
       }
     });
@@ -275,9 +271,9 @@ function Writing({
 
     //DB 곰감배열에 공감버튼 누른 사용자가 없고 처음 눌렀다면 공감 카운트 + 1.
     if (state && synOnlyOne === 1) {
-      const updateRef = doc(db, jobEng, `${writingInfo.글번호}`);
 
-      await updateDoc(updateRef, {
+
+      await updateDoc(docRefs, {
         symCount: data.symCount + 1,
         symArray: arrayUnion({
           email: email,
@@ -286,16 +282,15 @@ function Writing({
 
       //공감수 n-1개라면 symNum + 1
       if (data.symCount === symNum) {
-        const docSnap = await getDoc(doc(db, `${jobEng}Cate`, jobEng + "Sym"));
-        const updateCateRef = doc(db, `${jobEng}Cate`, `${jobEng}Sym`);
-        const updateRef = doc(db, jobEng, `${writingInfo.글번호}`);
+        const updateCateRef = doc(db, `혼자번당`, `${jobEng}Cate`)
+        const docSnap = await getDoc(updateCateRef);
 
         await updateDoc(updateCateRef, {
-          num: docSnap.data().num + 1,
+          [`${jobEng}Sym`]: docSnap.data()[`${jobEng}Sym`] + 1,
         });
 
-        await updateDoc(updateRef, {
-          symNum: docSnap.data().num + 1,
+        await updateDoc(docRefs, {
+          symNum: docSnap.data()[`${jobEng}Sym`] + 1,
         });
       }
 
@@ -323,15 +318,15 @@ function Writing({
         <div>
           <div>
             <div className={writing.heading}>
-              {writingInfo.제목.props.children[0].key}
+              {data.header}
             </div>
           </div>
           <div className={writing.detail}>
-            <span>[{writingInfo.카테고리}]</span>
-            <span className={writing.writer}>{writingInfo.글쓴이}</span>
+            <span>[{data.category}]</span>
+            <span className={writing.writer}>{data.user}</span>
 
             <span className={writing.item}>
-              <EyeOutlined /> {writingInfo.조회 + 1}
+              <EyeOutlined /> {data.count}
             </span>
             <span className={writing.item2}>
               <MessageOutlined /> {comments.length}
@@ -377,7 +372,6 @@ function Writing({
           />
         </div>
       </div>
-      <MemorizedFooter />
     </>
   );
 }

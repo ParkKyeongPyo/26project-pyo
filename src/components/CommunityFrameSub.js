@@ -5,17 +5,15 @@ import React, { useEffect } from "react";
 
 import Footer from "./Footer";
 
-const MemorizedFooter = React.memo(Footer);
 
 function CommunityFrameSub({
   job,
-  onWrite,
-  onWriting,
   jobEng,
   selectedGroup,
   loginState,
   setH,
   setC,
+  setWritingNum
 }) {
   useEffect(() => {
     if (job === "") {
@@ -42,14 +40,12 @@ function CommunityFrameSub({
     <>
       <div className={styles.flexCommunity2}>
         <Board
-          onWrite={onWrite}
-          onWriting={onWriting}
           jobEng={jobEng}
           selectedGroup={selectedGroup}
           loginState={loginState}
+          setWritingNum={setWritingNum}
         />
       </div>
-      <MemorizedFooter />
     </>
   );
 }

@@ -5,15 +5,18 @@ import Pagination from "@mui/material/Pagination";
 import board from "../CSS/board.module.css";
 
 import "antd/dist/antd.min.css";
+import { Link } from "react-router-dom";
 
 import { db } from "../fbase.js";
 import {
   getDocs,
   collection,
+  doc,
   query,
   orderBy,
   limit,
   where,
+  updateDoc,
 } from "firebase/firestore";
 import { authService } from "../fbase.js";
 
@@ -72,7 +75,7 @@ const MemorizedTable = React.memo(Table);
 const MemorizedPagination = React.memo(Pagination);
 
 //게시판 component
-function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
+function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
   const [pageSize, setPageSize] = useState(20);
   const [lastNum, setLastNum] = useState(1000000);
   const [favNum, setFavNum] = useState(1000000);
@@ -85,12 +88,15 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
   //첫 렌더링 후 직업 바뀌었으면 data에 빈 배열 넣고 한번더 렌더링 하기 위한 state
   const [render, setRender] = useState(false);
 
+  const docRefs = doc(db, "혼자번당모든글", jobEng);
+  const colRef = collection(docRefs, "Writing");
+
   const getListAllFirst = async (page) => {
     data = [];
     let itemsProcessed = 0;
 
     const q = query(
-      collection(db, jobEng),
+      colRef,
       where("num", "<=", lastNum - (page - 1) * pageSize),
       orderBy("num", "desc"),
       limit(pageSize)
@@ -104,14 +110,17 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
         카테고리: doc.data().category,
         제목: (
           <div className={board.flex}>
-            <span
+            <Link
+            className={board.link}
+              to="/honjabundang/community/writing"
+              title={doc.data().num}
+              name={doc.data().count}
               key={doc.data().header}
               onClick={msg}
-              onMouseOver={mouseOver}
               onMouseOut={mouseOut}
             >
               {doc.data().header}
-            </span>
+            </Link>
             <span className={board.replyCount}>[{doc.data().replyCount}]</span>
           </div>
         ),
@@ -130,7 +139,7 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
     data = [];
 
     const q = query(
-      collection(db, jobEng),
+      colRef,
       where("num", "<=", lastNum - (page - 1) * pageSize),
       orderBy("num", "desc"),
       limit(pageSize)
@@ -144,14 +153,17 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
         카테고리: doc.data().category,
         제목: (
           <div className={board.flex}>
-            <span
+            <Link
+              className={board.link}
+              to="/honjabundang/community/writing"
+              title={doc.data().num}
+              name={doc.data().count}
               key={doc.data().header}
               onClick={msg}
-              onMouseOver={mouseOver}
               onMouseOut={mouseOut}
             >
               {doc.data().header}
-            </span>
+            </Link>
             <span className={board.replyCount}>[{doc.data().replyCount}]</span>
           </div>
         ),
@@ -166,7 +178,7 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
   const getListCategory = async (page) => {
     data = [];
     const q = query(
-      collection(db, jobEng),
+      colRef,
       where("cateNum", "<=", cateNum - (page - 1) * pageSize),
       where("category", "==", selectedCategory),
       orderBy("cateNum", "desc"),
@@ -185,14 +197,17 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
             카테고리: doc.data().category,
             제목: (
               <div className={board.flex}>
-                <span
+                <Link
+                  className={board.link}
+                  to="/honjabundang/community/writing"
+                  title={doc.data().num}
+                  name={doc.data().count}
                   key={doc.data().header}
                   onClick={msg}
-                  onMouseOver={mouseOver}
                   onMouseOut={mouseOut}
                 >
                   {doc.data().header}
-                </span>
+                </Link>
                 <span className={board.replyCount}>
                   [{doc.data().replyCount}]
                 </span>
@@ -214,7 +229,7 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
   const getListSympathy = async (page) => {
     data = [];
     const q = query(
-      collection(db, jobEng),
+      colRef,
       where("symNum", "!=", 0),
       where("symNum", "<=", symNum - (page - 1) * pageSize),
       orderBy("symNum", "desc"),
@@ -236,14 +251,17 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
                 <div className={board.iconPad}>
                   <div className={board.symIcon}></div>
                 </div>
-                <span
+                <Link
+                  className={board.link}
+                  to="/honjabundang/community/writing"
+                  title={doc.data().num}
+                  name={doc.data().count}
                   key={doc.data().header}
                   onClick={msg}
-                  onMouseOver={mouseOver}
                   onMouseOut={mouseOut}
                 >
                   {doc.data().header}
-                </span>
+                </Link>
                 <span className={board.replyCount}>
                   [{doc.data().replyCount}]
                 </span>
@@ -265,7 +283,7 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
   const getListSympathyPageChanged = async (page) => {
     data = [];
     const q = query(
-      collection(db, jobEng),
+      colRef,
       where("symNum", "!=", 0),
       where("symNum", "<=", symNum - (page - 1) * pageSize),
       orderBy("symNum", "desc"),
@@ -286,14 +304,17 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
                 <div className={board.iconPad}>
                   <div className={board.symIcon}></div>
                 </div>
-                <span
+                <Link
+                  className={board.link}
+                  to="/honjabundang/community/writing"
+                  title={doc.data().num}
+                  name={doc.data().count}
                   key={doc.data().header}
                   onClick={msg}
-                  onMouseOver={mouseOver}
                   onMouseOut={mouseOut}
                 >
                   {doc.data().header}
-                </span>
+                </Link>
                 <span className={board.replyCount}>
                   [{doc.data().replyCount}]
                 </span>
@@ -318,7 +339,7 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
     const email = authService.currentUser.email;
 
     const q = query(
-      collection(db, jobEng),
+      colRef,
       where("email", "==", email),
       orderBy("num", "desc"),
       limit(pageSize)
@@ -337,14 +358,17 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
             <div className={board.iconPad}>
               <div className={board.myIcon}></div>
             </div>
-            <span
+            <Link
+              className={board.link}
+              to="/honjabundang/community/writing"
+              title={doc.data().num}
+              name={doc.data().count}
               key={doc.data().header}
               onClick={msg}
-              onMouseOver={mouseOver}
               onMouseOut={mouseOut}
             >
               {doc.data().header}
-            </span>
+            </Link>
             <span className={board.replyCount}>[{doc.data().replyCount}]</span>
           </div>
         ),
@@ -365,7 +389,7 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
     let itemsProcessed = 0;
 
     const q = query(
-      collection(db, jobEng),
+      colRef,
       where("favNum", "!=", 0),
       where("favNum", "<=", favNum - (page - 1) * pageSize),
       orderBy("favNum", "desc"),
@@ -384,14 +408,17 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
             <div className={board.iconPad}>
               <div className={board.favIcon}></div>
             </div>
-            <span
+            <Link
+              className={board.link}
+              to="/honjabundang/community/writing"
+              title={doc.data().num}
+              name={doc.data().count}
               key={doc.data().header}
               onClick={msg}
-              onMouseOver={mouseOver}
               onMouseOut={mouseOut}
             >
               {doc.data().header}
-            </span>
+            </Link>
             <span className={board.replyCount}>[{doc.data().replyCount}]</span>
           </div>
         ),
@@ -413,7 +440,7 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
     data = [];
 
     const q = query(
-      collection(db, jobEng),
+      colRef,
       where("favNum", "!=", 0),
       where("favNum", "<=", favNum - (page - 1) * pageSize),
       orderBy("favNum", "desc"),
@@ -432,14 +459,17 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
             <div className={board.iconPad}>
               <div className={board.favIcon}></div>
             </div>
-            <span
+            <Link
+              className={board.link}
+              to="/honjabundang/community/writing"
+              title={doc.data().num}
+              name={doc.data().count}
               key={doc.data().header}
               onClick={msg}
-              onMouseOver={mouseOver}
               onMouseOut={mouseOut}
             >
               {doc.data().header}
-            </span>
+            </Link>
             <span className={board.replyCount}>[{doc.data().replyCount}]</span>
           </div>
         ),
@@ -457,7 +487,7 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
     data = [];
 
     const q = query(
-      collection(db, jobEng),
+      colRef,
       where("category", "==", selectedCategory),
       where("cateNum", "<=", cateNum - (page - 1) * pageSize),
       orderBy("cateNum", "desc"),
@@ -475,14 +505,17 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
             카테고리: doc.data().category,
             제목: (
               <div className={board.flex}>
-                <span
+                <Link
+                  className={board.link}
+                  to="/honjabundang/community/writing"
+                  title={doc.data().num}
+                  name={doc.data().count}
                   key={doc.data().header}
                   onClick={msg}
-                  onMouseOver={mouseOver}
                   onMouseOut={mouseOut}
                 >
                   {doc.data().header}
-                </span>
+                </Link>
                 <span className={board.replyCount}>
                   [{doc.data().replyCount}]
                 </span>
@@ -551,19 +584,22 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
     e.target.className = board.mouseOut;
   };
 
-  const msg = () => {
-    message.info("게시글 페이지에 접속하려면 왼쪽 박스를 클릭하세요!");
-  };
+  const msg = async (e) => {
+    e.target.className = board.mouseOut;
+    setWritingNum(e.target.title);
 
-  const rowSelection = {
-    onSelect: onWriting,
-    hideSelectAll: true,
+    //조회수 + 1
+    const updateRef = doc(db, "혼자번당모든글", jobEng);
+    const docSnap = doc(updateRef, "Writing", e.target.title);
+
+    await updateDoc(docSnap, {
+      count: Number(e.target.name) + 1,
+    });
   };
 
   return (
     <>
       <MemorizedCombar
-        onWrite={onWrite}
         setSelectedCategory={setSelectedCategory}
         setCateChanged={setCateChanged}
         setCurrentPage={setCurrentPage}
@@ -582,7 +618,6 @@ function Board({ onWrite, onWriting, jobEng, selectedGroup, loginState }) {
         pagination={false}
         boardered="true"
         size="small"
-        rowSelection={rowSelection}
       />
       {myWriting ? null : (
         <MemorizedPagination

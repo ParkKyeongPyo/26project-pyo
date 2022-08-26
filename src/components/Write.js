@@ -9,14 +9,13 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import { db } from "../fbase.js";
-import { doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, setDoc, collection } from "firebase/firestore";
 import { authService } from "../fbase.js";
 
 import WriteCate from "./WriteCate";
 import Footer from "./Footer";
 
 const MemorizedWriteCate = React.memo(WriteCate);
-const MemorizedFooter = React.memo(Footer);
 /*
 문제
 1. devNum 새로고칭하면 초기화 됨
@@ -27,7 +26,6 @@ function Write({
   setCommunity,
   setWriting,
   job,
-  onWriteFinish,
   jobEng,
   selectedGroup,
   userRN,
@@ -56,7 +54,7 @@ function Write({
 
   //글 제출.
   const onSubmit = async () => {
-    const docRef = doc(db, "writingNum", jobEng);
+    const docRef = doc(db, "혼자번당글번호", jobEng);
     const docSnap = await getDoc(docRef);
 
     //Man == Manage, CoW == Cowork, Wkr === Worker
@@ -69,16 +67,16 @@ function Write({
     else if (category === "스터디&동아리") jobCate = jobEng + "Stu";
     else if (category === "세금&계약") jobCate = jobEng + "Tax";
     else if (category === "운영") jobCate = jobEng + "Man";
-    else if (category === "협업") jobCate = jobEng + "CoW";
-    else if (category === "직원&알바") jobCate = jobEng + "Wkr";
+    else if (category === "협업") jobCate = jobEng + "Coo";
+    else if (category === "직원&알바") jobCate = jobEng + "Emp";
 
     let cateNumSnap = "";
     let cateNum = 0;
 
     if (category !== "전체") {
-      const cateRef = doc(db, `${jobEng}Cate`, jobCate);
+      const cateRef = doc(db, "혼자번당", `${jobEng}Cate`);
       cateNumSnap = await getDoc(cateRef);
-      cateNum = cateNumSnap.data().num;
+      cateNum = cateNumSnap.data()[jobCate];
     }
 
     //로그인 유무에 따라서 익명 또는 displayName author에 넣기.
@@ -97,63 +95,71 @@ function Write({
 
     //DB에 글 저장하기.
     //로그인 사용자면 email 정보 추가
+
+    const docRefs = doc(db, "혼자번당모든글", jobEng);
+    const docSubRef = doc(docRefs, "Writing", `${docSnap.data().num}`);
+
     if (loginState) {
-      await setDoc(doc(db, jobEng, `${docSnap.data().num}`), {
-        num: docSnap.data().num,
-        cateNum: cateNum,
-        user: writerName,
-        email: email,
-        header: header,
-        category: category,
-        content: content,
-        symCount: 0,
-        symArray: [],
-        symNum: 0,
-        count: 0,
-        time: `${("0" + date.getHours()).slice(-2)}:${(
-          "0" + date.getMinutes()
-        ).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`,
-        date: `${("0" + (date.getMonth() + 1)).slice(-2)}-${(
-          "0" + date.getDate()
-        ).slice(-2)}`,
-        year: `${date.getFullYear()}`,
-        replyCount: 0,
-        favNum: 0,
-        reply: [],
-      });
+      await setDoc(docSubRef,
+        {
+          num: docSnap.data().num,
+          cateNum: cateNum,
+          user: writerName,
+          email: email,
+          header: header,
+          category: category,
+          content: content,
+          symCount: 0,
+          symArray: [],
+          symNum: 0,
+          count: 0,
+          time: `${("0" + date.getHours()).slice(-2)}:${(
+            "0" + date.getMinutes()
+          ).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`,
+          date: `${("0" + (date.getMonth() + 1)).slice(-2)}-${(
+            "0" + date.getDate()
+          ).slice(-2)}`,
+          year: `${date.getFullYear()}`,
+          replyCount: 0,
+          favNum: 0,
+          reply: [],
+        }
+      );
     } else {
-      await setDoc(doc(db, jobEng, `${docSnap.data().num}`), {
-        num: docSnap.data().num,
-        cateNum: cateNum,
-        user: writerName,
-        header: header,
-        category: category,
-        content: content,
-        symNum: 0,
-        symCount: 0,
-        symArray: [],
-        count: 0,
-        time: `${("0" + date.getHours()).slice(-2)}:${(
-          "0" + date.getMinutes()
-        ).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`,
-        date: `${("0" + (date.getMonth() + 1)).slice(-2)}-${(
-          "0" + date.getDate()
-        ).slice(-2)}`,
-        year: `${date.getFullYear()}`,
-        replyCount: 0,
-        favNum: 0,
-        reply: [],
-      });
+      await setDoc(docSubRef,
+        {
+          num: docSnap.data().num,
+          cateNum: cateNum,
+          user: writerName,
+          header: header,
+          category: category,
+          content: content,
+          symNum: 0,
+          symCount: 0,
+          symArray: [],
+          count: 0,
+          time: `${("0" + date.getHours()).slice(-2)}:${(
+            "0" + date.getMinutes()
+          ).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`,
+          date: `${("0" + (date.getMonth() + 1)).slice(-2)}-${(
+            "0" + date.getDate()
+          ).slice(-2)}`,
+          year: `${date.getFullYear()}`,
+          replyCount: 0,
+          favNum: 0,
+          reply: [],
+        }
+      );
     }
 
-    await updateDoc(doc(db, "writingNum", jobEng), {
+    await updateDoc(doc(db, "혼자번당글번호", jobEng), {
       num: docSnap.data().num + 1,
     });
 
     //DB) 인기, 공감, 내 글 제외한 나머지 카테고리 num + 1.
     if (category !== "전체") {
-      await updateDoc(doc(db, `${jobEng}Cate`, jobCate), {
-        num: cateNumSnap.data().num + 1,
+      await updateDoc(doc(db, "혼자번당", `${jobEng}Cate`), {
+        [jobCate]: cateNum + 1,
       });
     }
 
@@ -172,7 +178,10 @@ function Write({
       <form className={styles.flexWrite}>
         <div className={write.category}>
           <span>카테고리</span>
-          <MemorizedWriteCate selectedGroup={selectedGroup} setCategory={handleChange} />
+          <MemorizedWriteCate
+            selectedGroup={selectedGroup}
+            setCategory={handleChange}
+          />
         </div>
 
         <br />
@@ -188,7 +197,8 @@ function Write({
         <br />
 
         <div className={write.font}>
-          *Bold, 사진, 미디어 삽입, 인용, 표 기능은 아직 이용 불가능하니 참고바랍니다.
+          *Bold, 사진, 미디어 삽입, 인용, 표 기능은 아직 이용 불가능하니
+          참고바랍니다.
         </div>
 
         <CKEditor
@@ -207,15 +217,6 @@ function Write({
 
         <div className={write.btnMargin}>
           <Button
-            size="large"
-            type="primary"
-            htmlType="button"
-            className={write.btnMarginRight}
-            onClick={onWriteFinish}
-          >
-            취소
-          </Button>
-          <Button
             className={write.btn}
             size="large"
             type="primary"
@@ -226,7 +227,6 @@ function Write({
           </Button>
         </div>
       </form>
-      <MemorizedFooter />
     </>
   );
 }

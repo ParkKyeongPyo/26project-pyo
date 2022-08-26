@@ -8,13 +8,7 @@ import { Link } from "react-router-dom";
 
 import { Segmented } from "antd";
 
-import {
-  useSpring,
-  useSpringRef,
-  animated,
-  useChain,
-} from "react-spring";
-
+import { useSpring, useSpringRef, animated, useChain } from "react-spring";
 
 /* 
 해결해야 될 문제
@@ -26,9 +20,8 @@ function Jobchosing({
   setSelectedJobEng,
   setSelectedGroup,
   selectedGroup,
-  setJ
+  setJ,
 }) {
-
   const onGroupMouseOver = (e) => {
     e.target.className = groupStyles.mouseOver;
   };
@@ -109,7 +102,7 @@ function Jobchosing({
 
   return (
     <div style={{ height: "inherit", marginLeft: "auto", marginRight: "auto" }}>
-      <animated.div style={animation1} className={common.flexRowh2}>
+      <animated.div style={animation1} className={common.flexRowhMargin}>
         "혼자번당은 대한민국에서 혼자 일하는 모든 분들을 위한 커뮤니티입니다"
       </animated.div>
 
@@ -140,7 +133,24 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <h2 className={groupStyles.groupFlexCreater}>IT</h2>
+                <div className={groupStyles.groupFlexCreater}>
+                  <Link
+                    title="allFree"
+                    to="/honjabundang/community"
+                    className={groupStyles.group}
+                    onMouseOut={onGroupMouseOut}
+                    onMouseOver={onGroupMouseOver}
+                    onClick={onJobClick}
+                  >
+                    프리랜서
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className={groupStyles.groupFlex}>
+              <div className={groupStyles.groupTopCreater}>
+                <h2 className={groupStyles.groupFlexCreaterH}>IT</h2>
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="dev"
@@ -158,7 +168,7 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <h2 className={groupStyles.groupFlexCreater}>창작</h2>
+                <h2 className={groupStyles.groupFlexCreaterH}>창작</h2>
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="dsn"
@@ -207,7 +217,7 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <h2 className={groupStyles.groupFlexCreater}>문서/글쓰기</h2>
+                <h2 className={groupStyles.groupFlexCreaterH}>문서/글쓰기</h2>
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="rpo"
@@ -255,7 +265,7 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <h2 className={groupStyles.groupFlexCreater}>교육</h2>
+                <h2 className={groupStyles.groupFlexCreaterH}>교육</h2>
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="tch"
@@ -283,7 +293,9 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <h2 className={groupStyles.groupFlexCreater}>영상/사진/음향</h2>
+                <h2 className={groupStyles.groupFlexCreaterH}>
+                  영상/사진/음향
+                </h2>
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="vdo"
@@ -321,7 +333,7 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <h2 className={groupStyles.groupFlexCreater}>비지니스</h2>
+                <h2 className={groupStyles.groupFlexCreaterH}>비지니스</h2>
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="ket"
@@ -349,7 +361,7 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <h2 className={groupStyles.groupFlexCreater}>방송/생활</h2>
+                <h2 className={groupStyles.groupFlexCreaterH}>방송/생활</h2>
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="act"
@@ -413,9 +425,27 @@ function Jobchosing({
                 <span className={common.popover}>크리에이터란?</span>
               </Popover>
             </div>
+
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <h2 className={groupStyles.groupFlexCreater}>IT</h2>
+                <div className={groupStyles.groupFlexCreater}>
+                  <Link
+                    title="allCrea"
+                    to="/honjabundang/community"
+                    className={groupStyles.group}
+                    onMouseOut={onGroupMouseOut}
+                    onMouseOver={onGroupMouseOver}
+                    onClick={onJobClick}
+                  >
+                    크리에이터
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className={groupStyles.groupFlex}>
+              <div className={groupStyles.groupTopCreater}>
+                <h2 className={groupStyles.groupFlexCreaterH}>IT</h2>
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="wbap"
@@ -453,7 +483,7 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <h2 className={groupStyles.groupFlexCreater}>SNS</h2>
+                <h2 className={groupStyles.groupFlexCreaterH}>SNS</h2>
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="tube"
@@ -527,9 +557,27 @@ function Jobchosing({
                 <span className={common.popover}>자영업자란?</span>
               </Popover>
             </div>
+
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <h2 className={groupStyles.groupFlexCreater}>요식업</h2>
+                <div className={groupStyles.groupFlexCreater}>
+                  <Link
+                    title="allSelf"
+                    to="/honjabundang/community"
+                    className={groupStyles.group}
+                    onMouseOut={onGroupMouseOut}
+                    onMouseOver={onGroupMouseOver}
+                    onClick={onJobClick}
+                  >
+                    자영업자
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className={groupStyles.groupFlex}>
+              <div className={groupStyles.groupTopCreater}>
+                <h2 className={groupStyles.groupFlexCreaterH}>요식업</h2>
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="din"
@@ -587,7 +635,7 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <h2 className={groupStyles.groupFlexCreater}>편의/여가</h2>
+                <h2 className={groupStyles.groupFlexCreaterH}>편의/여가</h2>
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="mini"
@@ -645,7 +693,7 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <h2 className={groupStyles.groupFlexCreater}>생활</h2>
+                <h2 className={groupStyles.groupFlexCreaterH}>생활</h2>
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="health"
@@ -703,7 +751,7 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <h2 className={groupStyles.groupFlexCreater}>학원</h2>
+                <h2 className={groupStyles.groupFlexCreaterH}>학원</h2>
                 <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="test"

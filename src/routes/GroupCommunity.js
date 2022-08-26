@@ -13,7 +13,8 @@ function GroupCommunity({
   setNight,
   loginState,
   setH,
-  setC
+  setC,
+  setWritingNum
 }) {
   const [render, setRender] = useState(false);
 
@@ -39,6 +40,7 @@ function GroupCommunity({
           loginState={loginState}
           setH={setH}
           setC={setC}
+          setWritingNum={setWritingNum}
         />
       </>
     );
@@ -60,6 +62,7 @@ function GroupCommunity({
           loginState={loginState}
           setH={setH}
           setC={setC}
+          setWritingNum={setWritingNum}
         />
       </>
     );

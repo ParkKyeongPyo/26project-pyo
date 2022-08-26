@@ -56,6 +56,9 @@ function Footer() {
         >
           일 아이콘 제작자: Flat Icons - Flaticon
         </a>
+        <a className={footer.icon} href="https://www.flaticon.com/kr/free-icons/-" title="- 아이콘">
+          - 아이콘 제작자: Freepik - Flaticon
+        </a>
       </>
     );
   };
@@ -71,8 +74,13 @@ function Footer() {
       </div>
       <div className={footer.item}>문의 : as8798as@gmail.com</div>
       <div className={footer.icon}>
-        <Popover content={content} iconItem title="아이콘 저작권자" trigger="hover">
-          아이콘 저작권 
+        <Popover
+          content={content}
+          iconItem
+          title="아이콘 저작권자"
+          trigger="hover"
+        >
+          아이콘 저작권
         </Popover>
       </div>
     </footer>

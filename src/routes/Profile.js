@@ -6,10 +6,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { signOut, updateProfile, deleteUser } from "firebase/auth";
-import { authService } from "../fbase";
+import { authService, db } from "../fbase";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 import MenuBarHome from "../components/MenuBarHome";
 import Footer from "../components/Footer";
+import NameValidation from "../components/NameValidation";
 
 const layout = {
   labelCol: {
@@ -42,7 +44,10 @@ function Profile({ loginState }) {
       authService.currentUser.email !== "as8798as@gmail.com"
     )
       message.error("운영자가 들어간 닉네임은 사용할 수 없습니다.");
-    else onSave();
+    else {
+      let value = true
+      NameValidation(userNickname, navigate, value);
+    }
   };
 
   const onSubmit = () => {
@@ -57,37 +62,61 @@ function Profile({ loginState }) {
       });
   };
 
-  const onSave = async () => {
-    updateProfile(authService.currentUser, {
-      displayName: userNickname,
-    })
-      .then(() => {
-        navigate("/");
-      })
-      .catch((error) => {
-        // An error occurred
-        // ...
-        message.error("오류가 발생했습니다. 다시 시도해주세요.");
-      });
-  };
+  /*const onSave = async () => {
+    const docRef = doc(db, "혼자당", "닉네임");
+    const docSnap = await getDoc(docRef);
+    const nArray = docSnap.data().name;
+    let value = true;
+    let num = 0;
+    const preName = authService.currentUser.displayName;
 
-  const onDeleteClick = async () => {
-    const user = authService.currentUser;
-    deleteUser(user)
-      .then(() => {
-        navigate("/");
-      })
-      .catch((error) => {
-        // An error ocurred
-        // ...
-        message.error("오류가 발생했습니다. 다시 시도해주세요.");
-      });
-  };
+    nArray.map((item) => {
+      if (item === userNickname) value = false;
+      num++;
+      if (num === nArray.length) {
+        if (value) {
+          updateProfile(authService.currentUser, {
+            displayName: userNickname,
+          })
+            .then(async () => {
+              //배열에 있는 기존 닉네임 제거 후 새로운 닉네임으로 치환
+              const index = nArray.indexOf(preName);
+              nArray[index] = userNickname;
+              //배열 업데이트
+              await updateDoc(docRef, {
+                name: nArray
+              });
+
+              navigate("/");
+            })
+            .catch((error) => {
+              message.error("오류가 발생했습니다. 다시 시도해주세요.");
+            });
+        } else {
+          message.warning("해당 닉네임이 존재합니다.");
+        }
+      }
+    });
+  };*/
 
   const confirm = (e) => {
     const user = authService.currentUser;
+    const displayName = user.displayName;
     deleteUser(user)
-      .then(() => {
+      .then(async () => {
+        const docRef = doc(db, "혼자당", "닉네임");
+        const docSnap = await getDoc(docRef);
+        const nArray = docSnap.data().name;
+
+        //db 혼자번당/닉네임/name 배열에 있는 유저 닉네임 삭제
+        const index = nArray.indexOf(displayName);
+        nArray.splice(index, 1);
+
+        //db 혼자번당/닉네임/name 업데이트
+        updateDoc(docRef, {
+          name: nArray,
+        });
+
         navigate("/");
       })
       .catch((error) => {
@@ -110,7 +139,7 @@ function Profile({ loginState }) {
       style={{ height: "inherit", backgroundColor: "white", color: "black" }}
     >
       <MemorizedMenuBarHome loginState={loginState} />
-      <div className={styles.flexHome}>
+      <div className={styles.flexHomeMargin}>
         <Form {...layout} name="nest-messages" onFinish={onSubmitFilter}>
           <Form.Item name={["user", "nickname"]} label="닉네임">
             <Input
@@ -140,8 +169,8 @@ function Profile({ loginState }) {
               로그아웃
             </Button>
           </Form.Item>
-          <br/>
-          <br/>
+          <br />
+          <br />
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 2 }}>
             <Popconfirm
               title="정말 탈퇴하시겠습니까?"

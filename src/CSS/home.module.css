@@ -1,0 +1,198 @@
+.frame{
+    height: inherit;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    width: 1240px;
+    margin-top: 20px;
+}
+
+.head{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.headWriting{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 13px;
+}
+
+.middle{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 1240px;
+    margin: 0 auto 0px auto;
+}
+
+
+.middleSub{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.middleDang{
+    width: 50%;
+}
+
+.flexTwoRow{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.commingSoon{
+    display: flex;
+    align-items: center;
+    height: 40%;
+    font-size: larger;
+}
+
+.naming{
+    font-size: 22px;
+    font-family: OKGUNG;
+}
+
+/*Weeckly 글 마우스 이펙트*/
+
+.out{
+    color: black;
+    padding-top: 4px;
+    margin: auto 0 auto 0;
+}
+
+
+
+
+
+
+
+.middleCom{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.com{
+    width: 90%;
+}
+
+.comHead{
+    height: 50px;
+    background-color: rgb(245, 245, 245);
+    border-radius: 20px;
+}
+
+.comTable{
+    height: 330px;
+    width: 97%;
+    margin: 0 auto 0 auto;
+}
+
+.img{
+    width: 50px;
+    height: 50px;
+}
+
+.imgHonja{
+    width: 70px;
+    height:70px;
+}
+
+.table{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 60px;
+    border-bottom: 1px solid gainsboro;
+}
+
+.tableSub{
+    display: flex;
+}
+
+.tableSub2{
+    display: flex;
+}
+
+.span{
+    margin: auto 0 auto 0;
+    color: black;
+    padding-top: 4px;
+}
+
+.spanWriting{
+    margin: auto 0 auto 0;
+    background-color: #384244;
+    color: white;
+    padding: 2px;
+    border-radius: 6px;
+    margin-right: 7px;
+    font-size: 11px;
+}
+
+.spanCom2{
+    margin: auto 0 auto 0;
+    background-color: #384244;
+    color: white;
+    padding: 3px 5px 3px 5px;
+    border-radius: 20px;
+    margin-left: 7px;
+    font-size: smaller;
+}
+
+.spanCom1{
+    margin: auto 0 auto 0;
+    background-color: #384244;
+    color: white;
+    padding: 3px 5px 3px 5px;
+    border-radius: 20px;
+    margin-left: auto;
+    font-size: smaller;
+}
+
+.spanDate{
+    margin: auto 0 auto 8px;
+    color: rgb(199, 196, 196);
+    padding-top: 4px;
+}
+
+.count{
+    margin-left: auto;
+    padding-top: 4px;
+}
+
+
+
+
+
+
+.leftBar{
+    display: flex;
+    flex-direction: column;
+    width:200px;
+}
+
+.rightBar{
+    width:200px;
+}
+
+
+
+

@@ -18,6 +18,7 @@ function Community({
   userRN,
   setH,
   setC,
+  setWritingNum
 }) {
   const [render, setRender] = useState(false);
 
@@ -40,6 +41,7 @@ function Community({
         loginState={loginState}
         setH={setH}
         setC={setC}
+        setWritingNum={setWritingNum}
       />
     </div>
   );

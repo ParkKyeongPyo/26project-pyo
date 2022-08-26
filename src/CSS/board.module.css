@@ -3,8 +3,13 @@
 }
 
 .mouseOut {
-  text-decoration: none;
+  color: black;
 }
+
+.link{
+  color: black;
+}
+
 
 .replyCount{
   color: #999999;

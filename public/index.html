@@ -2,12 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="./img/browser.png" />
-    <meta
-      name="혼자당"
-      content="대한민국에서 혼자인 모든 분들을 위한 커뮤니티"
-    />
-    <link rel="apple-touch-icon" href="./img/browser.png" />
+    <link rel="icon" href="./img/bossBig.png" />
+    <link rel="apple-touch-icon" href="./img/bossBig.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -47,11 +43,11 @@
       }
 
       /*테이블 레이블 클래스*/
-      .ant-table-thead  .ant-table-cell{
-        background-color: #232F3E !important;
+      .ant-table-thead .ant-table-cell {
+        background-color: #232f3e !important;
         color: white !important;
       }
-      
+
       .ant-table-cell {
         font-size: 15px;
         text-align: center !important;
@@ -147,20 +143,41 @@
       }
 
       /*write editor*/
-      .ck.ck-editor{
+      .ck.ck-editor {
         width: 70% !important;
         color: black !important;
       }
-    </style>
 
+      /*Pagination*/
+      .css-1b5ei7m{
+        color: inherit !important;
+      }
+
+      /*로그인 폼*/
+      #basic_Email,
+      #basic_nickname{
+        width: 300px ;
+      }
+
+      #basic_Password{
+        width: 340px;
+      }
+    </style>
   </head>
-  <body style="margin: 0px; height: 100%; overflow-y: visible; font-family: GangwonEdu_OTFBoldA;">
+  <body
+    style="
+      margin: 0px;
+      height: 100%;
+      overflow-y: visible;
+      font-family: GangwonEdu_OTFBoldA;
+    "
+  >
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root" style="height: inherit"></div>
 
     <!--
       This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+      If you open it directly in the bossBig, you will see an empty page.
 
       You can add webfonts, meta tags, or analytics to this file.
       The build step will place the bundled scripts into the <body> tag.

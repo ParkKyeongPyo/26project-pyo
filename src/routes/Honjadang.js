@@ -6,8 +6,18 @@ import React, { useEffect } from "react";
 
 const MemorizedMenuBarHome = React.memo(MenuBarHome);
 const MemorizedFooter = React.memo(Footer);
+const MemorizedDangChosing = React.memo(DangChosing);
 
-function Honjadang({ loginState, setH, setC, setD }) {
+function Honjadang({
+  loginState,
+  setH,
+  setC,
+  setD,
+  setJ,
+  setWeeklyNum,
+  setSelectedJob,
+  setSelectedJobEng
+}) {
   useEffect(() => {
     setD("홈");
     setH("혼자당 - 혼자인 모든 분들을 위한 커뮤니티");
@@ -16,7 +26,13 @@ function Honjadang({ loginState, setH, setC, setD }) {
   return (
     <div>
       <MemorizedMenuBarHome loginState={loginState} />
-      <DangChosing setH={setH} setC={setC} setD={setD} />
+      <MemorizedDangChosing
+        setD={setD}
+        setJ={setJ}
+        setWeeklyNum={setWeeklyNum}
+        setSelectedJob={setSelectedJob}
+        setSelectedJobEng={setSelectedJobEng}
+      />
       <MemorizedFooter />
     </div>
   );

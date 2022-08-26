@@ -9,7 +9,6 @@ function LoginCom({
   onChange,
   onSwitch,
   onFinishFailed,
-  onSubmitGoogle,
   setLocalLoginState
 }) {
 
@@ -83,24 +82,6 @@ function LoginCom({
         >
           <Button type="primary" htmlType="submit">
             로그인
-          </Button>
-        </Form.Item>
-
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Button htmlType="button" onClick={onSubmitGoogle}>
-            <img
-              width="17px"
-              alt="Google sign-in"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
-            />
-            <span style={{ marginLeft: "10px", verticalAlign: "middle" }}>
-              Coninue with google
-            </span>
           </Button>
         </Form.Item>
 
