@@ -59,6 +59,50 @@ const columns = [
   },
 ];
 
+const columns2 = [
+  {
+    title: "카테고리",
+    dataIndex: "카테고리",
+    width: 80,
+  },
+  {
+    title: "제목",
+    dataIndex: "제목",
+  },
+  {
+    title: "글쓴이",
+    dataIndex: "글쓴이",
+    width: 80,
+  },
+  {
+    title: "작성일",
+    dataIndex: "작성일",
+    width: 80,
+  },
+  {
+    title: "조회",
+    dataIndex: "조회",
+    width: 50,
+  },
+  {
+    title: "공감",
+    dataIndex: "공감",
+    width: 50,
+  },
+];
+
+const columns3 = [
+  {
+    title: "제목",
+    dataIndex: "제목",
+  },
+  {
+    title: "조회",
+    dataIndex: "조회",
+    width: 50,
+  },
+];
+
 /*
 ajax 사용시에는 비동기로 처리 됨.
 이 부분에서 개발자는 동기로 처리해야되는 부분을 async await로 처리
@@ -111,7 +155,7 @@ function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
         제목: (
           <div className={board.flex}>
             <Link
-            className={board.link}
+              className={board.link}
               to="/honjabundang/community/writing"
               title={doc.data().num}
               name={doc.data().count}
@@ -596,6 +640,7 @@ function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
       count: Number(e.target.name) + 1,
     });
   };
+
 
   return (
     <>

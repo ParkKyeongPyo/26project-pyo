@@ -1,26 +1,94 @@
 .wide {
   height: auto;
-  width: 1240px;
+}
+
+.wideSub {
+  max-width: 1240px;
   margin: 5% auto 0px auto;
+}
+
+@media (min-width: 1024px) {
+  .middle1 {
+    display: none;
+  }
+
+  .middleBtn {
+    margin-right: 5px;
+    background-color: #e5e7eb;
+    padding: 7px 7px 5px 7px;
+    border-radius: 20px;
+    border: 1px solid white;
+    font-size: 16px;
+    text-align: justify;
+    color: black !important;
+  }
+
+  .floatingBtn{
+    margin-right: 14%;
+  }
+  
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .middle1 {
+    width: 100%;
+    height: 32px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 7px;
+  }
+
+  .middle3 {
+    display: none;
+  }
+
+  .middleBtn {
+    margin-right: 5px;
+    background-color: #e5e7eb;
+    padding: 2px 8px 0px 8px;
+    border-radius: 20px;
+    border: 1px solid white;
+    font-size: 14px;
+    text-align: justify;
+    color: black !important;
+  }
+  
+}
+
+@media (max-width: 768px) {
+  .middle1 {
+    width: 100%;
+    height: 32px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 7px;
+  }
+
+  .middle3 {
+    display: none;
+  }
+
+  .middleBtn {
+    margin-right: 5px;
+    background-color: #e5e7eb;
+    padding: 2px 8px 0px 8px;
+    border-radius: 20px;
+    border: 1px solid white;
+    font-size: 14px;
+    text-align: justify;
+    color: black !important;
+  }
+  
 }
 
 .halfboard {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: stretch;
+  align-items: center;
   width: 50%;
-}
-
-.middleBtn {
-  margin-right: 5px;
-  background-color: #e5e7eb;
-  padding: 7px 7px 5px 7px;
-  border-radius: 20px;
-  border: 1px solid white;
-  font-size:16px;
-  text-align: justify;
-  color:black !important;
 }
 
 .mouseOver {
@@ -38,13 +106,13 @@
   flex-direction: row;
   justify-content: space-between;
   border-bottom: 1px solid #e5e7eb;
-  font-style:unset;
+  font-style: unset;
   font-size: xx-large;
   color: inherit;
   background-color: inherit;
   width: 100%;
 }
 
-.btn{
-  font-size: 16px
+.btn {
+  font-size: 16px;
 }

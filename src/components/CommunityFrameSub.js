@@ -5,7 +5,6 @@ import React, { useEffect } from "react";
 
 import Footer from "./Footer";
 
-
 function CommunityFrameSub({
   job,
   jobEng,
@@ -13,7 +12,7 @@ function CommunityFrameSub({
   loginState,
   setH,
   setC,
-  setWritingNum
+  setWritingNum,
 }) {
   useEffect(() => {
     if (job === "") {
@@ -39,12 +38,17 @@ function CommunityFrameSub({
   return (
     <>
       <div className={styles.flexCommunity2}>
-        <Board
-          jobEng={jobEng}
-          selectedGroup={selectedGroup}
-          loginState={loginState}
-          setWritingNum={setWritingNum}
-        />
+        <div className={styles.board}>
+          <Board
+            jobEng={jobEng}
+            selectedGroup={selectedGroup}
+            loginState={loginState}
+            setWritingNum={setWritingNum}
+          />
+        </div>
+        <div className={styles.boardRight}>
+
+        </div>
       </div>
     </>
   );

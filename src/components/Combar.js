@@ -74,7 +74,7 @@ function Combar({
             </Button>
           </Popover>
         </div>
-        <div>
+        <div className={Frame.middle3}>
           <span
             className={Frame.middleBtn}
             onClick={onClick}
@@ -141,28 +141,93 @@ function Combar({
     );
   } else if (selectedGroup === "크리에이터") {
     return (
-      <div className={styles.flexThinBar}>
-        <div>
-          <Button className={Frame.btn} onClick={onClick}>
-            전체
-          </Button>
-          <Button className={Frame.btn} onClick={onClick}>
-            인기
-          </Button>
-          <Button className={Frame.btn} onClick={onClick}>
-            Q&A
-          </Button>
-          <Popover
-            content="내 글은 최근 날짜를 기준으로 최대 20개까지 볼 수 있습니다."
-            title="주의사항"
-            trigger="hover"
-          >
-            <Button className={Frame.btn} onClick={onMyWritingClick}>
-              내 글
+      <div>
+        <div className={styles.flexThinBar}>
+          <div>
+            <Button className={Frame.btn} onClick={onClick}>
+              전체
             </Button>
-          </Popover>
+            <Button className={Frame.btn} onClick={onClick}>
+              인기
+            </Button>
+            <Button className={Frame.btn} onClick={onClick}>
+              Q&A
+            </Button>
+            <Popover
+              content="내 글은 최근 날짜를 기준으로 최대 20개까지 볼 수 있습니다."
+              title="주의사항"
+              trigger="hover"
+            >
+              <Button className={Frame.btn} onClick={onMyWritingClick}>
+                내 글
+              </Button>
+            </Popover>
+          </div>
+          <div className={Frame.middle3}>
+            <span
+              className={Frame.middleBtn}
+              onClick={onClick}
+              onMouseOut={onGroupMouseOut}
+              onMouseOver={onGroupMouseOver}
+            >
+              정보공유
+            </span>
+            <span
+              className={Frame.middleBtn}
+              onClick={onClick}
+              onMouseOut={onGroupMouseOut}
+              onMouseOver={onGroupMouseOver}
+            >
+              경험공유
+            </span>
+            <span
+              className={Frame.middleBtn}
+              onClick={onClick}
+              onMouseOut={onGroupMouseOut}
+              onMouseOver={onGroupMouseOver}
+            >
+              현실고충
+            </span>
+            <span
+              className={Frame.middleBtn}
+              onClick={onClick}
+              onMouseOut={onGroupMouseOut}
+              onMouseOver={onGroupMouseOver}
+            >
+              수익
+            </span>
+            <span
+              className={Frame.middleBtn}
+              onClick={onClick}
+              onMouseOut={onGroupMouseOut}
+              onMouseOver={onGroupMouseOver}
+            >
+              세금&계약
+            </span>
+            <span
+              className={Frame.middleBtn}
+              onClick={onClick}
+              onMouseOut={onGroupMouseOut}
+              onMouseOver={onGroupMouseOver}
+            >
+              운영
+            </span>
+            <span
+              className={Frame.middleBtn}
+              onClick={onClick}
+              onMouseOut={onGroupMouseOut}
+              onMouseOver={onGroupMouseOver}
+            >
+              협업
+            </span>
+          </div>
+          <div>
+            <Button className={Frame.btn}>
+              <Link to="/honjabundang/community/write">글쓰기</Link>
+            </Button>
+          </div>
         </div>
-        <div>
+        <div className={Frame.middle1}>
           <span
             className={Frame.middleBtn}
             onClick={onClick}
@@ -219,11 +284,6 @@ function Combar({
           >
             협업
           </span>
-        </div>
-        <div>
-          <Button className={Frame.btn}>
-            <Link to="/honjabundang/community/write">글쓰기</Link>
-          </Button>
         </div>
       </div>
     );

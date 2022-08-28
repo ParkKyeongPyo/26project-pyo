@@ -45,12 +45,13 @@ function CommunityFrame({
   return (
     <>
       <div className={frame.wide} style={animation1}>
+        <div className={frame.wideSub}>
         {(selectedGroup === "프리랜서" || selectedGroup === "크리에이터") && (
           <animated.h1 style={animation1} className={frame.h1}>
             {selectedGroup === job
               ? `${job} 커뮤니티`
               : `${selectedGroup} ${job} 커뮤니티`}
-            <div style={{ marginRight: "14%" }}>
+            <div className={frame.floatingBtn}>
               <MemorizedFloatingBtn2
                 night={night}
                 setNight={setNight}
@@ -84,6 +85,7 @@ function CommunityFrame({
             setWritingNum={setWritingNum}
           />
         </animated.div>
+        </div>
       </div>
       <MemorizedFooter />
     </>

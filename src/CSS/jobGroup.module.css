@@ -2,7 +2,7 @@
   background-color: #e5e7eb;
   padding: 4px 20px 4px 20px;
   border-radius: 20px;
-  margin: 0 10px 0 10px;
+  margin: 5px 10px 5px 10px;
   border: 1px solid white;
   color: black;
 }
@@ -40,16 +40,20 @@
   justify-content: center;
   margin-bottom: 3%;
   font-size: 15px;
+  margin: 10px auto 10px auto;
 }
+
+
 
 .groupFlexCreater {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   color: inherit;
   background-color: inherit;
   font-size: 14px;
   color: black;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .groupFlexCreaterH {

@@ -24,17 +24,6 @@ function FAQ({ loginState }) {
         <br />
 
         <div className={faq.heading}>
-          Q. 글쓰기, 글 페이지에서 뒤로가기시 홈으로 돌아와요.
-        </div>
-        <div>
-          A. 개발 효율을 위해 최대한 페이지를 줄이면서 나타나는 현상이며 오른쪽
-          상단에 있는 자체 뒤로가기 버튼을 이용해주시기 바랍니다.
-        </div>
-
-        <br />
-        <br />
-
-        <div className={faq.heading}>
           Q. 사진 및 미디어 삽입, 인용, 표 기능이 안되요.
         </div>
         <div>

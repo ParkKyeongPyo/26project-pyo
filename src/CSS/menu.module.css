@@ -1,3 +1,30 @@
+@media(min-width: 1024px) {
+    .menuDetail{
+        display: flex;
+        justify-content: flex-start;
+        margin: 0 auto 0 auto;
+        max-width: 1240px;
+    }
+    
+}
+
+@media(max-width: 1024px) and ( min-width: 768px){
+    .menuDetail{
+        display: flex;
+        justify-content: flex-start;
+        margin: 0 auto 0 auto;
+    }
+}
+
+@media(max-width: 768px) {
+    .menuDetail{
+        display: flex;
+        justify-content: flex-start;
+        margin: 0 auto 0 auto;
+    }
+    
+}
+
 .flex{
     display: flex;
     flex-direction: row;
@@ -9,8 +36,8 @@
     font-size: large;
     background-color: #232F3E;
     color: white;
-    width: 100%;
     font-family: 'GangwonEdu_OTFBoldA';
+    height: 48px;
 }
 
 .flexMobile{
@@ -18,35 +45,26 @@
     background-color: #232F3E;
     color: white;
     width: 100%;
-    height: 53px;
+    height: 48px;
 }
 
-.menuDetail{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    width: 1240px;
-    margin: 0 auto 0 auto;
-}
 
 .flexItem{
     padding: 10px 12px 10px 12px;
 }
 
 .logo{
-    padding: 10px 12px 10px 0;
+    padding: 10px 12px 10px 10px;
    
     
 }
 .logoMargin{
     padding: 10px 12px 10px 12px;
-
-    
 }
 
 
 .flexItemLast{
-    padding: 10px 0 10px 15px;
+    padding: 10px 10px 10px 15px;
     margin-left: auto;
 }
 

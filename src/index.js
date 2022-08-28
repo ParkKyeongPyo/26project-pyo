@@ -8,7 +8,7 @@ import { HelmetProvider } from "react-helmet-async";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <div style={{ height: "inherit", minWidth: "1280px" }}>
+  <div style={{ height: "inherit" }}>
     <HelmetProvider>
       <App />
     </HelmetProvider>

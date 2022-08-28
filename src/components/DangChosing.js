@@ -16,7 +16,7 @@ import { doc, updateDoc, getDoc } from "firebase/firestore";
 
 import dateCalculator from "./dateCalculator.js";
 
-import { EyeOutlined } from "@ant-design/icons";
+import { EyeFilled } from "@ant-design/icons";
 
 /* 
 해결해야 될 문제
@@ -34,7 +34,7 @@ let pick = [
     글번호: 1,
     job: "크리에이터",
     jobEng: "allCrea",
-    조회수: 14,
+    조회수: 30,
   },
 ];
 let best = [];
@@ -91,8 +91,10 @@ function DangChosing({
     const updateRef = doc(db, "혼자번당모든글", pick[index].jobEng);
     const docSnap = doc(updateRef, "Writing", `${pick[index].글번호}`);
 
+    const docData = await getDoc(docSnap);
+
     await updateDoc(docSnap, {
-      count: pick[index].조회수 + 1,
+      count: docData.data().count + 1,
     });
   };
 
@@ -119,6 +121,7 @@ function DangChosing({
 
   return (
     <div className={home.frame}>
+      <div className={home.frameSub}>
       <div className={home.leftBar}>
         <div></div>
       </div>
@@ -132,7 +135,7 @@ function DangChosing({
               className={home.imgHonja}
             />
 
-            <div style={{ paddingTop: "15px" }}>
+            <div className={home.title} style={{ paddingTop: "15px" }}>
               "대한민국에서 혼자인 모든 분들을 위한 커뮤니티, 혼자당"
             </div>
           </div>
@@ -177,7 +180,7 @@ function DangChosing({
                     </Link>
 
                     <span className={home.count}>
-                      <EyeOutlined />
+                      <EyeFilled  style={{marginRight: "2px"}}/>
                       {pick[0].조회수}
                     </span>
                   </div>
@@ -342,6 +345,7 @@ function DangChosing({
       </div>
 
       <div className={home.rightBar}></div>
+      </div>
     </div>
   );
 }
