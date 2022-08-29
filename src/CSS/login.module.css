@@ -55,17 +55,16 @@
   justify-content: flex-start;
   width: 100%;
   margin: 7px 0px 7px 0;
-  padding-right: 2%;
 }
 
 /*테이블과 광고 css*/
 @media (min-width: 1024px){
   .board{
-    width: 87%;
+    width: 75%;
   }
   
   .boardRight{
-    width: 13%
+    width: 25%
   }
 }
 

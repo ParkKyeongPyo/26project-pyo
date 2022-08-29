@@ -1,15 +1,8 @@
 .flex{
+    height: inherit;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 0px 20px 0px;
-    border-top: 1px solid #e5e7eb;
-    margin-top: 15%;
-    margin-bottom: 0px;
-    color: gray;
-    font-family: none;
-    font-size: 11px;
+    justify-content: flex-end;
 }
 
 .item{
@@ -19,4 +12,16 @@
 .icon{
     font-size: 10px;
     color: gray !important;
+}
+
+.frame{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px 20px 0px;
+    border-top: 1px solid #e5e7eb;
+    color: gray;
+    font-family: none;
+    font-size: 11px;
 }

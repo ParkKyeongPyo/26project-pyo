@@ -13,7 +13,8 @@ import { doc, getDoc, updateDoc, setDoc, collection } from "firebase/firestore";
 import { authService } from "../fbase.js";
 
 import WriteCate from "./WriteCate";
-import Footer from "./Footer";
+
+import { useNavigate } from "react-router-dom";
 
 const MemorizedWriteCate = React.memo(WriteCate);
 /*
@@ -34,6 +35,8 @@ function Write({
   const [category, setCategory] = useState("전체");
   const [header, setHeader] = useState("");
   const [content, setContent] = useState("");
+
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     setHeader(e.target.value);
@@ -100,56 +103,52 @@ function Write({
     const docSubRef = doc(docRefs, "Writing", `${docSnap.data().num}`);
 
     if (loginState) {
-      await setDoc(docSubRef,
-        {
-          num: docSnap.data().num,
-          cateNum: cateNum,
-          user: writerName,
-          email: email,
-          header: header,
-          category: category,
-          content: content,
-          symCount: 0,
-          symArray: [],
-          symNum: 0,
-          count: 0,
-          time: `${("0" + date.getHours()).slice(-2)}:${(
-            "0" + date.getMinutes()
-          ).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`,
-          date: `${("0" + (date.getMonth() + 1)).slice(-2)}-${(
-            "0" + date.getDate()
-          ).slice(-2)}`,
-          year: `${date.getFullYear()}`,
-          replyCount: 0,
-          favNum: 0,
-          reply: [],
-        }
-      );
+      await setDoc(docSubRef, {
+        num: docSnap.data().num,
+        cateNum: cateNum,
+        user: writerName,
+        email: email,
+        header: header,
+        category: category,
+        content: content,
+        symCount: 0,
+        symArray: [],
+        symNum: 0,
+        count: 0,
+        time: `${("0" + date.getHours()).slice(-2)}:${(
+          "0" + date.getMinutes()
+        ).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`,
+        date: `${("0" + (date.getMonth() + 1)).slice(-2)}-${(
+          "0" + date.getDate()
+        ).slice(-2)}`,
+        year: `${date.getFullYear()}`,
+        replyCount: 0,
+        favNum: 0,
+        reply: [],
+      });
     } else {
-      await setDoc(docSubRef,
-        {
-          num: docSnap.data().num,
-          cateNum: cateNum,
-          user: writerName,
-          header: header,
-          category: category,
-          content: content,
-          symNum: 0,
-          symCount: 0,
-          symArray: [],
-          count: 0,
-          time: `${("0" + date.getHours()).slice(-2)}:${(
-            "0" + date.getMinutes()
-          ).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`,
-          date: `${("0" + (date.getMonth() + 1)).slice(-2)}-${(
-            "0" + date.getDate()
-          ).slice(-2)}`,
-          year: `${date.getFullYear()}`,
-          replyCount: 0,
-          favNum: 0,
-          reply: [],
-        }
-      );
+      await setDoc(docSubRef, {
+        num: docSnap.data().num,
+        cateNum: cateNum,
+        user: writerName,
+        header: header,
+        category: category,
+        content: content,
+        symNum: 0,
+        symCount: 0,
+        symArray: [],
+        count: 0,
+        time: `${("0" + date.getHours()).slice(-2)}:${(
+          "0" + date.getMinutes()
+        ).slice(-2)}:${("0" + date.getSeconds()).slice(-2)}`,
+        date: `${("0" + (date.getMonth() + 1)).slice(-2)}-${(
+          "0" + date.getDate()
+        ).slice(-2)}`,
+        year: `${date.getFullYear()}`,
+        replyCount: 0,
+        favNum: 0,
+        reply: [],
+      });
     }
 
     await updateDoc(doc(db, "혼자번당글번호", jobEng), {
@@ -163,9 +162,7 @@ function Write({
       });
     }
 
-    setWrite(false);
-    setCommunity(true);
-    setWriting(false);
+    navigate("/honjabundang/community");
   };
 
   /*

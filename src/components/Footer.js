@@ -56,7 +56,11 @@ function Footer() {
         >
           일 아이콘 제작자: Flat Icons - Flaticon
         </a>
-        <a className={footer.icon} href="https://www.flaticon.com/kr/free-icons/-" title="- 아이콘">
+        <a
+          className={footer.icon}
+          href="https://www.flaticon.com/kr/free-icons/-"
+          title="- 아이콘"
+        >
           - 아이콘 제작자: Freepik - Flaticon
         </a>
       </>
@@ -65,23 +69,25 @@ function Footer() {
 
   return (
     <footer className={footer.flex}>
-      <div className={footer.item}>
-        Copyright © 2022.08. 혼자당. All rights reserved.
-      </div>
-      <div className={footer.item}>
-        혼자당 홈페이지 무단 도용 및 관련 저작권 침해시 법적 조치를 받을 수
-        있습니다.
-      </div>
-      <div className={footer.item}>문의 : as8798as@gmail.com</div>
-      <div className={footer.icon}>
-        <Popover
-          content={content}
-          iconItem
-          title="아이콘 저작권자"
-          trigger="hover"
-        >
-          아이콘 저작권
-        </Popover>
+      <div className={footer.frame}>
+        <div className={footer.item}>
+          Copyright © 2022.08. 혼자당. All rights reserved.
+        </div>
+        <div className={footer.item}>
+          혼자당 홈페이지 무단 도용 및 관련 저작권 침해시 법적 조치를 받을 수
+          있습니다.
+        </div>
+        <div className={footer.item}>문의 : as8798as@gmail.com</div>
+        <div className={footer.icon}>
+          <Popover
+            content={content}
+            iconItem
+            title="아이콘 저작권자"
+            trigger="hover"
+          >
+            아이콘 저작권
+          </Popover>
+        </div>
       </div>
     </footer>
   );

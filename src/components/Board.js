@@ -21,6 +21,7 @@ import {
 import { authService } from "../fbase.js";
 
 import Combar from "./Combar.js";
+import Tables from "./Table.js";
 
 const columns = [
   {
@@ -641,6 +642,16 @@ function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
     });
   };
 
+  /*
+   <MemorizedTable
+        columns={columns}
+        dataSource={[...data]}
+        pagination={false}
+        boardered="true"
+         size="small"
+      />
+  */
+
 
   return (
     <>
@@ -657,13 +668,9 @@ function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
         setPageSize={setPageSize}
         setMyWriting={setMyWriting}
       />
-      <MemorizedTable
-        columns={columns}
-        dataSource={[...data]}
-        pagination={false}
-        boardered="true"
-        size="small"
-      />
+      
+      <Tables data={[...data]}/>
+
       {myWriting ? null : (
         <MemorizedPagination
           className={board.pagination}
