@@ -38,6 +38,8 @@
     color: white;
     font-family: 'GangwonEdu_OTFBoldA';
     height: 48px;
+    white-space: nowrap;
+    overflow-x: auto;
 }
 
 .flexMobile{

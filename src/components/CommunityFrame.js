@@ -7,6 +7,7 @@ import FloatingBtn2 from "./FloatingBtn2.js";
 import Footer from "./Footer";
 
 import { useSpring, useSpringRef, animated, useChain } from "react-spring";
+import session from "redux-persist/lib/storage/session";
 
 const MemorizedFloatingBtn2 = React.memo(FloatingBtn2);
 const MemorizedCommunityFrameSub = React.memo(CommunityFrameSub);
@@ -40,17 +41,19 @@ function CommunityFrame({
 
   useChain([animation1Ref, animation2Ref], [0.2, 0.4] /*1000*/);
 
+  const category = sessionStorage.getItem("Category");
+
   return (
     <>
       <div className={frame.wide} style={animation1}>
         <div className={frame.wideSub}>
           {(selectedGroup === "프리랜서" || selectedGroup === "크리에이터") && (
             <animated.h1 style={animation1} className={frame.h1}>
-              {selectedGroup === job ? (
-                <div style={{ paddingTop: "13px" }}>{`${job} 커뮤니티`}</div>
+              {(job === "프리랜서" || job === "크리에이터") ? (
+                <div className={frame.h}>{`${job} 커뮤니티`}</div>
               ) : (
-                <div style={{ paddingTop: "13px" }}>
-                  {`${selectedGroup} ${job} 커뮤니티`}
+                <div className={frame.h}>
+                  {`${category} ${job} 커뮤니티`}
                 </div>
               )}
               <div className={frame.floatingBtn}>
@@ -60,14 +63,14 @@ function CommunityFrame({
           )}
           {selectedGroup === "자영업자" && (
             <animated.h1 style={animation1} className={frame.h1}>
-              {selectedGroup === job ? (
+              {job == "자영업자" ? (
                 <div
-                  style={{ paddingTop: "13px" }}
+                  className={frame.h}
                 >{`${job} 사장님 커뮤니티`}</div>
               ) : (
                 <div
-                  style={{ paddingTop: "13px" }}
-                >{`${selectedGroup} ${job} 사장님 커뮤니티`}</div>
+                  className={frame.h}
+                >{`${category} ${job} 사장님 커뮤니티`}</div>
               )}
               <div style={{ marginRight: "14%" }}>
                 <MemorizedFloatingBtn2 night={night} setNight={setNight} />

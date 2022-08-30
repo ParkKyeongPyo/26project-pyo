@@ -38,6 +38,7 @@ function Jobchosing({
     //직업 sessionStorage에 저장해 새로고침시 jobEng 유지하도록 함.
     sessionStorage.setItem("job", e.target.innerText);
     sessionStorage.setItem("jobEng", e.target.title);
+    sessionStorage.setItem("Category", e.target.name);
   };
 
   const onChange = (value) => {
@@ -102,13 +103,14 @@ function Jobchosing({
 
   return (
     <div style={{ height: "inherit", marginLeft: "auto", marginRight: "auto" }}>
-      <animated.div style={animation1} className={common.flexRowhMargin}>
-        "혼자번당은 대한민국에서 혼자 일하는 모든 분들을 위한 커뮤니티입니다"
-      </animated.div>
+        <animated.div style={animation1} className={common.flexRowhMargin}>
+          "혼자번당은 대한민국에서 혼자 일하는 모든 분들을 위한 커뮤니티입니다"
+        </animated.div>
 
-      <animated.div style={animation2} className={common.flexRowMiddle}>
-        같은 일을 하는 사람들과 소통하고 배우고 나누며 성장해보세요!
-      </animated.div>
+        <animated.div style={animation2} className={common.flexRowMiddle}>
+          같은 일을 하는 사람들과 소통하고 배우고 나누며 성장해보세요!
+        </animated.div>
+     
       <animated.div style={animation3}>
         <div className={common.imgFlex}>
           <img alt="혼자당" className={common.img} src="img/work.png" />
@@ -133,9 +135,10 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <div className={groupStyles.groupFlexCreater}>
+                <div className={groupStyles.groupFlexCreaterJob}>
                   <Link
                     title="allFree"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -151,9 +154,10 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>IT</h2>
-                <div className={groupStyles.groupFlexCreater}>
+                <div className={groupStyles.groupFlexCreaterJob}>
                   <Link
                     title="dev"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -169,9 +173,10 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>창작</h2>
-                <div className={groupStyles.groupFlexCreater}>
+                <div className={groupStyles.groupFlexCreaterJob}>
                   <Link
                     title="dsn"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -183,6 +188,7 @@ function Jobchosing({
 
                   <Link
                     title="wit"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -193,6 +199,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="wton"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -203,6 +210,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="cpr"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -218,9 +226,10 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>문서/글쓰기</h2>
-                <div className={groupStyles.groupFlexCreater}>
+                <div className={groupStyles.groupFlexCreaterJob}>
                   <Link
                     title="rpo"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -231,6 +240,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="trans"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -241,6 +251,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="inter"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -251,6 +262,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="copy"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -266,9 +278,10 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>교육</h2>
-                <div className={groupStyles.groupFlexCreater}>
+                <div className={groupStyles.groupFlexCreaterJob}>
                   <Link
                     title="tch"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -279,6 +292,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="psy"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -296,9 +310,10 @@ function Jobchosing({
                 <h2 className={groupStyles.groupFlexCreaterH}>
                   영상/사진/음향
                 </h2>
-                <div className={groupStyles.groupFlexCreater}>
+                <div className={groupStyles.groupFlexCreaterJob}>
                   <Link
                     title="vdo"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -309,6 +324,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="pic"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -319,6 +335,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="vce"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -334,9 +351,10 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>비지니스</h2>
-                <div className={groupStyles.groupFlexCreater}>
+                <div className={groupStyles.groupFlexCreaterJob}>
                   <Link
                     title="ket"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -347,6 +365,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="sul"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -362,9 +381,10 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>방송/생활</h2>
-                <div className={groupStyles.groupFlexCreater}>
+                <div className={groupStyles.groupFlexCreaterJob}>
                   <Link
                     title="act"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -375,6 +395,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="mdl"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -385,6 +406,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="up"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -395,6 +417,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="hair"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -405,6 +428,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="htr"
+                    name="프리랜서"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -428,9 +452,10 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <div className={groupStyles.groupFlexCreater}>
+                <div className={groupStyles.groupFlexCreaterJob}>
                   <Link
                     title="allCrea"
+                    name="크리에이터"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -446,9 +471,10 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>IT</h2>
-                <div className={groupStyles.groupFlexCreater}>
+                <div className={groupStyles.groupFlexCreaterJob}>
                   <Link
                     title="wbap"
+                    name="크리에이터"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -459,6 +485,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="smt"
+                    name="크리에이터"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -469,6 +496,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="shop"
+                    name="크리에이터"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -484,9 +512,10 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>SNS</h2>
-                <div className={groupStyles.groupFlexCreater}>
+                <div className={groupStyles.groupFlexCreaterJob}>
                   <Link
                     title="tube"
+                    name="크리에이터"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -497,6 +526,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="istar"
+                    name="크리에이터"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -507,6 +537,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="tik"
+                    name="크리에이터"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -517,6 +548,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="blog"
+                    name="크리에이터"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -527,6 +559,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="perb"
+                    name="크리에이터"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -537,6 +570,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="broad"
+                    name="크리에이터"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -560,9 +594,10 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <div className={groupStyles.groupFlexCreater}>
+                <div className={groupStyles.groupFlexCreaterJob}>
                   <Link
                     title="allSelf"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -578,9 +613,10 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>요식업</h2>
-                <div className={groupStyles.groupFlexCreater}>
+                <div className={groupStyles.groupFlexCreaterJob}>
                   <Link
                     title="din"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -591,6 +627,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="cof"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -601,6 +638,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="dsrt"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -611,6 +649,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="acol"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -621,6 +660,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="franc"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -636,9 +676,10 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>편의/여가</h2>
-                <div className={groupStyles.groupFlexCreater}>
+                <div className={groupStyles.groupFlexCreaterJob}>
                   <Link
                     title="mini"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -649,6 +690,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="none"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -659,6 +701,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="study"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -669,6 +712,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="pc"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -679,6 +723,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="sing"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -694,9 +739,10 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>생활</h2>
-                <div className={groupStyles.groupFlexCreater}>
+                <div className={groupStyles.groupFlexCreaterJob}>
                   <Link
                     title="health"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -707,6 +753,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="hshop"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -717,6 +764,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="nail"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -727,6 +775,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="phone"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -737,6 +786,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="cloth"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -752,9 +802,10 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>학원</h2>
-                <div className={groupStyles.groupFlexCreater}>
+                <div className={groupStyles.groupFlexCreaterJob}>
                   <Link
                     title="test"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -765,6 +816,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="exer"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -775,6 +827,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="art"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}
@@ -785,6 +838,7 @@ function Jobchosing({
                   </Link>
                   <Link
                     title="sing"
+                    name="자영업자"
                     to="/honjabundang/community"
                     className={groupStyles.group}
                     onMouseOut={onGroupMouseOut}

@@ -176,7 +176,7 @@ function Writing({
       ]);
     }, 1000);
 
-    const updateFav = doc(db, '혼자번당', `${jobEng}Cate`);
+    const updateFav = doc(db, "혼자번당", `${jobEng}Cate`);
 
     const docSnap = await getDoc(updateFav);
 
@@ -224,7 +224,7 @@ function Writing({
         reply: doc.data().reply,
         symCount: doc.data().symCount,
         symArray: doc.data().symArray,
-        count: doc.data().count
+        count: doc.data().count,
       };
       itemsProcessed++;
       let i = 0;
@@ -242,9 +242,7 @@ function Writing({
         setSynCount(data.symCount);
         //meta data
         if (job === "") {
-          setH(
-            `${data.header}-${selectedGroup} 커뮤니티`
-          );
+          setH(`${data.header}-${selectedGroup} 커뮤니티`);
           setC(`${data.category}, ${data.content}`);
         } else {
           setH(`${data.header}-${job} 커뮤니티`);
@@ -271,8 +269,6 @@ function Writing({
 
     //DB 곰감배열에 공감버튼 누른 사용자가 없고 처음 눌렀다면 공감 카운트 + 1.
     if (state && synOnlyOne === 1) {
-
-
       await updateDoc(docRefs, {
         symCount: data.symCount + 1,
         symArray: arrayUnion({
@@ -282,7 +278,7 @@ function Writing({
 
       //공감수 n-1개라면 symNum + 1
       if (data.symCount === symNum) {
-        const updateCateRef = doc(db, `혼자번당`, `${jobEng}Cate`)
+        const updateCateRef = doc(db, `혼자번당`, `${jobEng}Cate`);
         const docSnap = await getDoc(updateCateRef);
 
         await updateDoc(updateCateRef, {
@@ -316,61 +312,62 @@ function Writing({
     <>
       <div className={writing.flex}>
         <div>
-          <div>
-            <div className={writing.heading}>
-              {data.header}
+          <div className={writing.adLeft}>
+            <div>
+              <div className={writing.heading}>{data.header}</div>
+            </div>
+            <div className={writing.detail}>
+              <span>[{data.category}]</span>
+              <span className={writing.writer}>{data.user}</span>
+
+              <span className={writing.item1}>
+                <EyeOutlined /> {data.count}
+              </span>
+              <span className={writing.item2}>
+                <MessageOutlined /> {comments.length}
+              </span>
+              <span className={writing.item3}>
+                <HeartOutlined /> {synCount}
+              </span>
+            </div>
+            <div className={writing.detail2}>
+              <span className={writing.date}>
+                {data.year}-{data.date}{" "}
+              </span>
+              <span>{data.time}</span>
             </div>
           </div>
-          <div className={writing.detail}>
-            <span>[{data.category}]</span>
-            <span className={writing.writer}>{data.user}</span>
-
-            <span className={writing.item}>
-              <EyeOutlined /> {data.count}
-            </span>
-            <span className={writing.item2}>
-              <MessageOutlined /> {comments.length}
-            </span>
-            <span>
-              <HeartOutlined /> {synCount}
-            </span>
+          <div className={writing.content}>
+            <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
           </div>
-          <div className={writing.detail2}>
-            <span className={writing.date}>
-              {data.year}-{data.date}{" "}
-            </span>
-            <span>{data.time}</span>
+          <div className={writing.btns}>
+            <Button
+              className={writing.symBtn}
+              htmlType="button"
+              onClick={onSymCondition}
+            >
+              <FavoriteIcon fontSize="small" />
+              <span className={writing.symWord}>공감</span>
+            </Button>
+            <Button className={writing.symCount} htmlType="button">
+              <span>{data.symCount}명</span>
+            </Button>
+          </div>
+          <div>
+            {comments.length > 0 && <CommentList comments={comments} />}
+            <Comment
+              content={
+                <Editor
+                  onChange={handleChange}
+                  onSubmit={submit}
+                  submitting={submitting}
+                  value={value}
+                />
+              }
+            />
           </div>
         </div>
-        <div className={writing.content}>
-          <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
-        </div>
-        <div className={writing.btns}>
-          <Button
-            className={writing.symBtn}
-            htmlType="button"
-            onClick={onSymCondition}
-          >
-            <FavoriteIcon fontSize="small" />
-            <span className={writing.symWord}>공감</span>
-          </Button>
-          <Button className={writing.symCount} htmlType="button">
-            <span>{data.symCount}명</span>
-          </Button>
-        </div>
-        <div>
-          {comments.length > 0 && <CommentList comments={comments} />}
-          <Comment
-            content={
-              <Editor
-                onChange={handleChange}
-                onSubmit={submit}
-                submitting={submitting}
-                value={value}
-              />
-            }
-          />
-        </div>
+        <div className={writing.ad}></div>
       </div>
     </>
   );

@@ -675,8 +675,7 @@ function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
         <MemorizedPagination
           className={board.pagination}
           page={currentPage}
-          variant="outlined"
-          color="primary"
+          size="small"
           count={100}
           onChange={onChange}
         />

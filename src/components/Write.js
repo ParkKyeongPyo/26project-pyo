@@ -186,7 +186,7 @@ function Write({
         <Input
           key="header"
           onChange={onChange}
-          style={{ width: "500px" }}
+          style={{ width: "70%" }}
           placeholder="제목"
         />
 

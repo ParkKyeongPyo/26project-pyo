@@ -53,6 +53,16 @@
   background-color: inherit;
   font-size: 14px;
   color: black;
+}
+
+.groupFlexCreaterJob {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: inherit;
+  background-color: inherit;
+  font-size: 14px;
+  color: black;
   border-bottom: 1px solid #e5e7eb;
 }
 
