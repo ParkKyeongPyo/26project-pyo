@@ -1,17 +1,22 @@
-.flex{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: large;
-    margin: 7% auto 0 auto;
+.flex {
+    max-width: 1240;
+  font-size: large;
 }
 
-.item{
-    font-size: large;
+.flexSub {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  margin: 7% auto 0 auto;
 }
 
-.heading{
-    font-size: x-large;
-    margin-bottom: 1%;
+.item {
+  font-size: large;
+}
+
+.heading {
+  font-size: x-large;
+  margin-bottom: 1%;
 }

@@ -9,8 +9,6 @@ import "antd/dist/antd.min.css";
 
 import { Link } from "react-router-dom";
 
-import { useState, useEffect } from "react";
-
 import { db } from "../fbase.js";
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 
@@ -25,16 +23,56 @@ import { EyeFilled } from "@ant-design/icons";
 
 let pick = [
   {
+    닉네임: "익명3470",
+    제목: "프로그래머에게 가장 중요한 것",
+    커뮤니티: "혼자번당",
+    community: "honjabundang",
+    카테고리: "프리랜서",
+    날짜: "2022-09-01 15:21:17",
+    글분류: "전체",
+    글번호: 2,
+    job: "개발자",
+    jobEng: "dev",
+    조회수: 11,
+  },
+  {
+    닉네임: "개발자",
+    제목: "초보 개발자라면 꼭 기억해야 할 5가지 (feat.노마드코더)",
+    커뮤니티: "혼자번당",
+    community: "honjabundang",
+    카테고리: "프리랜서",
+    날짜: "2022-09-01 14:51:47",
+    글분류: "전체",
+    글번호: 1,
+    job: "개발자",
+    jobEng: "dev",
+    조회수: 22,
+  },
+  {
+    닉네임: "고독한 대식가",
+    제목: "초기 크리에이터가 성장하기 위한 타게팅 전략",
+    커뮤니티: "혼자번당",
+    community: "honjabundang",
+    카테고리: "크리에이터",
+    날짜: "2022-08-31 03:59:32",
+    글분류: "운영",
+    글번호: 3,
+    job: "크리에이터",
+    jobEng: "allCrea",
+    조회수: 27,
+  },
+  {
     닉네임: "Tate",
     제목: "헐 크리에이터 커뮤니티가 있네요ㅜㅜ 필요했는데",
     커뮤니티: "혼자번당",
+    community: "honjabundang",
     카테고리: "크리에이터",
     날짜: "2022-08-25 18:07:27",
     글분류: "전체",
     글번호: 1,
     job: "크리에이터",
     jobEng: "allCrea",
-    조회수: 30,
+    조회수: 55,
   },
 ];
 let best = [];
@@ -75,6 +113,7 @@ function DangChosing({
     //직업 sessionStorage에 저장해 새로고침시 jobEng 유지하도록 함.
     sessionStorage.setItem("job", pick[index].job);
     sessionStorage.setItem("jobEng", pick[index].jobEng);
+    sessionStorage.setItem("Category", pick[index].카테고리);
   };
 
   //WEECKLY 글 화면
@@ -135,7 +174,7 @@ function DangChosing({
               className={home.imgHonja}
             />
 
-            <div className={home.title} style={{ paddingTop: "15px" }}>
+            <div className={home.title}>
               "대한민국에서 혼자인 모든 분들을 위한 커뮤니티, 혼자당"
             </div>
           </div>
@@ -149,46 +188,44 @@ function DangChosing({
                 <span className={home.naming}>WEEKLY PICK</span>
               </div>
               <div className={home.comTable}>
-                <div className={home.table}>
+                {pick.map((item, index) => (
+                  <div className={home.table}>
                   <div className={home.tableSub}>
-                    <span className={home.span}>{pick[0].닉네임}</span>
+                    <span className={home.span}>{item.닉네임}</span>
                     <span className={home.spanDate}>
-                      {dateCalculator(pick[0].날짜)}
+                      {dateCalculator(item.날짜)}
                     </span>
-                    <Link to="/honjabundang" className={home.spanCom1}>
-                      #{pick[0].커뮤니티}
+                    <Link to={`/${item.community}`} className={home.spanCom1}>
+                      #{item.커뮤니티}
                     </Link>
                     <Link
-                      to="/honjabundang/community"
-                      title={0}
+                      to={`/${item.community}/community`}
+                      title={index}
                       className={home.spanCom2}
                       onClick={onCateClick}
                     >
-                      #{pick[0].카테고리}
+                      #{item.카테고리}
                     </Link>
                   </div>
                   <div className={home.tableSub2}>
-                    <span className={home.spanWriting}>{pick[0].글분류} </span>
+                    <span className={home.spanWriting}>{item.글분류} </span>
                     <Link
                       to="/weeckly"
-                      title={0}
+                      title={index}
                       onClick={onPickClick}
                       className={home.span}
                       onMouseOut={onWeecklyMouseOut}
                     >
-                      {pick[0].제목}
+                      {item.제목}
                     </Link>
 
                     <span className={home.count}>
                       <EyeFilled  style={{marginRight: "2px"}}/>
-                      {pick[0].조회수}
+                      {item.조회수}
                     </span>
                   </div>
                 </div>
-                <div className={home.table}></div>
-                <div className={home.table}></div>
-                <div className={home.table}></div>
-                <div className={home.table}></div>
+                ))}
               </div>
             </div>
             <div className={home.com}>
@@ -223,11 +260,14 @@ function DangChosing({
               <div className={home.flexTwoRow}>
                 <div className={groupStyles.groupFlex}>
                   <div className={groupStyles.groupTopCreater}>
-                    <div className={groupStyles.groupFlexCreater}>
-                      {`<혼자 일하는 모든 분들을 위한 커뮤니티>`}
+                    <div className={groupStyles.dangHeader}>
+                      <div>"혼자 일하는</div>
+                      <div>&nbsp;모든 분들을 위한 커뮤니티"</div>
                     </div>
                     <div className={groupStyles.hashtag}>
-                      #프리랜서 #크리에이터 #자영업자
+                      <div>#프리랜서</div>
+                      <div>#크리에이터</div>
+                      <div>#자영업자</div>
                     </div>
                     <div className={common.imgFlex}>
                       <img
@@ -252,11 +292,14 @@ function DangChosing({
 
                 <div className={groupStyles.groupFlex}>
                   <div className={groupStyles.groupTopCreater}>
-                    <div className={groupStyles.groupFlexCreater}>
-                      {`<혼자 투자하는 모든 분들을 위한 커뮤니티>`}
+                  <div className={groupStyles.dangHeader}>
+                      <div>"혼자 투자하는</div>
+                      <div>&nbsp;모든 분들을 위한 커뮤니티"</div>
                     </div>
                     <div className={groupStyles.hashtag}>
-                      #주식 #부동산 #코인 #투자
+                      <div>#주식</div>
+                      <div>#부동산</div>
+                      <div>#코인</div>
                     </div>
                     <div className={common.imgFlex}>
                       <img
@@ -280,14 +323,17 @@ function DangChosing({
                 </div>
               </div>
 
-              <div className={home.flexTwoRow} style={{ marginTop: "40px" }}>
+              <div className={home.flexTwoRow} style={{ marginTop: "20px" }}>
                 <div className={groupStyles.groupFlex}>
                   <div className={groupStyles.groupTopCreater}>
-                    <div className={groupStyles.groupFlexCreater}>
-                      {`<혼자 여행가는 모든 분들을 위한 커뮤니티>`}
+                  <div className={groupStyles.dangHeader}>
+                      <div>"혼자 여행가는</div>
+                      <div>&nbsp;모든 분들을 위한 커뮤니티"</div>
                     </div>
                     <div className={groupStyles.hashtag}>
-                      #국내여행 #해외여행 #휴가
+                      <div>#국내여행</div>
+                      <div>#해외여행</div>
+                      <div>#휴가</div>
                     </div>
                     <div className={common.imgFlex}>
                       <img
@@ -312,10 +358,15 @@ function DangChosing({
 
                 <div className={groupStyles.groupFlex}>
                   <div className={groupStyles.groupTopCreater}>
-                    <div className={groupStyles.groupFlexCreater}>
-                      {`<혼자 사는 모든 분들을 위한 커뮤니티>`}
+                  <div className={groupStyles.dangHeader}>
+                      <div>"혼자 사는</div>
+                      <div>&nbsp;모든 분들을 위한 커뮤니티"</div>
                     </div>
-                    <div className={groupStyles.hashtag}>#자취 #생활 #꿀팁</div>
+                    <div className={groupStyles.hashtag}>
+                      <div>#자취</div>
+                      <div>#생활</div>
+                      <div>#꿀팁</div>
+                    </div>
                     <div className={common.imgFlex}>
                       <img
                         alt="혼자산당"

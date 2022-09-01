@@ -5,7 +5,8 @@
     width: 25%;
   }
 
-  .adLeft{
+  .adLeft,
+  .content{
     width: 75%;
   }
 }
@@ -18,6 +19,11 @@
   .adLeft{
     width: 100%;
   }
+
+  .content{
+    width: 98%;
+  }
+
   
 }
 
@@ -36,7 +42,7 @@
   min-height: 300px;
   margin-top: 5px;
   margin-left: 2%;
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .heading {

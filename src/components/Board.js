@@ -1,4 +1,3 @@
-import { Table, message } from "antd";
 import React from "react";
 import { useState, useEffect } from "react";
 import Pagination from "@mui/material/Pagination";
@@ -23,87 +22,6 @@ import { authService } from "../fbase.js";
 import Combar from "./Combar.js";
 import Tables from "./Table.js";
 
-const columns = [
-  {
-    title: "글번호",
-    dataIndex: "글번호",
-    width: 80,
-  },
-  {
-    title: "카테고리",
-    dataIndex: "카테고리",
-    width: 80,
-  },
-  {
-    title: "제목",
-    dataIndex: "제목",
-  },
-  {
-    title: "글쓴이",
-    dataIndex: "글쓴이",
-    width: 80,
-  },
-  {
-    title: "작성일",
-    dataIndex: "작성일",
-    width: 80,
-  },
-  {
-    title: "조회",
-    dataIndex: "조회",
-    width: 50,
-  },
-  {
-    title: "공감",
-    dataIndex: "공감",
-    width: 50,
-  },
-];
-
-const columns2 = [
-  {
-    title: "카테고리",
-    dataIndex: "카테고리",
-    width: 80,
-  },
-  {
-    title: "제목",
-    dataIndex: "제목",
-  },
-  {
-    title: "글쓴이",
-    dataIndex: "글쓴이",
-    width: 80,
-  },
-  {
-    title: "작성일",
-    dataIndex: "작성일",
-    width: 80,
-  },
-  {
-    title: "조회",
-    dataIndex: "조회",
-    width: 50,
-  },
-  {
-    title: "공감",
-    dataIndex: "공감",
-    width: 50,
-  },
-];
-
-const columns3 = [
-  {
-    title: "제목",
-    dataIndex: "제목",
-  },
-  {
-    title: "조회",
-    dataIndex: "조회",
-    width: 50,
-  },
-];
-
 /*
 ajax 사용시에는 비동기로 처리 됨.
 이 부분에서 개발자는 동기로 처리해야되는 부분을 async await로 처리
@@ -116,8 +34,8 @@ ajax 사용시에는 비동기로 처리 됨.
 let data = [];
 
 const MemorizedCombar = React.memo(Combar);
-const MemorizedTable = React.memo(Table);
 const MemorizedPagination = React.memo(Pagination);
+const MemorizedTables = React.memo(Tables);
 
 //게시판 component
 function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
@@ -669,7 +587,7 @@ function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
         setMyWriting={setMyWriting}
       />
       
-      <Tables data={[...data]}/>
+      <MemorizedTables data={[...data]}/>
 
       {myWriting ? null : (
         <MemorizedPagination

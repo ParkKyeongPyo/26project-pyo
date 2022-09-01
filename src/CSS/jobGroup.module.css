@@ -13,10 +13,10 @@
   background-color: #e5e7eb;
   padding: 4px 20px 4px 20px;
   border-radius: 20px;
-  margin: 0 10px 0 10px;
+  margin: 5px 10px 5px 10px;
 }
 
-.dang{
+.dang {
   background-color: #e5e7eb;
   padding: 4px 20px 4px 20px;
   border-radius: 20px;
@@ -25,7 +25,7 @@
   margin: 10px 0 5px 0;
 }
 
-.mouseOverDang{
+.mouseOverDang {
   border: 1px solid #1890ff;
   color: #1890ff;
   background-color: #e5e7eb;
@@ -43,7 +43,59 @@
   margin: 10px auto 10px auto;
 }
 
+@media (min-width: 768px) {
+  .dangHeader {
+    font-size: 14px;
+  }
 
+  .hashtag {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 768px) {
+  .dangHeader {
+    flex-direction: column;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  .hashtag {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 300px) {
+  .dangHeader {
+    flex-direction: column;
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+
+  .hashtag {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.dangHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  color: inherit;
+  background-color: inherit;
+  color: inherit;
+  margin-bottom: 5px;
+}
 
 .groupFlexCreater {
   display: flex;
@@ -55,17 +107,6 @@
   color: black;
 }
 
-.groupFlexCreaterJob {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  color: inherit;
-  background-color: inherit;
-  font-size: 14px;
-  color: black;
-  border-bottom: 1px solid #e5e7eb;
-}
-
 .groupFlexCreaterH {
   display: flex;
   flex-direction: row;
@@ -75,15 +116,12 @@
 }
 
 .hashtag {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   color: inherit;
   background-color: inherit;
   margin-bottom: 10px;
   font-size: 13px;
   font-weight: 700;
-  color: black;
+  color: inherit;
 }
 
 .groupTop {

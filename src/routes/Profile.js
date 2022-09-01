@@ -1,11 +1,11 @@
-import styles from "../CSS/login.module.css";
+import profile from "../CSS/profile.module.css";
 import { Button, Form, Input, message, Popconfirm } from "antd";
 import "antd/dist/antd.min.css";
 import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { signOut, updateProfile, deleteUser } from "firebase/auth";
+import { signOut, deleteUser } from "firebase/auth";
 import { authService, db } from "../fbase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 
@@ -45,7 +45,7 @@ function Profile({ loginState }) {
     )
       message.error("운영자가 들어간 닉네임은 사용할 수 없습니다.");
     else {
-      let value = true
+      let value = true;
       NameValidation(userNickname, navigate, value);
     }
   };
@@ -136,54 +136,54 @@ function Profile({ loginState }) {
 
   return (
     <div
-      style={{ height: "inherit", backgroundColor: "white", color: "black" }}
+      style={{ height: "inherit", backgroundColor: "inherit", color: "inherit" }}
     >
       <MemorizedMenuBarHome loginState={loginState} />
-      <div className={styles.flexHomeMargin}>
-        <Form {...layout} name="nest-messages" onFinish={onSubmitFilter}>
-          <Form.Item name={["user", "nickname"]} label="닉네임">
-            <Input
-              name="nickname"
-              onChange={onChange}
-              placeholder={displayName}
-            />
-          </Form.Item>
+      <div className={profile.profile}>
+        <div className={profile.profileSub}>
+          <Form {...layout} name="nest-messages">
+            <Form.Item name={["user", "nickname"]} label="닉네임">
+              <Input
+                name="nickname"
+                onChange={onChange}
+                placeholder={displayName}
+              />
+            </Form.Item>
 
-          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-            <Button
-              type="primary"
-              htmlType="submit"
-              style={{ marginTop: "10px" }}
-            >
-              저장
-            </Button>
-          </Form.Item>
-          <br />
-          <br />
-          <br />
-        </Form>
-
-        <Form onFinish={onSubmit}>
-          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 2 }}>
-            <Button type="primary" htmlType="submit">
-              로그아웃
-            </Button>
-          </Form.Item>
-          <br />
-          <br />
-          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 2 }}>
-            <Popconfirm
-              title="정말 탈퇴하시겠습니까?"
-              onConfirm={confirm}
-              okText="Yes"
-              cancelText="No"
-            >
-              <Button type="primary" htmlType="button">
-                회원 탈퇴
+            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+              <Button
+                onClick={onSubmitFilter}
+                type="primary"
+                htmlType="submit"
+                style={{ marginTop: "10px" }}
+              >
+                저장
               </Button>
-            </Popconfirm>
-          </Form.Item>
-        </Form>
+            </Form.Item>
+            <br />
+            <br />
+            <br />
+            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 2 }}>
+              <Button type="primary" htmlType="submit" onClick={onSubmit}>
+                로그아웃
+              </Button>
+            </Form.Item>
+            <br />
+            <br />
+            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 2 }}>
+              <Popconfirm
+                title="정말 탈퇴하시겠습니까?"
+                onConfirm={confirm}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button type="primary" htmlType="button">
+                  회원 탈퇴
+                </Button>
+              </Popconfirm>
+            </Form.Item>
+          </Form>
+        </div>
       </div>
       <MemorizedFooter />
     </div>

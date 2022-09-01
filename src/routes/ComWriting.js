@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import Writing from "../components/Writing";
 import Footer from "../components/Footer";

@@ -104,7 +104,10 @@ function Jobchosing({
   return (
     <div style={{ height: "inherit", marginLeft: "auto", marginRight: "auto" }}>
         <animated.div style={animation1} className={common.flexRowhMargin}>
-          "혼자번당은 대한민국에서 혼자 일하는 모든 분들을 위한 커뮤니티입니다"
+          <div>"혼자번당은 대한민국에서</div>
+
+          <div>&nbsp;혼자 일하는 모든 분들을 위한 커뮤니티입니다"</div>
+          
         </animated.div>
 
         <animated.div style={animation2} className={common.flexRowMiddle}>
@@ -135,7 +138,7 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <div className={groupStyles.groupFlexCreaterJob}>
+                <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="allFree"
                     name="프리랜서"
@@ -154,7 +157,7 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>IT</h2>
-                <div className={groupStyles.groupFlexCreaterJob}>
+                <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="dev"
                     name="프리랜서"
@@ -173,7 +176,7 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>창작</h2>
-                <div className={groupStyles.groupFlexCreaterJob}>
+                <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="dsn"
                     name="프리랜서"
@@ -226,7 +229,7 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>문서/글쓰기</h2>
-                <div className={groupStyles.groupFlexCreaterJob}>
+                <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="rpo"
                     name="프리랜서"
@@ -278,7 +281,7 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>교육</h2>
-                <div className={groupStyles.groupFlexCreaterJob}>
+                <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="tch"
                     name="프리랜서"
@@ -310,7 +313,7 @@ function Jobchosing({
                 <h2 className={groupStyles.groupFlexCreaterH}>
                   영상/사진/음향
                 </h2>
-                <div className={groupStyles.groupFlexCreaterJob}>
+                <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="vdo"
                     name="프리랜서"
@@ -351,7 +354,7 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>비지니스</h2>
-                <div className={groupStyles.groupFlexCreaterJob}>
+                <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="ket"
                     name="프리랜서"
@@ -381,7 +384,7 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>방송/생활</h2>
-                <div className={groupStyles.groupFlexCreaterJob}>
+                <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="act"
                     name="프리랜서"
@@ -452,7 +455,7 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <div className={groupStyles.groupFlexCreaterJob}>
+                <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="allCrea"
                     name="크리에이터"
@@ -471,7 +474,7 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>IT</h2>
-                <div className={groupStyles.groupFlexCreaterJob}>
+                <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="wbap"
                     name="크리에이터"
@@ -512,7 +515,7 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>SNS</h2>
-                <div className={groupStyles.groupFlexCreaterJob}>
+                <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="tube"
                     name="크리에이터"
@@ -594,7 +597,7 @@ function Jobchosing({
 
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
-                <div className={groupStyles.groupFlexCreaterJob}>
+                <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="allSelf"
                     name="자영업자"
@@ -613,7 +616,7 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>요식업</h2>
-                <div className={groupStyles.groupFlexCreaterJob}>
+                <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="din"
                     name="자영업자"
@@ -676,7 +679,7 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>편의/여가</h2>
-                <div className={groupStyles.groupFlexCreaterJob}>
+                <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="mini"
                     name="자영업자"
@@ -739,7 +742,7 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>생활</h2>
-                <div className={groupStyles.groupFlexCreaterJob}>
+                <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="health"
                     name="자영업자"
@@ -802,7 +805,7 @@ function Jobchosing({
             <div className={groupStyles.groupFlex}>
               <div className={groupStyles.groupTopCreater}>
                 <h2 className={groupStyles.groupFlexCreaterH}>학원</h2>
-                <div className={groupStyles.groupFlexCreaterJob}>
+                <div className={groupStyles.groupFlexCreater}>
                   <Link
                     title="test"
                     name="자영업자"

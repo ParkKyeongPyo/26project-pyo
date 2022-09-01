@@ -36,7 +36,6 @@
 
   .middleDang {
     width: 50%;
-    padding-bottom: 40px;
   }
 
   .middleCom {
@@ -80,7 +79,6 @@
 
   .middleDang {
     width: 50%;
-    padding-bottom: 40px;
   }
 
   .middleCom {
@@ -136,7 +134,6 @@
 
   .middleDang {
     width: 95%;
-    padding-bottom: 40px;
   }
 
   .commingSoon {
@@ -144,10 +141,12 @@
   }
 }
 
-
+.middleDang {
+  padding-bottom: 15px;
+}
 
 .title {
-  padding-top: "15px";
+  padding-top: 15px;
 }
 
 .head {
@@ -156,7 +155,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100px;
+  height: auto;
 }
 
 .headWriting {
@@ -169,7 +168,6 @@
   border-bottom: 1px solid #e5e7eb;
   margin-bottom: 13px;
 }
-
 
 .flexTwoRow {
   width: 100%;
@@ -187,7 +185,7 @@
 /*Weeckly 글 마우스 이펙트*/
 
 .out {
-  color: black;
+  color: inherit;
   padding-top: 4px;
   margin: auto 0 auto 0;
 }
@@ -203,9 +201,9 @@
 }
 
 .comTable {
-  height: 330px;
+  height: auto;
   width: 97%;
-  margin: 0 auto 0 auto;
+  margin: 0 auto 20px auto;
 }
 
 .img {
@@ -236,25 +234,29 @@
 
 .span {
   margin: auto 0 auto 0;
-  color: black;
+  color: inherit;
   padding-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .spanWriting {
   margin: auto 0 auto 0;
   background-color: #384244;
   color: white;
-  padding: 2px;
+  padding: 4px 2px 1px 2px;
   border-radius: 6px;
   margin-right: 7px;
   font-size: 11px;
+  white-space: nowrap;
 }
 
 .spanCom2 {
   margin: auto 0 auto 0;
   background-color: #384244;
   color: white;
-  padding: 3px 5px 3px 5px;
+  padding: 3px 5px 1px 5px;
   border-radius: 20px;
   margin-left: 7px;
   font-size: smaller;
@@ -264,7 +266,7 @@
   margin: auto 0 auto 0;
   background-color: #384244;
   color: white;
-  padding: 3px 5px 3px 5px;
+  padding: 3px 5px 1px 5px;
   border-radius: 20px;
   margin-left: auto;
   font-size: smaller;
@@ -279,4 +281,19 @@
 .count {
   margin-left: auto;
   padding-top: 4px;
+  white-space: nowrap;
 }
+
+
+/*weeckly*/
+
+.weeckly{
+  width: 100%;
+}
+
+.weecklySub{
+  max-width: 1240px;
+  margin: 0 auto 0 auto;
+}
+
+/*weeckly*/

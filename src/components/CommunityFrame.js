@@ -72,7 +72,7 @@ function CommunityFrame({
                   className={frame.h}
                 >{`${category} ${job} 사장님 커뮤니티`}</div>
               )}
-              <div style={{ marginRight: "14%" }}>
+              <div className={frame.floatingBtn}>
                 <MemorizedFloatingBtn2 night={night} setNight={setNight} />
               </div>
             </animated.h1>

@@ -4,8 +4,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
-  GoogleAuthProvider,
-  signInWithRedirect,
   setPersistence,
   browserSessionPersistence,
   browserLocalPersistence,
@@ -22,7 +20,6 @@ import Footer from "../components/Footer.js";
 import NameValidation from "../components/NameValidation.js";
 
 import { message } from "antd";
-import { wait } from "@testing-library/user-event/dist/utils/index.js";
 
 const MemorizedMenuBarHome = React.memo(MenuBarHome);
 const MemorizedFooter = React.memo(Footer);
@@ -264,25 +261,27 @@ const Login = ({ loginState }) => {
     <>
       <MemorizedMenuBarHome loginState={loginState} />
       <div className={styles.loginPage}>
-        {newAccount ? (
-          <MemorizedNewAccount
-            onSubmitAccount={onSubmitAccount}
-            onChange={onChange}
-            onSwitch={onSwitch}
-            onFinishFailed={onFinishFailed}
-            loginState={loginState}
-    
-          />
-        ) : (
-          <MemorizedLoginCom
-            onSubmitLogin={onSubmitLogin}
-            onChange={onChange}
-            onSwitch={onSwitch}
-            onFinishFailed={onFinishFailed}
-            loginState={loginState}
-            setLocalLoginState={setLocalLoginState}
-          />
-        )}
+        <div className={styles.loginSub}>
+          {newAccount ? (
+            <MemorizedNewAccount
+              onSubmitAccount={onSubmitAccount}
+              onChange={onChange}
+              onSwitch={onSwitch}
+              onFinishFailed={onFinishFailed}
+              loginState={loginState}
+            />
+          ) : (
+            <MemorizedLoginCom
+              onSubmitLogin={onSubmitLogin}
+              onChange={onChange}
+              onSwitch={onSwitch}
+              onFinishFailed={onFinishFailed}
+              loginState={loginState}
+              setLocalLoginState={setLocalLoginState}
+              email={email}
+            />
+          )}
+        </div>
       </div>
       <MemorizedFooter />
     </>

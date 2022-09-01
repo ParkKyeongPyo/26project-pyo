@@ -195,14 +195,14 @@ function Write({
 
         <div className={write.font}>
           *Bold, 사진, 미디어 삽입, 인용, 표 기능은 아직 이용 불가능하니
-          참고바랍니다.
+          참고바랍니다. <br/>
+          *Shift+Enter키를 누르면 줄바꿈이 됩니다.
         </div>
 
         <CKEditor
           key="content"
           height="1000px"
           width="100%"
-          min
           editor={ClassicEditor}
           onChange={(event, editor) => {
             const data = editor.getData();

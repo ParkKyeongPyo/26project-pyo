@@ -437,7 +437,7 @@ function Combar({
             </Button>
           </div>
         </div>
-        <div className={Frame.middle3}>
+        <div className={Frame.middle1}>
           <span
             className={Frame.middleBtn}
             onClick={onClick}

@@ -4,24 +4,45 @@ import Brightness3Icon from "@mui/icons-material/Brightness3";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import HomeIcon from "@mui/icons-material/Home";
 
+import { useEffect } from "react";
+
 import float from "../CSS/float.module.css";
 
 import { useNavigate } from "react-router-dom";
-
+import { toHaveValue } from "@testing-library/jest-dom/dist/matchers";
 
 function FloatingBtn2({ night, setNight }) {
   const body = document.querySelector("body");
   const navigate = useNavigate();
 
+  const value = sessionStorage.getItem("야간모드");
+
+  if(value === "night") night = true;
+  else night = false; 
+
   const onSwitchClick = () => {
-    if (night) {
+    if (value === "night") {
+      body.style.backgroundColor = "white";
+      body.style.color = "black";
+
+      sessionStorage.setItem("야간모드", "light");
+      setNight("false");
+    } else {
       body.style.backgroundColor = "#151515";
       body.style.color = "#ccc";
-      setNight(false);
+
+      sessionStorage.setItem("야간모드", "night");
+      setNight("true");
+    }
+  };
+
+  const nightRefresh = () => {
+    if (value === "night") {
+      body.style.backgroundColor = "#151515";
+      body.style.color = "#ccc";
     } else {
       body.style.backgroundColor = "white";
       body.style.color = "black";
-      setNight(true);
     }
   };
 
@@ -29,6 +50,10 @@ function FloatingBtn2({ night, setNight }) {
   const onHomeClick = () => {
     navigate("/");
   };
+
+  useEffect(() => {
+    nightRefresh();
+  }, []);
 
 
   return (
@@ -38,9 +63,9 @@ function FloatingBtn2({ night, setNight }) {
       </Fab>
       <Fab size="small" aria-label="like">
         {night ? (
-          <Brightness3Icon onClick={onSwitchClick} />
-        ) : (
           <LightModeRoundedIcon onClick={onSwitchClick} />
+        ) : (
+          <Brightness3Icon onClick={onSwitchClick} />
         )}
       </Fab>
     </Box>

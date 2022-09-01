@@ -7,6 +7,10 @@ import React, { useState } from "react";
 
 const MemorizedRouterCom = React.memo(RouterCom);
 
+if(sessionStorage.getItem("야간모드") === null){
+  sessionStorage.setItem("야간모드", "light");
+}
+
 function App() {
   const [h, setH] = useState("");
   const [c, setC] = useState("");

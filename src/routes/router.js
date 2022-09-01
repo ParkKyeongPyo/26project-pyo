@@ -15,9 +15,7 @@ import ComWriting from "./ComWriting";
 import { useState, useEffect } from "react";
 
 import { onAuthStateChanged } from "firebase/auth";
-import { authService, db } from "../fbase";
-
-import { setDoc, doc } from "firebase/firestore";
+import { authService } from "../fbase";
 
 function RouterCom({ setH, setC, setJ, setD }) {
   const [loginState, setLoginState] = useState(false);
@@ -26,9 +24,9 @@ function RouterCom({ setH, setC, setJ, setD }) {
   const [selectedJobEng, setSelectedJobEng] = useState(
     sessionStorage.getItem("jobEng")
   );
-  const [night, setNight] = useState(true);
+  const [night, setNight] = useState(false);
   const [userRN, setUserRN] = useState("");
-  const [weeklyNum, setWeeklyNum] = useState(0);
+  const [weeklyNum, setWeeklyNum] = useState("");
   const [writingNum, setWritingNum] = useState("");
 
   useEffect(() => {
@@ -264,8 +262,6 @@ function RouterCom({ setH, setC, setJ, setD }) {
               setNight={setNight}
               loginState={loginState}
               userRN={userRN}
-              setH={setH}
-              setC={setC}
             />
           }
         ></Route>

@@ -21,6 +21,14 @@
     -->
     <title>혼자당</title>
     <style>
+      /*form*/
+      .ant-form,
+      .ant-form-item,
+      .ant-form-item-label>label{
+        color:inherit !important;
+      }
+      /*form*/
+
       .ck-editor__editable {
         min-height: 500px;
       }
@@ -145,20 +153,27 @@
         color: black !important;
       }
 
-      /*Pagination*/
-      .css-1b5ei7m{
-        color: inherit !important;
-      }
-
       /*로그인 폼*/
       #basic_Email,
       #basic_nickname{
-        width: 300px ;
+        max-width: 300px ;
       }
 
       #basic_Password{
-        width: 340px;
+        max-width: 340px;
       }
+
+      .ant-row{
+        justify-content: flex-end !important;
+      }
+
+      /*pagination*/
+      .css-1ba2zw7-MuiButtonBase-root-MuiPaginationItem-root,
+      .css-19d20mt{
+        color: inherit !important;
+      }
+
+
     </style>
   </head>
   <body

@@ -10,12 +10,15 @@ const NameValidation = async (userNickname, navigate, value) => {
   const nArray = docSnap.data().name;
   let num = 0;
   let preName = "";
+  let email = "";
 
   if (authService.currentUser !== null) {
     preName = authService.currentUser.displayName;
+    email = authService.currentUser.email;
   }
 
-  if (userNickname.length <= 20 && !userNickname.includes("운영자")) {
+
+  if (userNickname.length <= 15 && (email === "as8798as@gmail.com" || !userNickname.includes("운영자"))) {
     if (preName !== "") {
       nArray.map((item) => {
         if (item === userNickname) value = false;
@@ -67,7 +70,7 @@ const NameValidation = async (userNickname, navigate, value) => {
       message.warning("운영자가 들어간 닉네임은 지을 수 없습니다.");
       value = false;
     } else {
-      message.warning("닉네임은 20자 이하로 작성해야합니다.");
+      message.warning("닉네임은 15자 이하로 작성해야합니다.");
       value = false;
     }
   }

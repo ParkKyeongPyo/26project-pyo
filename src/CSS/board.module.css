@@ -3,11 +3,11 @@
 }
 
 .mouseOut {
-  color: black;
+  color: inherit;
 }
 
 .link{
-  color: black;
+  color: inherit;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

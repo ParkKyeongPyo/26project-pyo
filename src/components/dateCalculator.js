@@ -1,6 +1,6 @@
 function dateCalculator(value) {
     const today = new Date();
-    const timeValue = new Date(value);
+    const timeValue = new Date(value.replace(/\s/, 'T'));
 
     const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
     if (betweenTime < 1) return '방금전';

@@ -82,7 +82,7 @@ function NewAccount({ onSubmitAccount, onChange, onSwitch, onFinishFailed }) {
             },
           ]}
         >
-          <Input  onChange={onChange} placeholder="20자 이하로 입력해주세요." />
+          <Input  onChange={onChange} placeholder="15자 이하로 입력해주세요." />
         </Form.Item>
 
         <div className={styles.message}>

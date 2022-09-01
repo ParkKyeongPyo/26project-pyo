@@ -1,5 +1,4 @@
 import React from "react";
-
 import Write from "../components/Write";
 import Footer from "../components/Footer";
 import FloatingBtn2 from "../components/FloatingBtn2";
@@ -20,8 +19,6 @@ function ComWrite({
   setNight,
   loginState,
   userRN,
-  setH,
-  setC,
 }) {
   const category = sessionStorage.getItem("Category");
 

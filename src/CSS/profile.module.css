@@ -1,0 +1,11 @@
+.profile {
+  max-width: 1240px; 
+  margin: 15% auto 0 auto;
+}
+
+.profileSub {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
