@@ -156,6 +156,10 @@ function DangChosing({
     e.target.className = home.out;
   };
 
+  const onHashClick = (e) => {
+    sessionStorage.setItem("커뮤니티", e.target.title);
+  }
+
   /*
   const getSeeCount = async () => {
     const pick1Ref = doc(db, "혼자번당모든글", "allCrea");
@@ -210,7 +214,7 @@ function DangChosing({
                     <span className={home.spanDate}>
                       {dateCalculator(item.날짜)}
                     </span>
-                    <Link to={`/${item.community}`} className={home.spanCom1}>
+                    <Link to={`/${item.community}`} title={item.커뮤니티} onClick={onHashClick} className={home.spanCom1}>
                       #{item.커뮤니티}
                     </Link>
                     <Link
