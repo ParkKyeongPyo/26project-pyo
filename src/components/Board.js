@@ -75,7 +75,7 @@ function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
           <div className={board.flex}>
             <Link
               className={board.link}
-              to="/honjabundang/community/writing"
+              to={`/honjabundang/community/writing/${jobEng}/${doc.data().num}`}
               title={doc.data().num}
               name={doc.data().count}
               key={doc.data().header}
@@ -118,7 +118,7 @@ function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
           <div className={board.flex}>
             <Link
               className={board.link}
-              to="/honjabundang/community/writing"
+              to={`/honjabundang/community/writing/${jobEng}/${doc.data().num}`}
               title={doc.data().num}
               name={doc.data().count}
               key={doc.data().header}
@@ -162,7 +162,7 @@ function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
               <div className={board.flex}>
                 <Link
                   className={board.link}
-                  to="/honjabundang/community/writing"
+                  to={`/honjabundang/community/writing/${jobEng}/${doc.data().num}`}
                   title={doc.data().num}
                   name={doc.data().count}
                   key={doc.data().header}
@@ -216,7 +216,7 @@ function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
                 </div>
                 <Link
                   className={board.link}
-                  to="/honjabundang/community/writing"
+                  to={`/honjabundang/community/writing/${jobEng}/${doc.data().num}`}
                   title={doc.data().num}
                   name={doc.data().count}
                   key={doc.data().header}
@@ -269,7 +269,7 @@ function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
                 </div>
                 <Link
                   className={board.link}
-                  to="/honjabundang/community/writing"
+                  to={`/honjabundang/community/writing/${jobEng}/${doc.data().num}`}
                   title={doc.data().num}
                   name={doc.data().count}
                   key={doc.data().header}
@@ -323,7 +323,7 @@ function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
             </div>
             <Link
               className={board.link}
-              to="/honjabundang/community/writing"
+              to={`/honjabundang/community/writing/${jobEng}/${doc.data().num}`}
               title={doc.data().num}
               name={doc.data().count}
               key={doc.data().header}
@@ -373,7 +373,7 @@ function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
             </div>
             <Link
               className={board.link}
-              to="/honjabundang/community/writing"
+              to={`/honjabundang/community/writing/${jobEng}/${doc.data().num}`}
               title={doc.data().num}
               name={doc.data().count}
               key={doc.data().header}
@@ -424,7 +424,7 @@ function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
             </div>
             <Link
               className={board.link}
-              to="/honjabundang/community/writing"
+              to={`/honjabundang/community/writing/${jobEng}/${doc.data().num}`}
               title={doc.data().num}
               name={doc.data().count}
               key={doc.data().header}
@@ -470,7 +470,7 @@ function Board({ jobEng, selectedGroup, loginState, setWritingNum }) {
               <div className={board.flex}>
                 <Link
                   className={board.link}
-                  to="/honjabundang/community/writing"
+                  to={`/honjabundang/community/writing/${jobEng}/${doc.data().num}`}
                   title={doc.data().num}
                   name={doc.data().count}
                   key={doc.data().header}

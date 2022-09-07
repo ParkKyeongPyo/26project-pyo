@@ -16,6 +16,7 @@ import { useState, useEffect } from "react";
 
 import { onAuthStateChanged } from "firebase/auth";
 import { authService } from "../fbase";
+import session from "redux-persist/lib/storage/session";
 
 function RouterCom({ setH, setC, setJ, setD }) {
   const [loginState, setLoginState] = useState(false);
@@ -137,6 +138,26 @@ function RouterCom({ setH, setC, setJ, setD }) {
     }
   }*/
 
+  /*
+   <Route
+          path="/honjabundang/groupCommunity"
+          element={
+            <GroupCommunity
+              selectedJob={selectedJob}
+              selectedGroup={selectedGroup}
+              selectedJobEng={selectedJobEng}
+              night={night}
+              setNight={setNight}
+              loginState={loginState}
+              userRN={userRN}
+              setH={setH}
+              setC={setC}
+              setWritingNum={setWritingNum}
+            />
+          }
+        ></Route>
+  */
+
   return (
     <Router>
       <Routes>
@@ -199,9 +220,9 @@ function RouterCom({ setH, setC, setJ, setD }) {
               setJ={setJ}
             />
           }
-        ></Route>
+        ></Route> 
         <Route
-          path="/honjabundang/community"
+          path={`/honjabundang/community/${selectedJobEng}`}
           element={
             <Community
               selectedJob={selectedJob}
@@ -218,24 +239,7 @@ function RouterCom({ setH, setC, setJ, setD }) {
           }
         ></Route>
         <Route
-          path="/honjabundang/groupCommunity"
-          element={
-            <GroupCommunity
-              selectedJob={selectedJob}
-              selectedGroup={selectedGroup}
-              selectedJobEng={selectedJobEng}
-              night={night}
-              setNight={setNight}
-              loginState={loginState}
-              userRN={userRN}
-              setH={setH}
-              setC={setC}
-              setWritingNum={setWritingNum}
-            />
-          }
-        ></Route>
-        <Route
-          path="/honjabundang/community/writing"
+          path={`/honjabundang/community/writing/${selectedJobEng}/${writingNum}`}
           element={
             <ComWriting
               job={selectedJob}

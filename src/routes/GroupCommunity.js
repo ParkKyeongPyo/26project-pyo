@@ -14,12 +14,12 @@ function GroupCommunity({
   loginState,
   setH,
   setC,
-  setWritingNum
+  setWritingNum,
 }) {
   const [render, setRender] = useState(false);
 
   useEffect(() => {
-    setRender((prev) => !prev)
+    setRender((prev) => !prev);
   }, []);
 
   if (selectedGroup === "프리랜서") {
@@ -27,9 +27,8 @@ function GroupCommunity({
       <>
         <MemorizedCommunityMenuBar
           job={selectedJob}
+          jobEng={selectedJobEng}
           selectedGroup={selectedGroup}
-          loginState={loginState}
-          selectedJobEng={selectedJobEng}
         />
         <CommunityFrame
           job=""
@@ -50,8 +49,7 @@ function GroupCommunity({
         <MemorizedCommunityMenuBar
           job={selectedJob}
           selectedGroup={selectedGroup}
-          loginState={loginState}
-          selectedJobEng={selectedJobEng}
+          jobEng={selectedJobEng}
         />
         <CommunityFrame
           job=""
@@ -72,8 +70,7 @@ function GroupCommunity({
         <MemorizedCommunityMenuBar
           job={selectedJob}
           selectedGroup={selectedGroup}
-          loginState={loginState}
-          selectedJobEng={selectedJobEng}
+          jobEng={selectedJobEng}
         />
         <CommunityFrame
           job=""

@@ -23,6 +23,32 @@ import { EyeFilled } from "@ant-design/icons";
 
 let pick = [
   {
+    닉네임: "익명9373",
+    제목: "[정리] 크리에이터는 무에서 유를 창조하는 사람이 아니다. (feat.브랜드보이, 드로앤드류)",
+    커뮤니티: "혼자번당",
+    community: "honjabundang",
+    카테고리: "크리에이터",
+    날짜: "2022-09-05 21:34:05",
+    글분류: "정보공유",
+    글번호: 3,
+    job: "퍼스널 브랜더",
+    jobEng: "perb",
+    조회수: 11,
+  },
+  {
+    닉네임: "익명2728",
+    제목: "퍼스널 브랜딩의 4단계 프로세스",
+    커뮤니티: "혼자번당",
+    community: "honjabundang",
+    카테고리: "크리에이터",
+    날짜: "2022-09-02 14:38:18",
+    글분류: "정보공유",
+    글번호: 1,
+    job: "퍼스널 브랜더",
+    jobEng: "perb",
+    조회수: 24,
+  },
+  {
     닉네임: "익명3470",
     제목: "프로그래머에게 가장 중요한 것",
     커뮤니티: "혼자번당",
@@ -33,7 +59,7 @@ let pick = [
     글번호: 2,
     job: "개발자",
     jobEng: "dev",
-    조회수: 11,
+    조회수: 35,
   },
   {
     닉네임: "개발자",
@@ -46,7 +72,7 @@ let pick = [
     글번호: 1,
     job: "개발자",
     jobEng: "dev",
-    조회수: 22,
+    조회수: 37,
   },
   {
     닉네임: "고독한 대식가",
@@ -59,20 +85,7 @@ let pick = [
     글번호: 3,
     job: "크리에이터",
     jobEng: "allCrea",
-    조회수: 27,
-  },
-  {
-    닉네임: "Tate",
-    제목: "헐 크리에이터 커뮤니티가 있네요ㅜㅜ 필요했는데",
-    커뮤니티: "혼자번당",
-    community: "honjabundang",
-    카테고리: "크리에이터",
-    날짜: "2022-08-25 18:07:27",
-    글분류: "전체",
-    글번호: 1,
-    job: "크리에이터",
-    jobEng: "allCrea",
-    조회수: 55,
+    조회수: 40,
   },
 ];
 let best = [];
@@ -97,6 +110,8 @@ function DangChosing({
 
   const onDangClick = (e) => {
     setD(e.target.innerText);
+
+    sessionStorage.setItem("커뮤니티", e.target.innerText);
   };
 
   const onyetClick = (e) => {
@@ -199,12 +214,12 @@ function DangChosing({
                       #{item.커뮤니티}
                     </Link>
                     <Link
-                      to={`/${item.community}/community`}
+                      to={`/${item.community}/community/${item.jobEng}`}
                       title={index}
                       className={home.spanCom2}
                       onClick={onCateClick}
                     >
-                      #{item.카테고리}
+                      #{item.job}
                     </Link>
                   </div>
                   <div className={home.tableSub2}>
@@ -293,40 +308,6 @@ function DangChosing({
                 <div className={groupStyles.groupFlex}>
                   <div className={groupStyles.groupTopCreater}>
                   <div className={groupStyles.dangHeader}>
-                      <div>"혼자 투자하는</div>
-                      <div>&nbsp;모든 분들을 위한 커뮤니티"</div>
-                    </div>
-                    <div className={groupStyles.hashtag}>
-                      <div>#주식</div>
-                      <div>#부동산</div>
-                      <div>#코인</div>
-                    </div>
-                    <div className={common.imgFlex}>
-                      <img
-                        alt="혼투한당"
-                        className={common.img}
-                        src="img/invest.png"
-                      />
-                    </div>
-                    <div className={groupStyles.groupFlexCreater}>
-                      <Link
-                        to="/"
-                        className={groupStyles.dang}
-                        onMouseOut={onGroupMouseOut}
-                        onMouseOver={onGroupMouseOver}
-                        onClick={onyetClick}
-                      >
-                        혼투한당
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className={home.flexTwoRow} style={{ marginTop: "20px" }}>
-                <div className={groupStyles.groupFlex}>
-                  <div className={groupStyles.groupTopCreater}>
-                  <div className={groupStyles.dangHeader}>
                       <div>"혼자 여행가는</div>
                       <div>&nbsp;모든 분들을 위한 커뮤니티"</div>
                     </div>
@@ -351,6 +332,40 @@ function DangChosing({
                         onClick={onyetClick}
                       >
                         혼자간당
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className={home.flexTwoRow} style={{ marginTop: "20px" }}>
+              <div className={groupStyles.groupFlex}>
+                  <div className={groupStyles.groupTopCreater}>
+                  <div className={groupStyles.dangHeader}>
+                      <div>"혼자 투자하는</div>
+                      <div>&nbsp;모든 분들을 위한 커뮤니티"</div>
+                    </div>
+                    <div className={groupStyles.hashtag}>
+                      <div>#주식</div>
+                      <div>#부동산</div>
+                      <div>#코인</div>
+                    </div>
+                    <div className={common.imgFlex}>
+                      <img
+                        alt="혼투한당"
+                        className={common.img}
+                        src="img/invest.png"
+                      />
+                    </div>
+                    <div className={groupStyles.groupFlexCreater}>
+                      <Link
+                        to="/"
+                        className={groupStyles.dang}
+                        onMouseOut={onGroupMouseOut}
+                        onMouseOver={onGroupMouseOver}
+                        onClick={onyetClick}
+                      >
+                        혼투한당
                       </Link>
                     </div>
                   </div>

@@ -188,6 +188,9 @@
   color: inherit;
   padding-top: 4px;
   margin: auto 0 auto 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .com {

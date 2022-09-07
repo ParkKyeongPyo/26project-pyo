@@ -74,10 +74,10 @@ function Footer() {
           Copyright © 2022.08. 혼자당. All rights reserved.
         </div>
         <div className={footer.item}>
-          혼자당 홈페이지 무단 도용 및 관련 저작권 침해시 법적 조치를 받을 수
+          무단 도용 및 관련 저작권 침해시 법적 조치를 받을 수
           있습니다.
         </div>
-        <div className={footer.item}>문의 : as8798as@gmail.com</div>
+        <div className={footer.item}>문의 : honjadang7@gmail.com</div>
         <div className={footer.icon}>
           <Popover
             content={content}

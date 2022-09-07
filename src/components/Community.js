@@ -29,6 +29,7 @@ function Community({
     <div style={{ height: "inherit" }}>
       <MemorizedCommunityMenuBar
         job={selectedJob}
+        jobEng={selectedJobEng}
         selectedGroup={selectedGroup}
       />
       <MemorizedCommunityFrame
