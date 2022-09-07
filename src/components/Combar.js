@@ -213,7 +213,7 @@ function Combar({
               인기
             </Button>
             <Button className={Frame.btn} onClick={onClick}>
-              Q&A
+              공감
             </Button>
             <Popover
               content="내 글은 최근 날짜를 기준으로 최대 20개까지 볼 수 있습니다."
@@ -232,7 +232,7 @@ function Combar({
               onMouseOut={onGroupMouseOut}
               onMouseOver={onGroupMouseOver}
             >
-              정보공유
+              Q&A
             </span>
             <span
               className={Frame.middleBtn}
@@ -290,6 +290,14 @@ function Combar({
           </div>
         </div>
         <div className={Frame.middle1}>
+        <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            Q&A
+          </span>
           <span
             className={Frame.middleBtn}
             onClick={onClick}
@@ -361,7 +369,7 @@ function Combar({
               인기
             </Button>
             <Button className={Frame.btn} onClick={onClick}>
-              Q&A
+              공감
             </Button>
             <Popover
               content="내 글은 최근 날짜를 기준으로 최대 20개까지 볼 수 있습니다."
@@ -374,6 +382,14 @@ function Combar({
             </Popover>
           </div>
           <div className={Frame.middle3}>
+          <span
+              className={Frame.middleBtn}
+              onClick={onClick}
+              onMouseOut={onGroupMouseOut}
+              onMouseOver={onGroupMouseOver}
+            >
+              Q&A
+            </span>
             <span
               className={Frame.middleBtn}
               onClick={onClick}
@@ -438,6 +454,14 @@ function Combar({
           </div>
         </div>
         <div className={Frame.middle1}>
+        <span
+            className={Frame.middleBtn}
+            onClick={onClick}
+            onMouseOut={onGroupMouseOut}
+            onMouseOver={onGroupMouseOver}
+          >
+            Q&A
+          </span>
           <span
             className={Frame.middleBtn}
             onClick={onClick}
